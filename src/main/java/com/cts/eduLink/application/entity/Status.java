@@ -5,15 +5,13 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Role {
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String roleName;
+    private String statusType; // e.g., "Active", "Inactive", "Pending"
+    private String description;
 
-    @OneToOne
-    @JoinColumn(name = "app_user_id")
-    private AppUser appUser;
+    // Perhaps generic, or link to specific entities
 }

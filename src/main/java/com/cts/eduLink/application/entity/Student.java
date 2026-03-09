@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -51,5 +52,6 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id")
     )
-    private Set<Course> courseSet;
+    @JsonIgnore
+    private Set<Course> courseSet = new HashSet<>();
 }

@@ -2,6 +2,7 @@ package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class LearningMaterial {
     private String learningMaterialStatus;
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JsonIgnore
     private Course course;
 
 }

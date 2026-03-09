@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name="appuser")
+@Table(name="appUser")
 public class AppUser {
 
     @Id
@@ -27,7 +27,7 @@ public class AppUser {
     private Long phoneNumber;
 
     @OneToOne(mappedBy = "appUser")
-    private AppUser role;
+    private Role role;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<Notification> notificationList;

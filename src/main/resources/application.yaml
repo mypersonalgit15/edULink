@@ -1,3 +1,23 @@
+server:
+  port: 8081
+logging:
+  level:
+    # This silences the Hibernate startup/metadata logs
+    org.hibernate: WARN
+    # This silences the connection pool logs
+    org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: WARN
 spring:
   application:
-    name: eduLink
+    name: ems
+  datasource:
+    url: jdbc:h2:mem:ems
+    username: root
+    password: 2478208
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: never
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
