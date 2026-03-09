@@ -1,6 +1,11 @@
+# 📘 Project Class Diagram
+
+This repository contains the domain model for the project.  
+The following diagram illustrates the relationships between entities.
+
+```mermaid
 classDiagram
     direction TB
-
     class AppUser {
         +Long id
         +Long phoneNumber
@@ -8,12 +13,10 @@ classDiagram
         +Long userId
         +String userName
     }
-
     class Attendance {
         +Long id
         +LocalDateTime localDateTime
     }
-
     class Course {
         +Long id
         +int courseCredit
@@ -24,14 +27,12 @@ classDiagram
         +String courseSubject
         +String courseTitle
     }
-
     class Exam {
         +Long id
         +LocalDateTime examLocalDateTime
         +String examName
         +String examStatus
     }
-
     class Faculty {
         +Long id
         +String facultyGender
@@ -40,14 +41,12 @@ classDiagram
         +int facultyYearOfExperience
         +String studentAddress
     }
-
     class Grade {
         +Long id
         +String grade
         +double score
         +String status
     }
-
     class LearningMaterial {
         +Long id
         +File learningMaterialFile
@@ -55,12 +54,10 @@ classDiagram
         +String learningMaterialTitle
         +LocalDateTime learningMaterialUploadedDate
     }
-
     class Notification {
         +Long id
         +String notificationMessage
     }
-
     class PerformanceMetric {
         +Long id
         +LocalDate localDate
@@ -68,12 +65,10 @@ classDiagram
         +double score
         +String status
     }
-
     class Role {
         +Long id
         +String roleName
     }
-
     class Student {
         +Long id
         +String studentAddress
@@ -82,16 +77,14 @@ classDiagram
         +String studentGender
         +Long studentId
     }
-
-    AbstractAuditable --|> AbstractPersistable
-    AppUser "0..1" <--> "0..*" Notification : notifies
-    AppUser "0..1" <--> "0..1" Role : has role
-    Course "0..1" <--> "0..*" Exam : includes
-    Course "0..*" <--> "0..*" Faculty : taught by
-    Course "0..1" <--> "0..*" LearningMaterial : contains
-    Course "0..1" <--> "0..*" PerformanceMetric : measures
-    Exam "0..1" <--> "0..*" Grade : results in
-    Student "0..1" <--> "0..*" Attendance : records
-    Student "0..*" <--> "0..*" Course : enrolled in
-    Student "0..1" <--> "0..*" Grade : receives
-    Student "0..1" <--> "0..*" PerformanceMetric : tracked by
+    AppUser "0..1" <--> "0..*" Notification
+    AppUser "0..1" <--> "0..1" Role
+    Course "0..1" <--> "0..*" Exam
+    Course "0..*" <--> "0..*" Faculty
+    Course "0..1" <--> "0..*" LearningMaterial
+    Course "0..1" <--> "0..*" PerformanceMetric
+    Exam "0..1" <--> "0..*" Grade
+    Student "0..1" <--> "0..*" Attendance
+    Student "0..*" <--> "0..*" Course
+    Student "0..1" <--> "0..*" Grade
+    Student "0..1" <--> "0..*" PerformanceMetric
