@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +28,9 @@ public class Course {
     private int courseCredit;
     private String courseStatus;
     private double courseRating;
+
+    @Column(nullable = true)
+    private Long facultyId;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<PerformanceMetric> metrics;

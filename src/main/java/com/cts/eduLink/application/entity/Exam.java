@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
