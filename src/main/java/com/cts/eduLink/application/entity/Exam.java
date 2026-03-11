@@ -2,7 +2,6 @@ package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +18,6 @@ public class Exam {
 
     @ManyToOne
     @JoinColumn(name = "course_id",referencedColumnName = "id")
-    @JsonIgnore
     private Course course;
 
     @OneToMany(mappedBy = "exam")

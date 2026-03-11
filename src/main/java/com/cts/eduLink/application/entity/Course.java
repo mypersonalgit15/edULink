@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.HashSet;
 import java.util.List;
@@ -36,15 +35,12 @@ public class Course {
     private List<PerformanceMetric> metrics;
 
     @ManyToMany(mappedBy = "courseSet")
-    @JsonIgnore
-    private Set<Student> studentSet = new HashSet<>();
+    private Set<Student> studentSet;
 
     @ManyToMany(mappedBy = "courseSet")
-    @JsonIgnore
-    private Set<Faculty> facultySet = new HashSet<>();
+    private Set<Faculty> facultySet;
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Exam> examList;
 
     @OneToMany(mappedBy = "course")

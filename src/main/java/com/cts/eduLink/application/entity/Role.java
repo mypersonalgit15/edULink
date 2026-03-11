@@ -14,6 +14,6 @@ public class Role {
     private String roleName;
 
     @OneToOne
-    @JoinColumn(name = "app_user_id")
+    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
     private AppUser appUser;
 }
