@@ -1,15 +1,3 @@
 spring:
   application:
-    name: ems
-  datasource:
-    url: jdbc:h2:mem:ems
-    username: root
-    password: 2478208
-    driver-class-name: org.h2.Driver
-  sql:
-    init:
-      mode: never
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
+    name: eduLink

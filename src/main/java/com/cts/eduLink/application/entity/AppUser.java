@@ -22,7 +22,7 @@ public class AppUser {
     @Column(unique = true, nullable = false)
     private Long phoneNumber;
     @OneToOne(mappedBy = "appUser")
-    private Role role;
+    private AppUser role;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<Notification> notificationList;
