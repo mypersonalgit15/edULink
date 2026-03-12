@@ -36,6 +36,10 @@ public class Student {
     @Column(nullable = false)
     private LocalDateTime studentEnrollmentDateTime;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
+    private AppUser appUser;
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<PerformanceMetric> metricList;
 

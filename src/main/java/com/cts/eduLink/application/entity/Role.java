@@ -1,19 +1,20 @@
 package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long roleId;
 
     @Column(unique = true, nullable = false)
     private String roleName;
 
-    @OneToOne
-    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
+    @OneToOne(mappedBy = "role")
     private AppUser appUser;
 }

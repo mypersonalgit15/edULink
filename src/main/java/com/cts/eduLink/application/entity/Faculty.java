@@ -32,6 +32,10 @@ public class Faculty {
     @Column(nullable = false)
     private double facultyRating;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
+    private AppUser appUser;
+
     @ManyToMany
     @JoinTable(
             name = "faculty_course_mapping",
