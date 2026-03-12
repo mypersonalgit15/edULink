@@ -1,6 +1,5 @@
 package com.cts.eduLink.application.dto;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 

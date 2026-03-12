@@ -3,6 +3,7 @@ package com.cts.eduLink.application.serviceTest;
 import com.cts.eduLink.application.classexception.CourseException;
 import com.cts.eduLink.application.projection.CourseProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
+import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.service.CourseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +26,11 @@ public class CourseServiceImplTest {
 
     private  CourseServiceImpl courseService;
     private  List<CourseProjection>courseProjectionList;
+    private FacultyRepository facultyRepository;
 
     @BeforeEach
     void setUp() {
-        courseService = new CourseServiceImpl(courseRepository);
+        courseService = new CourseServiceImpl(courseRepository,facultyRepository);
         courseProjectionList = new ArrayList<>();
         courseProjectionList.add(new CourseProjection("java springBoot", "Full Stack", "college student", 4, "active", 4.8));
     }

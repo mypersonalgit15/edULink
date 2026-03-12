@@ -1,7 +1,9 @@
 package com.cts.eduLink.application.classexception;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public class FacultyException extends RuntimeException {
     public final HttpStatus httpStatus;
     public FacultyException(String message, HttpStatus httpStatus) {

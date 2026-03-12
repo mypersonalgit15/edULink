@@ -3,7 +3,6 @@ package com.cts.eduLink.application.controller;
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
 import com.cts.eduLink.application.service.IFacultyService;
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

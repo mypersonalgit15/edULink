@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -15,6 +17,6 @@ public class Role {
     @Column(unique = true, nullable = false)
     private String roleName;
 
-    @OneToOne(mappedBy = "role")
-    private AppUser appUser;
+    @OneToMany(mappedBy = "role")
+    private List<AppUser> appUserList;
 }

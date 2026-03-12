@@ -2,6 +2,7 @@ package com.cts.eduLink.application.globalexception;
 
 import com.cts.eduLink.application.classexception.AppUserException;
 import com.cts.eduLink.application.classexception.CourseException;
+import com.cts.eduLink.application.classexception.FacultyException;
 import com.cts.eduLink.application.classexception.StudentException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -22,5 +23,10 @@ public class GlobalException {
     @ExceptionHandler(StudentException.class)
     public ResponseEntity<String> studentExceptionHandler(StudentException s){
         return ResponseEntity.status(s.getHttpStatus()).body(s.getMessage());
+    }
+
+    @ExceptionHandler(FacultyException.class)
+    public ResponseEntity<String> facultyExceptionHandler(FacultyException f){
+        return ResponseEntity.status(f.getHttpStatus()).body(f.getMessage());
     }
 }

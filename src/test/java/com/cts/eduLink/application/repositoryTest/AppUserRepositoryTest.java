@@ -4,12 +4,10 @@ import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.Role;
 import com.cts.eduLink.application.entity.Student;
 import com.cts.eduLink.application.repository.AppUserRepository;
-import jakarta.persistence.OneToOne;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
-import org.springframework.test.annotation.Commit;
 
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertTrue;

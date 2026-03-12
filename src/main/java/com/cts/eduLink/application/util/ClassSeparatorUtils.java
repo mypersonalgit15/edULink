@@ -1,8 +1,10 @@
 package com.cts.eduLink.application.util;
 
+import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
 import com.cts.eduLink.application.dto.StudentRegistrationDto;
 import com.cts.eduLink.application.entity.AppUser;
+import com.cts.eduLink.application.entity.Course;
 import com.cts.eduLink.application.entity.Faculty;
 import com.cts.eduLink.application.entity.Student;
 
@@ -27,11 +29,25 @@ public class ClassSeparatorUtils {
         appUser.setPhoneNumber(appUserDto.getPhoneNumber());
         return appUser;
     }
+
+    public static Course facultyDtoSeparator(CourseRegistrationDto courseRegistrationDto){
+        Course course = new Course();
+        course.setCourseTitle(courseRegistrationDto.getCourseTitle());
+        course.setCourseSubject(courseRegistrationDto.getCourseSubject());
+        course.setCourseCredit(courseRegistrationDto.getCourseCredit());
+        course.setCourseRating(0.0);
+        course.setCourseGradeLevel(courseRegistrationDto.getCourseGradeLevel());
+        Long courseId = UIDGeneratorUtils.uidGenerator();
+        course.setCourseId(courseId);
+        return course;
+    }
+
     public static Faculty facultyDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
         faculty.setStudentAddress(facultyRegistrationDto.getStudentAddress());
+        faculty.setFacultyRating(0.0);
         Long facultyId = UIDGeneratorUtils.uidGenerator();
         faculty.setFacultyId(facultyId);
         return faculty;

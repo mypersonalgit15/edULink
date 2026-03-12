@@ -33,7 +33,7 @@ public class Course {
     private List<PerformanceMetric> metrics;
 
     @ManyToMany(mappedBy = "courseSet")
-    private Set<Faculty> facultySet;
+    private Set<Faculty> facultySet = new HashSet<>();
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private List<Exam> examList;

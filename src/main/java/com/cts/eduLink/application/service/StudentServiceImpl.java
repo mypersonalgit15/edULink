@@ -10,8 +10,6 @@ import com.cts.eduLink.application.repository.RoleRepository;
 import com.cts.eduLink.application.repository.StudentRepository;
 import com.cts.eduLink.application.util.ClassSeparatorUtils;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +36,7 @@ public class StudentServiceImpl implements IStudentService {
         Optional<Role> role = roleRepository.findRoleByName("STUDENT");
         appUser.setRole(role.get());
         student.setAppUser(appUser);
-        log.debug("Attempting to register AppUser and save Student entity");
+        log.error("Attempting to register AppUser and save Student entity");
         iAppUserService.registerAppUser(appUser);
         studentRepository.save(student);
         log.info("Successfully registered student. Assigned Student ID: {}", student.getStudentId());

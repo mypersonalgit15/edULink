@@ -17,7 +17,7 @@ public class AppUser {
     private String userEmail;
     private Long phoneNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
