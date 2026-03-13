@@ -1,0 +1,17 @@
+package com.cts.eduLink.application.projection;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class CourseDetailByIdProjection {
+    private String courseTitle;
+    private String courseSubject;
+    private String courseGradeLevel;
+    private int courseCredit;
+    private String courseStatus;
+    private double courseRating;
+
+    // faculty name+rating+similar course
+}

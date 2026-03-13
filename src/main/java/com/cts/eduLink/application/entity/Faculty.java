@@ -1,11 +1,10 @@
 package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,17 +18,9 @@ public class Faculty {
 
     @Column(unique = true,nullable = false)
     private Long facultyId;
-
-    @Column(nullable = false)
     private String facultyGender;
-
-    @Column(nullable = false)
-    private String studentAddress;
-
-    @Column(nullable = false)
+    private String facultyAddress;
     private int facultyYearOfExperience;
-
-    @Column(nullable = false)
     private double facultyRating;
 
     @OneToOne(cascade = CascadeType.ALL)

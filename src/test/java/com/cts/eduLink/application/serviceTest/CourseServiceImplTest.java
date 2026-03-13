@@ -1,7 +1,7 @@
 package com.cts.eduLink.application.serviceTest;
 
 import com.cts.eduLink.application.classexception.CourseException;
-import com.cts.eduLink.application.projection.CourseProjection;
+import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.service.CourseServiceImpl;
@@ -25,25 +25,25 @@ public class CourseServiceImplTest {
     private  CourseRepository courseRepository;
 
     private  CourseServiceImpl courseService;
-    private  List<CourseProjection>courseProjectionList;
+    private  List<CourseDetailProjection> courseDetailProjectionList;
     private FacultyRepository facultyRepository;
 
     @BeforeEach
     void setUp() {
         courseService = new CourseServiceImpl(courseRepository,facultyRepository);
-        courseProjectionList = new ArrayList<>();
-        courseProjectionList.add(new CourseProjection("java springBoot", "Full Stack", "college student", 4, "active", 4.8));
+        courseDetailProjectionList = new ArrayList<>();
+        courseDetailProjectionList.add(new CourseDetailProjection("java springBoot" , "K",  4.8));
     }
     @Test
     public void courseProjectTest_200(){
-        when(courseRepository.findAllAvailableCourse()).thenReturn(courseProjectionList);
-        List<CourseProjection> courseProjections = courseService.findAllAvailableCourse();
-        assertEquals(!courseProjections.isEmpty(),courseProjections.size()==1,"Tested Successfully");
+        when(courseRepository.findAllAvailableCourse()).thenReturn(courseDetailProjectionList);
+        List<CourseDetailProjection> courseDetailProjections = courseService.findAllAvailableCourse();
+        assertEquals(!courseDetailProjections.isEmpty(), courseDetailProjections.size()==1,"Tested Successfully");
     }
 
     @Test
     public void courseProjectTest_404(){
-        courseProjectionList = new ArrayList<>();
+        courseDetailProjectionList = new ArrayList<>();
         CourseException exception = assertThrows(CourseException.class,()->{
             courseService.findAllAvailableCourse();
         });

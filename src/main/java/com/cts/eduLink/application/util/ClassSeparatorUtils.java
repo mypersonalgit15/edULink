@@ -46,7 +46,7 @@ public class ClassSeparatorUtils {
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
-        faculty.setStudentAddress(facultyRegistrationDto.getStudentAddress());
+        faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         Long facultyId = UIDGeneratorUtils.uidGenerator();
         faculty.setFacultyId(facultyId);

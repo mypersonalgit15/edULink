@@ -11,5 +11,4 @@ public class AppUserException extends  RuntimeException{
         super(message);
         this.httpStatus = httpStatus;
     }
-
 }

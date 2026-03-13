@@ -5,7 +5,8 @@ import com.cts.eduLink.application.classexception.FacultyException;
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.entity.Course;
 import com.cts.eduLink.application.entity.Faculty;
-import com.cts.eduLink.application.projection.CourseProjection;
+import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
+import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.util.ClassSeparatorUtils;
@@ -33,22 +34,35 @@ public class CourseServiceImpl implements ICourseService{
             log.error("{} is not authorized to register course",courseRegistrationDto.getFacultyId());
             throw new FacultyException(courseRegistrationDto.getFacultyId()+" is not registered",HttpStatus.BAD_REQUEST);
         }
+        log.error("Unable to separate faculty from courseRegistrationDto");
         Course course = ClassSeparatorUtils.facultyDtoSeparator(courseRegistrationDto);
         course.setCourseStatus("ACTIVE");
         course.getFacultySet().add(facultyOption.get());
         courseRepository.save(course);
+        log.info("Course with id {} saved successFully into database",course.getCourseId());
         return "Course has registered successFully with course Id: "+course.getCourseId();
     }
 
     @Override
-    public List<CourseProjection> findAllAvailableCourse() throws CourseException {
+    public List<CourseDetailProjection> findAllAvailableCourse() throws CourseException {
         log.info("User has requested to display course List");
-        List<CourseProjection> courseProjections = courseRepository.findAllAvailableCourse();
-        if(courseProjections.isEmpty()){
+        List<CourseDetailProjection> courseDetailProjections = courseRepository.findAllAvailableCourse();
+        if(courseDetailProjections.isEmpty()){
             log.error("no course is available to display");
             throw new CourseException("No course Available!", HttpStatus.NOT_FOUND);
         }
-        log.info("Course List has been accessed SuccessFully and first course name is {}",courseProjections.getFirst().getCourseTitle());
-        return courseProjections;
+        log.info("Course List has been accessed SuccessFully and first course name is {}", courseDetailProjections.getFirst().getCourseTitle());
+        return courseDetailProjections;
+    }
+
+    @Override
+    public CourseDetailByIdProjection findCourseById(Long courseId) throws CourseException{
+        Optional<CourseDetailByIdProjection> courseDetailByIdProjection = courseRepository.findCourseById(courseId);
+        if (courseDetailByIdProjection.isEmpty()){
+            log.debug("User requested for {} which is not available",courseId);
+            throw new CourseException("No Course is with course id: "+courseId,HttpStatus.NOT_FOUND);
+        }
+        log.debug("{} has fetched successfully from course table",courseId);
+        return courseDetailByIdProjection.get();
     }
 }
