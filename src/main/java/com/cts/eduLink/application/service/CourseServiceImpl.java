@@ -42,6 +42,7 @@ public class CourseServiceImpl implements ICourseService{
         courseRepository.save(course);
         log.info("Course with id {} saved successFully into database",course.getCourseId());
         return "Course has registered successFully with course Id: "+course.getCourseId();
+//        return "Course has registered successFully"; // for testing
     }
 
     @Override

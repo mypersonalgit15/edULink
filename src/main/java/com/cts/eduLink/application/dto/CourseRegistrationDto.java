@@ -2,8 +2,10 @@ package com.cts.eduLink.application.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class CourseRegistrationDto {
 
     @NotBlank(message = "Course title is required")
@@ -25,3 +27,4 @@ public class CourseRegistrationDto {
     @Positive(message = "Invalid Faculty ID")
     private Long facultyId;
 }
+

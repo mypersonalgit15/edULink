@@ -9,5 +9,5 @@ import java.util.List;
 public interface ICourseService {
     String registerCourse(CourseRegistrationDto courseRegistrationDto);
     List<CourseDetailProjection> findAllAvailableCourse();
-    CourseDetailByIdProjection findCourseById(Long courseId);
+    CourseDetailByIdProjection findCourseDetailsById(Long courseId);
 }

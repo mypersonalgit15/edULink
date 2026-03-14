@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
@@ -16,11 +17,9 @@ public class CourseRepositoryTest {
     @Autowired
     private CourseRepository courseRepository;
 
-    private Course course;
-
     @BeforeEach
     public void setUp(){
-        course = new Course();
+        Course course = new Course();
         course.setCourseId(12532434543L);
         course.setCourseTitle("Java Full Stack");
         course.setCourseSubject("Java");
@@ -35,6 +34,6 @@ public class CourseRepositoryTest {
     @Test
     public void getCourseList_200(){
         List<CourseDetailProjection> courseDetailProjections = courseRepository.findAllAvailableCourse();
-        assertEquals("Java", courseDetailProjections.get(0).getCourseSubject());
+        assertEquals("Java", courseDetailProjections.getFirst().getCourseTitle());
     }
 }

@@ -26,10 +26,10 @@ public class CourseController {
         return  ResponseEntity.status(200).body(iCourseService.registerCourse(courseRegistrationDto));
     }
 
-    @GetMapping("/findCourseById/{courseId}")
+    @GetMapping("/findCourseDetailsById/{courseId}")
     public ResponseEntity<CourseDetailByIdProjection> findCourseById(@PathVariable Long courseId){
         log.info("User requested for details of courseId: {} ",courseId);
-        return ResponseEntity.status(200).body(iCourseService.findCourseById(courseId));
+        return ResponseEntity.status(200).body(iCourseService.findCourseDetailsById(courseId));
     }
 
     @GetMapping("/findAllAvailableCourse")

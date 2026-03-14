@@ -12,6 +12,6 @@ public class CourseDetailByIdProjection {
     private int courseCredit;
     private String courseStatus;
     private double courseRating;
-
-    // faculty name+rating+similar course
+    private String facultyName;
+    private double facultyRating;
 }

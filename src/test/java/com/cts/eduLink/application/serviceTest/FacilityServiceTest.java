@@ -11,8 +11,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 @AllArgsConstructor
 public class FacilityServiceTest {
@@ -30,7 +28,7 @@ public class FacilityServiceTest {
     public void setUp(){
         facultyRegistrationDto = new FacultyRegistrationDto();
         facultyRegistrationDto.setUserEmail("ankit@gmail.com");
-        facultyRegistrationDto.setUserName("ankit");
+        facultyRegistrationDto.setUserName("Ankit");
         facultyRegistrationDto.setFacultyGender("Male");
     }
 

@@ -40,7 +40,7 @@ public class StudentServiceImpl implements IStudentService {
         iAppUserService.registerAppUser(appUser);
         studentRepository.save(student);
         log.info("Successfully registered student. Assigned Student ID: {}", student.getStudentId());
-//        return "Thanks for Registration, Your User Id "; // return for testing
+//        return "Thanks for Registration, Your User id "; // return for testing
         return "Thanks for Registration, Your User Id is: "+student.getStudentId(); // return for development
     }
 }
