@@ -3,7 +3,6 @@ server:
 logging:
   level:
     root: INFO
-    com.cts.eduLink.application: DEBUG
     org.hibernate: WARN
     org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: WARN
 spring:
