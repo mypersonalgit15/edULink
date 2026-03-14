@@ -38,6 +38,7 @@ public class CourseServiceImpl implements ICourseService{
         Course course = ClassSeparatorUtils.facultyDtoSeparator(courseRegistrationDto);
         course.setCourseStatus("ACTIVE");
         course.getFacultySet().add(facultyOption.get());
+        facultyOption.get().getCourseSet().add(course);
         courseRepository.save(course);
         log.info("Course with id {} saved successFully into database",course.getCourseId());
         return "Course has registered successFully with course Id: "+course.getCourseId();
@@ -56,11 +57,11 @@ public class CourseServiceImpl implements ICourseService{
     }
 
     @Override
-    public CourseDetailByIdProjection findCourseById(Long courseId) throws CourseException{
-        Optional<CourseDetailByIdProjection> courseDetailByIdProjection = courseRepository.findCourseById(courseId);
+    public CourseDetailByIdProjection findCourseDetailsById(Long courseId) throws CourseException{
+        Optional<CourseDetailByIdProjection> courseDetailByIdProjection = courseRepository.findCourseDetailsById(courseId);
         if (courseDetailByIdProjection.isEmpty()){
             log.debug("User requested for {} which is not available",courseId);
-            throw new CourseException("No Course is with course id: "+courseId,HttpStatus.NOT_FOUND);
+            throw new CourseException("No Course available for course id: "+courseId,HttpStatus.NOT_FOUND);
         }
         log.debug("{} has fetched successfully from course table",courseId);
         return courseDetailByIdProjection.get();

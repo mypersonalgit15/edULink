@@ -41,6 +41,6 @@ public class Course {
     private List<LearningMaterial> learningMaterialList;
 
     @ManyToMany(mappedBy = "courseSet")
-    private Set<Student> studentSet;
+    private Set<Student> studentSet = new HashSet<>();
 
 }
