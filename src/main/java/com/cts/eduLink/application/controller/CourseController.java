@@ -1,39 +1,40 @@
 package com.cts.eduLink.application.controller;
 
-import com.cts.eduLink.application.entity.*;
+import com.cts.eduLink.application.dto.CourseRegistrationDto;
+import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
+import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.service.ICourseService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/course")
+@RequestMapping("/course")
+@AllArgsConstructor
+@Slf4j
 public class CourseController {
 
-    private final ICourseService courseService;
+    private final ICourseService iCourseService;
 
-    @Autowired
-    public CourseController(ICourseService courseService) {
-        this.courseService = courseService;
+    @PostMapping("/register")
+    public ResponseEntity<String> registerCourse(@Valid @RequestBody CourseRegistrationDto courseRegistrationDto){
+        log.info("{} request for a new course registration",courseRegistrationDto.getFacultyId());
+        return  ResponseEntity.status(200).body(iCourseService.registerCourse(courseRegistrationDto));
     }
 
-    @GetMapping("/{courseId}")
-    public ResponseEntity<Course> getCourseDetails(@PathVariable Long courseId) {
-        Course course = courseService.getCourseById(courseId);
-        return ResponseEntity.ok(course);
+    @GetMapping("/findCourseDetailsById/{courseId}")
+    public ResponseEntity<CourseDetailByIdProjection> findCourseById(@PathVariable Long courseId){
+        log.info("User requested for details of courseId: {} ",courseId);
+        return ResponseEntity.status(200).body(iCourseService.findCourseDetailsById(courseId));
     }
 
-    @PostMapping("/{courseId}/enroll")
-    public ResponseEntity<String> enrollInCourse(@PathVariable Long courseId, @RequestParam Long studentId) {
-        courseService.enrollStudentInCourse(studentId, courseId);
-        return ResponseEntity.ok("Successfully Enrolled in the Course");
-    }
-
-    @GetMapping("/{courseId}/content")
-    public ResponseEntity<List<LearningMaterial>> getCourseContent(@PathVariable Long courseId) {
-        List<LearningMaterial> materials = courseService.getCourseMaterials(courseId);
-        return ResponseEntity.ok(materials);
+    @GetMapping("/findAllAvailableCourse")
+    public ResponseEntity<List<CourseDetailProjection>> findALlAvailableCourse(){
+        log.info("User has called the endpoint successFully to fetch all available courses");
+        return ResponseEntity.status(200).body(iCourseService.findAllAvailableCourse());
     }
 }

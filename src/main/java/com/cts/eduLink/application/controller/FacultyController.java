@@ -1,25 +1,31 @@
 package com.cts.eduLink.application.controller;
 
-import com.cts.eduLink.application.entity.Faculty;
+import com.cts.eduLink.application.dto.FacultyRegistrationDto;
 import com.cts.eduLink.application.service.IFacultyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/faculty")
+@RequestMapping("/faculty")
+@AllArgsConstructor
+@Slf4j
 public class FacultyController {
 
     private final IFacultyService facultyService;
 
-    @Autowired
-    public FacultyController(IFacultyService facultyService) {
-        this.facultyService = facultyService;
+    @PostMapping("/register")
+    public ResponseEntity<String> registerFaculty(@Valid @RequestBody FacultyRegistrationDto facultyRegistrationDto){
+        log.info("{} has initiated the registration as a Faculty",facultyRegistrationDto.getUserEmail());
+        return ResponseEntity.status(200).body(facultyService.registerFaculty(facultyRegistrationDto));
     }
 
-    @GetMapping("/{facultyId}")
-    public ResponseEntity<Faculty> getFacultyDetails(@PathVariable Long facultyId) {
-        Faculty faculty = facultyService.getFacultyById(facultyId);
-        return ResponseEntity.ok(faculty);
+    @GetMapping("/filterByRatting/{facultyRating}")
+    public ResponseEntity<?> filterFacultyByRating(@PathVariable int facultyRating){
+        log.info("Faculty filter request by ratting intercepted");
+        return ResponseEntity.status(200).body(facultyService.filterFacultyByRating(facultyRating));
     }
+
 }

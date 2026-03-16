@@ -2,14 +2,11 @@ package com.cts.eduLink.application.entity;
 
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,17 +21,14 @@ public class Student {
     @Column(unique = true,nullable = false)
     private Long studentId;
 
-    @Column(nullable = false)
     private LocalDate studentDOB;
-
-    @Column(nullable = false)
     private String studentGender;
-
-    @Column(nullable = false)
     private String studentAddress;
-
-    @Column(nullable = false)
     private LocalDateTime studentEnrollmentDateTime;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
+    private AppUser appUser;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<PerformanceMetric> metricList;

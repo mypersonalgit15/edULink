@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,15 +32,15 @@ public class Course {
     private List<PerformanceMetric> metrics;
 
     @ManyToMany(mappedBy = "courseSet")
-    private Set<Student> studentSet;
-
-    @ManyToMany(mappedBy = "courseSet")
-    private Set<Faculty> facultySet;
+    private Set<Faculty> facultySet = new HashSet<>();
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private List<Exam> examList;
 
     @OneToMany(mappedBy = "course")
     private List<LearningMaterial> learningMaterialList;
+
+    @ManyToMany(mappedBy = "courseSet")
+    private Set<Student> studentSet = new HashSet<>();
 
 }

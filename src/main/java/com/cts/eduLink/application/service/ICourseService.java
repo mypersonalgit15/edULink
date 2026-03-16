@@ -1,10 +1,13 @@
 package com.cts.eduLink.application.service;
 
-import com.cts.eduLink.application.entity.*;
+import com.cts.eduLink.application.dto.CourseRegistrationDto;
+import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
+import com.cts.eduLink.application.projection.CourseDetailProjection;
+
 import java.util.List;
 
 public interface ICourseService {
-    Course getCourseById(Long courseId);
-    void enrollStudentInCourse(Long studentId, Long courseId);
-    List<LearningMaterial> getCourseMaterials(Long courseId);
+    String registerCourse(CourseRegistrationDto courseRegistrationDto);
+    List<CourseDetailProjection> findAllAvailableCourse();
+    CourseDetailByIdProjection findCourseDetailsById(Long courseId);
 }

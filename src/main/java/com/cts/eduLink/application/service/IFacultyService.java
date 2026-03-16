@@ -1,7 +1,12 @@
 package com.cts.eduLink.application.service;
 
-import com.cts.eduLink.application.entity.Faculty;
+import com.cts.eduLink.application.dto.FacultyRegistrationDto;
+import com.cts.eduLink.application.projection.FacultyDetailProjection;
+import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface IFacultyService {
-    Faculty getFacultyById(Long facultyId);
+    String registerFaculty(FacultyRegistrationDto facultyRegistrationDto);
+    List<FacultyDetailProjection> filterFacultyByRating(@Param("facultyRating") int facultyRating);
 }
