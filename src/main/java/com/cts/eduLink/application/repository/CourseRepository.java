@@ -21,4 +21,5 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
             "c.courseSubject,c.courseGradeLevel,c.courseCredit,c.courseStatus,c.courseRating,a.userName,f.facultyRating)"+
             " from Course c inner join c.facultySet f inner join f.appUser a where c.courseId = :courseId")
     Optional<CourseDetailByIdProjection> findCourseDetailsById(@Param("courseId") Long courseId);
+
 }

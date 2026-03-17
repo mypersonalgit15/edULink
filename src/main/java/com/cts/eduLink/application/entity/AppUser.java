@@ -29,4 +29,7 @@ public class AppUser {
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<Notification> notificationList;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<FeedBack> feedBackList;
 }

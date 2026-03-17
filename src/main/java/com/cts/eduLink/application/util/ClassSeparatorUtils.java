@@ -2,11 +2,9 @@ package com.cts.eduLink.application.util;
 
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
+import com.cts.eduLink.application.dto.FeedbackDto;
 import com.cts.eduLink.application.dto.StudentRegistrationDto;
-import com.cts.eduLink.application.entity.AppUser;
-import com.cts.eduLink.application.entity.Course;
-import com.cts.eduLink.application.entity.Faculty;
-import com.cts.eduLink.application.entity.Student;
+import com.cts.eduLink.application.entity.*;
 
 import java.time.LocalDateTime;
 
@@ -58,5 +56,12 @@ public class ClassSeparatorUtils {
         appUser.setUserEmail(facultyRegistrationDto.getUserEmail());
         appUser.setPhoneNumber(facultyRegistrationDto.getPhoneNumber());
         return appUser;
+    }
+
+    public static FeedBack feedBackDtoSeparator(FeedbackDto feedbackDto){
+        FeedBack feedBack = new FeedBack();
+        feedBack.setMessage(feedbackDto.getComment());
+        feedBack.setRating(feedbackDto.getRating());
+        return feedBack;
     }
 }
