@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/exam")
@@ -28,6 +29,25 @@ public class ExamController {
         log.info("Creating a new exam: {}", request.getExamName());
         examService.createExam(request);
         return ResponseEntity.status(HttpStatus.OK).body("created successfully");
+    }
+
+    @PutMapping("/update/{examId}")
+    public ResponseEntity<String> updateExam(@PathVariable Long examId, @RequestBody ExamCreationRequestDto request) {
+        log.info("Received request to update exam with ID: {}", examId);
+        String response = examService.updateExam(examId, request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/patch/{examId}")
+    public ResponseEntity<String> patchExam(@PathVariable Long examId, @RequestBody Map<String, Object> updates) {
+        log.info("Patch update for examId: {} has been initiated successfully", examId);
+        return ResponseEntity.status(200).body(examService.patchExam(examId, updates));
+    }
+
+    @DeleteMapping("/delete/{examId}")
+    public ResponseEntity<String> deleteExam(@PathVariable Long examId) {
+        log.info("Delete operation for examId: {} has been initiated successfully", examId);
+        return ResponseEntity.status(200).body(examService.deleteExam(examId));
     }
 
     @GetMapping("/allExams")

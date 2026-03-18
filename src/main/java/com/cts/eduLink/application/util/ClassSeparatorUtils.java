@@ -91,5 +91,12 @@ public class ClassSeparatorUtils {
 
     }
 
+    public static void updateExamFromDto(Exam exam, ExamCreationRequestDto dto) {
+        exam.setExamName(dto.getExamName());
+        exam.setExamStatus(dto.getStatus());
+        exam.setCandidates(dto.getCandidates());
+        // examLocalDateTime is usually set at creation, but you can update it here if needed
+    }
+
 
 }

@@ -6,6 +6,7 @@ import com.cts.eduLink.application.projection.ExamProjection;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface IExamService {
 
@@ -14,7 +15,8 @@ public interface IExamService {
 
     // Method to fetch all exams
     List<ExamProjection> findAllExams();
+    String updateExam(Long examId, ExamCreationRequestDto examCreationRequestDto);
+    String patchExam(Long examId, Map<String, Object> updates);
+    String deleteExam(Long examId);
 
-    // Method to fetch upcoming exams
-//    List<Exam> getUpcomingExams();
 }

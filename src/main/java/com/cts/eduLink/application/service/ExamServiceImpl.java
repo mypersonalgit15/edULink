@@ -51,6 +51,95 @@ ExamRepository examRepository;
     }
 
     @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String updateExam(Long examId, ExamCreationRequestDto dto) {
+        log.info("Updating exam details for ID: {}", examId);
+
+        // 1. Find existing exam
+        Exam existingExam = examRepository.findById(examId)
+                .orElseThrow(() -> new ExamException("Exam not found with ID: " + examId, HttpStatus.NOT_FOUND));
+
+        // 2. Update basic fields using utility
+        ClassSeparatorUtils.updateExamFromDto(existingExam, dto);
+
+        // 3. Update the associated course if a new courseId is provided
+        if (dto.getCourseId() != null) {
+            Course course = courseRepository.findByCourseId(dto.getCourseId())
+                    .orElseThrow(() -> new ExamException("Course not found with ID: " + dto.getCourseId(), HttpStatus.NOT_FOUND));
+            existingExam.setCourse(course);
+        }
+
+        // 4. Save the updated entity
+        examRepository.save(existingExam);
+
+        log.info("Exam ID: {} updated successfully", examId);
+        return "Exam updated successfully!";
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String patchExam(Long examId, java.util.Map<String, Object> updates) {
+        log.info("Patch update initiated for Exam ID: {}", examId);
+
+        // 1. Find the existing exam
+        com.cts.eduLink.application.entity.Exam exam = examRepository.findById(examId)
+                .orElseThrow(() -> new com.cts.eduLink.application.classexception.ExamException(
+                        "Exam not found with ID: " + examId,
+                        org.springframework.http.HttpStatus.NOT_FOUND
+                ));
+
+        // 2. Iterate through the map and update only provided fields
+        updates.forEach((key, value) -> {
+            if (value != null) {
+                switch (key) {
+                    case "examName":
+                        exam.setExamName(value.toString());
+                        break;
+                    case "status":
+                        exam.setExamStatus(value.toString());
+                        break;
+                    case "candidates":
+                        exam.setCandidates(Integer.parseInt(value.toString()));
+                        break;
+                    case "courseId":
+                        Long newCourseId = Long.valueOf(value.toString());
+                        com.cts.eduLink.application.entity.Course course = courseRepository.findByCourseId(newCourseId)
+                                .orElseThrow(() -> new com.cts.eduLink.application.classexception.ExamException(
+                                        "Course not found with ID: " + newCourseId,
+                                        org.springframework.http.HttpStatus.NOT_FOUND
+                                ));
+                        exam.setCourse(course);
+                        break;
+                }
+            }
+        });
+
+        // 3. Save the partially updated entity
+        examRepository.save(exam);
+        log.info("Exam ID: {} partially updated successfully", examId);
+        return "Exam partially updated successfully!";
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String deleteExam(Long examId) {
+        log.info("Deletion request initiated for Exam ID: {}", examId);
+
+        // 1. Find the existing exam using the database primary key ID
+        com.cts.eduLink.application.entity.Exam exam = examRepository.findById(examId)
+                .orElseThrow(() -> new com.cts.eduLink.application.classexception.ExamException(
+                        "Exam not found with ID: " + examId,
+                        org.springframework.http.HttpStatus.NOT_FOUND
+                ));
+
+        // 2. Delete the exam
+        examRepository.delete(exam);
+
+        log.info("Exam ID: {} deleted successfully", examId);
+        return "Exam deleted successfully!";
+    }
+
+    @Override
     public List<ExamProjection> findAllExams() throws ExamException {
         log.info("User has requested to display all exams via projection");
 
