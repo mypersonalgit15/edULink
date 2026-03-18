@@ -12,9 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FacultyDashboardDto {
-    private Long totalStudents;
-    private Long totalCourses;
-    private Long upcomingExams;
+    private int courseCount;
+    private int upcomingExamsCount;
+//    private Long totalStudents;
 //    private List<Course> myCourses;
 //    private List<Exam> upcomingExamsList;
 }

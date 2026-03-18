@@ -15,8 +15,7 @@ public interface IFacultyService {
     String registerFaculty(FacultyRegistrationDto facultyRegistrationDto);
     FacultyDashboardDto getFacultyDashboard(Long facultyId);
     List<Course> getFacultyCourses(Long facultyId);
-//    List<Exam> getUpcomingExams(Long facultyId);
-    Long getTotalStudents(Long facultyId);
+//    Long getTotalStudents(Long facultyId);
 
     Optional<IFacultyProjection> getFacultyProfile(Long facultyId);
     List<Exam> getupComingExams(Long facultyId );

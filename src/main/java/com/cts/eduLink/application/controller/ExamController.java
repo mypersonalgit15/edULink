@@ -1,7 +1,9 @@
 package com.cts.eduLink.application.controller;
 
+import com.cts.eduLink.application.classexception.ExamException;
 import com.cts.eduLink.application.dto.ExamCreationRequestDto;
 import com.cts.eduLink.application.entity.Exam;
+import com.cts.eduLink.application.projection.ExamProjection;
 import com.cts.eduLink.application.service.IExamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,11 +30,10 @@ public class ExamController {
         return ResponseEntity.status(HttpStatus.OK).body("created successfully");
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Exam>> getAllExams() {
-        log.info("Fetching all exams");
-        List<Exam> exams = examService.getAllExams();
-        return ResponseEntity.ok(exams);
+    @GetMapping("/allExams")
+    public ResponseEntity<List<ExamProjection>> getAllExams() throws ExamException {
+        log.info("Controller: Request received to fetch all exam projections");
+        return ResponseEntity.ok(examService.findAllExams());
     }
 
 }

@@ -7,6 +7,7 @@ import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.Faculty;
 import com.cts.eduLink.application.entity.Role;
 import com.cts.eduLink.application.projection.IFacultyProjection;
+import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
 import com.cts.eduLink.application.util.ClassSeparatorUtils;
@@ -35,6 +36,7 @@ public class FacultyServiceImpl implements IFacultyService {
     private final FacultyRepository facultyRepository;
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
+    private final CourseRepository courseRepository;
 
     @Override
     public String registerFaculty(FacultyRegistrationDto facultyRegistrationDto) {
@@ -54,32 +56,20 @@ public class FacultyServiceImpl implements IFacultyService {
 
     @Override
     public FacultyDashboardDto getFacultyDashboard(Long facultyId) {
-        log.info("Fetching dashboard data for faculty with id: {}", facultyId);
-        Optional<Faculty> facultyOptional = facultyRepository.findFacultyById(facultyId);
-        
-        if (facultyOptional.isEmpty()) {
-            log.warn("Faculty not found with id: {}", facultyId);
-            return new FacultyDashboardDto();
-        }
-        
-        // Get faculty's courses
-        List<Course> myCourses = getFacultyCourses(facultyId);
-        
-        // Get upcoming exams for faculty's courses
-//        List<Exam> upcomingExamsList = getUpcomingExams(facultyId);
-        
-        // Get total students in faculty's courses
-        Long totalStudents = getTotalStudents(facultyId);
-        
-        FacultyDashboardDto dashboardDto = new FacultyDashboardDto();
-        dashboardDto.setTotalStudents(totalStudents);
-        dashboardDto.setTotalCourses((long) myCourses.size());
-//        dashboardDto.setUpcomingExams((long) upcomingExamsList.size());
-//        dashboardDto.setMyCourses(myCourses);
-//        dashboardDto.setUpcomingExamsList(upcomingExamsList);
-        
-        log.info("Dashboard data fetched successfully for faculty: {}", facultyId);
-        return dashboardDto;
+        log.info("Generating dashboard data for faculty: {}", facultyId);
+
+        // 1. Get the course count from CourseRepository
+        int courses = courseRepository.getFacultyCourseCount(facultyId);
+
+        // 2. Get the exam count from FacultyRepository (or ExamRepository)
+        int exams = facultyRepository.getUpcomingExamsCount(facultyId);
+
+        // 3. Combine them into the DTO
+        FacultyDashboardDto dashboard = new FacultyDashboardDto();
+        dashboard.setCourseCount(courses);
+        dashboard.setUpcomingExamsCount(exams);
+
+        return dashboard;
     }
 
     @Override
@@ -106,50 +96,28 @@ public class FacultyServiceImpl implements IFacultyService {
         return facultyRepository.getUpcomingExamsCount(facultyId);
     }
 
+
 //    @Override
-//    public List<Exam> getUpcomingExams(Long facultyId) {
-//        log.debug("Fetching upcoming exams for faculty: {}", facultyId);
+//    public Long getTotalStudents(Long facultyId) {
+//        log.debug("Fetching total students for faculty: {}", facultyId);
 //        Optional<Faculty> facultyOptional = facultyRepository.findFacultyById(facultyId);
 //
 //        if (facultyOptional.isEmpty()) {
 //            log.warn("Faculty not found with id: {}", facultyId);
-//            return List.of();
+//            return 0L;
 //        }
 //
 //        Faculty faculty = facultyOptional.get();
-//        LocalDateTime now = LocalDateTime.now();
 //
-//         Get all exams for faculty's courses and filter upcoming ones
-//        List<Exam> upcomingExams = faculty.getCourseSet().stream()
-//                .flatMap(course -> course.getExamSet().stream())
-//                .filter(exam -> exam.getExamLocalDateTime() != null && exam.getExamLocalDateTime().isAfter(now))
-//                .collect(Collectors.toList());
+//        // Get all unique students from faculty's courses
+//        Set<Student> uniqueStudents = faculty.getCourseSet().stream()
+//                .flatMap(course -> course.getStudentSet().stream())
+//                .collect(Collectors.toSet());
 //
-//        log.debug("Found {} upcoming exams for faculty: {}", upcomingExams.size(), facultyId);
-//        return upcomingExams;
+//        long totalStudents = uniqueStudents.size();
+//        log.debug("Found {} total students for faculty: {}", totalStudents, facultyId);
+//        return totalStudents;
 //    }
-
-    @Override
-    public Long getTotalStudents(Long facultyId) {
-        log.debug("Fetching total students for faculty: {}", facultyId);
-        Optional<Faculty> facultyOptional = facultyRepository.findFacultyById(facultyId);
-        
-        if (facultyOptional.isEmpty()) {
-            log.warn("Faculty not found with id: {}", facultyId);
-            return 0L;
-        }
-        
-        Faculty faculty = facultyOptional.get();
-        
-        // Get all unique students from faculty's courses
-        Set<Student> uniqueStudents = faculty.getCourseSet().stream()
-                .flatMap(course -> course.getStudentSet().stream())
-                .collect(Collectors.toSet());
-        
-        long totalStudents = uniqueStudents.size();
-        log.debug("Found {} total students for faculty: {}", totalStudents, facultyId);
-        return totalStudents;
-    }
     public Optional<IFacultyProjection> getFacultyProfile(Long facultyId) throws FacultyException {
         return facultyRepository.findFacultyProfile(facultyId);
     }

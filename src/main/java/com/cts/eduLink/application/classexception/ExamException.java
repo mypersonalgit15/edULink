@@ -1,8 +1,14 @@
 package com.cts.eduLink.application.classexception;
 
-public class ExamException extends RuntimeException {
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
-    public ExamException(String message) {
+@Getter
+public class ExamException extends RuntimeException {
+    private final HttpStatus httpStatus;
+
+    public ExamException(String message, HttpStatus httpStatus) {
         super(message);
+        this.httpStatus = httpStatus;
     }
 }
