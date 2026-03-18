@@ -9,6 +9,7 @@ import com.cts.eduLink.application.projection.IFacultyProjection;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface IFacultyService {
@@ -16,6 +17,9 @@ public interface IFacultyService {
     FacultyDashboardDto getFacultyDashboard(Long facultyId);
     List<Course> getFacultyCourses(Long facultyId);
 //    Long getTotalStudents(Long facultyId);
+    String updateFaculty(Long facultyId, FacultyRegistrationDto facultyRegistrationDto);
+    String patchFaculty(Long facultyId, Map<String, Object> updates);
+    String deleteFaculty(Long facultyId);
 
     Optional<IFacultyProjection> getFacultyProfile(Long facultyId);
     List<Exam> getupComingExams(Long facultyId );

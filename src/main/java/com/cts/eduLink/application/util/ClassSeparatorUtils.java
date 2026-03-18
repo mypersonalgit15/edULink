@@ -40,6 +40,14 @@ public class ClassSeparatorUtils {
         return course;
     }
 
+    public static void updateCourseFromDto(Course course, CourseRegistrationDto dto) {
+        course.setCourseTitle(dto.getCourseTitle());
+        course.setCourseSubject(dto.getCourseSubject());
+        course.setCourseCredit(dto.getCourseCredit());
+        course.setCourseGradeLevel(dto.getCourseGradeLevel());
+        course.setCourseStatus(dto.getCourseStatus());
+    }
+
     public static Faculty facultyDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
@@ -50,6 +58,21 @@ public class ClassSeparatorUtils {
         faculty.setFacultyId(facultyId);
         return faculty;
     }
+
+    public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
+        // Update Faculty-specific fields
+        faculty.setFacultyGender(dto.getFacultyGender());
+        faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
+        faculty.setStudentAddress(dto.getStudentAddress());
+
+        // Update associated AppUser fields
+        if (faculty.getAppUser() != null) {
+            faculty.getAppUser().setUserName(dto.getUserName());
+            faculty.getAppUser().setUserEmail(dto.getUserEmail());
+            faculty.getAppUser().setPhoneNumber(dto.getPhoneNumber());
+        }
+    }
+
     public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         AppUser appUser = new AppUser();
         appUser.setUserName(facultyRegistrationDto.getUserName());
@@ -59,8 +82,6 @@ public class ClassSeparatorUtils {
     }
     public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto){
         Exam exam = new Exam();
-
-
         exam.setExamName(examCreationRequestDto.getExamName());
         exam.setExamLocalDateTime(LocalDateTime.now());
         exam.setExamStatus(examCreationRequestDto.getStatus());

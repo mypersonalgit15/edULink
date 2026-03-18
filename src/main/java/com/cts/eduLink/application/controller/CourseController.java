@@ -24,6 +24,27 @@ public class CourseController {
         return  ResponseEntity.status(200).body(iCourseService.registerCourse(courseRegistrationDto));
     }
 
+    @PutMapping("/update/{courseId}")
+    public ResponseEntity<String> updateCourse(@PathVariable Long courseId, @RequestBody CourseRegistrationDto courseRegistrationDto) {
+        log.info("Received request to update course with ID: {}", courseId);
+        String response = iCourseService.updateCourse(courseId, courseRegistrationDto);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/patch/{courseId}")
+    public ResponseEntity<String> patchCourse(@PathVariable Long courseId, @RequestBody Map<String, Object> updates) {
+        log.info("Received patch request for courseId: {}", courseId);
+        String response = iCourseService.patchCourse(courseId, updates);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/delete/{courseId}")
+    public ResponseEntity<String> deleteCourse(@PathVariable Long courseId) {
+        log.info("Received request to delete course with ID: {}", courseId);
+        String response = iCourseService.deleteCourse(courseId);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/findAllAvailableCourse")
     public ResponseEntity<List<CourseProjection>> findALlAvailableCourse(){
         log.info("User has called the endpoint successFully to fetch all available courses");

@@ -11,6 +11,9 @@ import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
 import com.cts.eduLink.application.util.ClassSeparatorUtils;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.HttpStatus;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +55,70 @@ public class FacultyServiceImpl implements IFacultyService {
         facultyRepository.save(faculty);
         log.info("faculty entity has saved into database for "+appUser.getUserEmail());
         return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
+    }
+
+    // Add to edULink-dev last update 17032026/src/main/java/com/cts/eduLink/application/service/FacultyServiceImpl.java
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String updateFaculty(Long facultyId, FacultyRegistrationDto dto) {
+        log.info("Updating faculty profile for ID: {}", facultyId);
+
+        // Find existing faculty or throw exception
+        Faculty existingFaculty = facultyRepository.findFacultyById(facultyId)
+                .orElseThrow(() -> new FacultyException("Faculty not found with ID: " + facultyId, org.springframework.http.HttpStatus.NOT_FOUND));
+
+        // Use utility to map DTO fields to existing entity
+        ClassSeparatorUtils.updateFacultyFromDto(existingFaculty, dto);
+
+        // Save updated entity (JPA identifies this as an update because the ID is present)
+        facultyRepository.save(existingFaculty);
+
+        log.info("Faculty profile updated successfully for ID: {}", facultyId);
+        return "Faculty profile updated successfully!";
+    }
+
+    @Override
+    @Transactional
+    public String patchFaculty(Long facultyId, Map<String, Object> updates) {
+        log.info("Patch update initiated for Faculty ID: {}", facultyId);
+
+        Faculty faculty = facultyRepository.findFacultyById(facultyId)
+                .orElseThrow(() -> new FacultyException("Faculty not found", HttpStatus.NOT_FOUND));
+
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "phoneNumber":
+                    faculty.getAppUser().setPhoneNumber(Long.valueOf(value.toString()));
+                    break;
+                case "facultyYearOfExperience":
+                    faculty.setFacultyYearOfExperience((Integer) value);
+                    break;
+                case "studentAddress":
+                    faculty.setStudentAddress((String) value);
+                    break;
+                // Add other fields as needed
+            }
+        });
+
+        facultyRepository.save(faculty);
+        return "Faculty record partially updated successfully!";
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String deleteFaculty(Long facultyId) {
+        log.info("Deletion request initiated for Faculty ID: {}", facultyId);
+
+        // Check if faculty exists using your existing repository method
+        Faculty faculty = facultyRepository.findFacultyById(facultyId)
+                .orElseThrow(() -> new FacultyException("Faculty not found with ID: " + facultyId, org.springframework.http.HttpStatus.NOT_FOUND));
+
+        // Delete the entity
+        facultyRepository.delete(faculty);
+
+        log.info("Faculty ID: {} and associated user deleted successfully", facultyId);
+        return "Faculty record deleted successfully!";
     }
 
     @Override
