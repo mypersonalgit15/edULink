@@ -6,6 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class CourseDetailByIdProjection {
+    private Long courseId;
     private String courseTitle;
     private String courseSubject;
     private String courseGradeLevel;

@@ -41,6 +41,6 @@ public class StudentServiceImpl implements IStudentService {
         studentRepository.save(student);
         log.info("Successfully registered student. Assigned Student ID: {}", student.getStudentId());
 //        return "Thanks for Registration, Your User id "; // return for testing
-        return "Thanks for Registration, Your User Id is: "+student.getStudentId(); // return for development
+        return "Thanks for Registration, Your User Id "+student.getStudentId(); // return for development
     }
 }

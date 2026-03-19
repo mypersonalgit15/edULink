@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.cts.eduLink.application.constants.ErrorConstant.FACULTY_ERROR;
+import static com.cts.eduLink.application.constants.ErrorConstant.Faculty_Error;
 
 @Service
 @AllArgsConstructor
@@ -54,7 +54,7 @@ public class FacultyServiceImpl implements IFacultyService {
         List<FacultyDetailProjection> facultyDetailProjections = facultyRepository.filterFacultyByRating(facultyRating);
         if (facultyDetailProjections.isEmpty()){
             log.error("No faculty available with {} ratting",facultyRating);
-            throw new FacultyException(FACULTY_ERROR+facultyRating, HttpStatus.NOT_FOUND);
+            throw new FacultyException(Faculty_Error+facultyRating, HttpStatus.NOT_FOUND);
         }
         log.info("Faculty with rating {} fetch successfully and first faculty name is {}",facultyRating,facultyDetailProjections.getFirst().getFacultyName());
         return facultyDetailProjections;

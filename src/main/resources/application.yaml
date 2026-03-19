@@ -2,9 +2,8 @@ server:
   port: 8081
 logging:
   level:
-    # This silences the Hibernate startup/metadata logs
+    root: INFO
     org.hibernate: WARN
-    # This silences the connection pool logs
     org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl: WARN
 spring:
   application:
@@ -15,7 +14,6 @@ spring:
     password: 2478208
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-    # Ensure this is set to false if you want to hide SQL queries
     show-sql: true
     hibernate:
       ddl-auto: update

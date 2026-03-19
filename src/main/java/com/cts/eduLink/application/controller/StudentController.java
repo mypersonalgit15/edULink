@@ -24,5 +24,6 @@ public class StudentController {
         log.info("Student's registration request has been initiated successFully by {}",studentRegistrationDto.getUserName());
         return ResponseEntity.status(200).body(iStudentService.registerStudent(studentRegistrationDto));
     }
+    
 
 }

@@ -32,6 +32,9 @@ public class Course {
     private List<PerformanceMetric> metrics;
 
     @ManyToMany(mappedBy = "courseSet")
+    private Set<Student> studentSet = new HashSet<>();
+
+    @ManyToMany(mappedBy = "courseSet")
     private Set<Faculty> facultySet = new HashSet<>();
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
@@ -40,7 +43,8 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<LearningMaterial> learningMaterialList;
 
-    @ManyToMany(mappedBy = "courseSet")
-    private Set<Student> studentSet = new HashSet<>();
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Assignment> assignmentList;
+
 
 }
