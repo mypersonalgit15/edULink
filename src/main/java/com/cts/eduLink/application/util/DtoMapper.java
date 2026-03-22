@@ -1,13 +1,15 @@
 package com.cts.eduLink.application.util;
 
-import com.cts.eduLink.application.dto.CourseRegistrationDto;
-import com.cts.eduLink.application.dto.FacultyRegistrationDto;
-import com.cts.eduLink.application.dto.StudentRegistrationDto;
+import com.cts.eduLink.application.classexception.FileException;
+import com.cts.eduLink.application.dto.*;
 import com.cts.eduLink.application.entity.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class ClassSeparatorUtils {
+public class DtoMapper {
 
     public static Student studentDtoSeparator(StudentRegistrationDto studentDto){
         Student student = new Student();
@@ -33,6 +35,7 @@ public class ClassSeparatorUtils {
         course.setCourseSubject(courseRegistrationDto.getCourseSubject());
         course.setCourseCredit(courseRegistrationDto.getCourseCredit());
         course.setCourseRating(0.0);
+        course.setTotalCourseRatingCount(0L);
         course.setCourseGradeLevel(courseRegistrationDto.getCourseGradeLevel());
         Long courseId = UIDGeneratorUtils.uidGenerator();
         course.setCourseId(courseId);
@@ -45,6 +48,7 @@ public class ClassSeparatorUtils {
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
+        faculty.setTotalFacultyRatingCount(0L);
         Long facultyId = UIDGeneratorUtils.uidGenerator();
         faculty.setFacultyId(facultyId);
         return faculty;
@@ -57,5 +61,26 @@ public class ClassSeparatorUtils {
         return appUser;
     }
 
-    
+
+
+    public static LearningMaterial learningMaterialDtoSeparator(LearningMaterialRegistrationDto dto) throws IOException {
+        LearningMaterial learningMaterial = new LearningMaterial();
+        learningMaterial.setLearningMaterialTitle(dto.getLearningMaterialTitle());
+
+        MultipartFile file = dto.getLearningMaterialFile();
+        if (file == null || file.isEmpty()) {
+            throw new IOException("File is empty or missing");
+        }
+
+        File uploadDir = new File("uploads");
+        if (!uploadDir.exists()) uploadDir.mkdirs();
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        File dest = new File(uploadDir.getAbsolutePath() + File.separator + fileName);
+        file.transferTo(dest);
+        learningMaterial.setLearningMaterialFile(dest.getPath());
+        learningMaterial.setLearningMaterialUploadedDate(LocalDateTime.now());
+        learningMaterial.setLearningMaterialStatus("UPLOADED");
+
+        return learningMaterial;
+    }
 }

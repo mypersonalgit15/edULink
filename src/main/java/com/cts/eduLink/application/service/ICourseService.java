@@ -13,5 +13,6 @@ public interface ICourseService {
     CourseDetailByIdProjection findCourseDetailsById(Long courseId);
     String courseEnrollmentRequest(CourseEnrollmentDto courseEnrollmentDto);
     String updateCourseRating(Long courseId, double newCourseRating);
-    List<CourseDetailProjection> findCourseListByStudentId(long StudentId);
+    List<CourseDetailProjection> findCourseListByStudentId(Long studentId);
+
 }

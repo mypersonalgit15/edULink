@@ -2,7 +2,6 @@ package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -15,12 +14,11 @@ public class LearningMaterial {
     private Long id;
 
     private String learningMaterialTitle;
-    private File learningMaterialFile;
+    private String learningMaterialFile;
     private LocalDateTime learningMaterialUploadedDate;
-    private String learningMaterialStatus;
+    private String learningMaterialStatus; // UPLOADED, pending
     @ManyToOne
     @JoinColumn(name = "course_id", referencedColumnName = "id")
-    @JsonIgnore
     private Course course;
 
 }
