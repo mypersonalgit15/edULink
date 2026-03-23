@@ -18,7 +18,6 @@ public interface IFacultyService {
     String registerFaculty(FacultyRegistrationDto facultyRegistrationDto);
     FacultyDashboardDto getFacultyDashboard(Long facultyId);
     List<Course> getFacultyCourses(Long facultyId);
-//    Long getTotalStudents(Long facultyId);
     String updateFaculty(Long facultyId, FacultyRegistrationDto facultyRegistrationDto);
     String patchFaculty(Long facultyId, Map<String, Object> updates);
     String deleteFaculty(Long facultyId);

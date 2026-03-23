@@ -2,14 +2,14 @@ package com.cts.eduLink.application.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
+@Data
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,13 +44,6 @@ public class Course {
     private List<Attendance> attendanceList;
 
     @ManyToMany(mappedBy = "courseSet")
-    private Set<Faculty> facultySet = new HashSet<>();
-
-    @ManyToMany(mappedBy = "courseSet")
     private Set<Student> studentSet = new HashSet<>();
-    @ManyToMany(mappedBy = "courseSet")
-    private Set<Student> studentSet=new HashSet<>();
-
-}
 
 }

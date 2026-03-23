@@ -14,7 +14,4 @@ import java.util.List;
 public class FacultyDashboardDto {
     private int courseCount;
     private int upcomingExamsCount;
-//    private Long totalStudents;
-//    private List<Course> myCourses;
-//    private List<Exam> upcomingExamsList;
 }

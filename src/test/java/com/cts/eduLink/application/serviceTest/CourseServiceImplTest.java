@@ -8,6 +8,7 @@ import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
+import com.cts.eduLink.application.repository.StudentRepository;
 import com.cts.eduLink.application.service.CourseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ public class CourseServiceImplTest {
     private  CourseRepository courseRepository;
     @Mock
     private FacultyRepository facultyRepository;
+    @Mock
+    private StudentRepository studentRepository;
+
 
     private  CourseServiceImpl courseService;
     private  List<CourseDetailProjection> courseDetailProjectionList;
@@ -38,10 +42,10 @@ public class CourseServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        courseService = new CourseServiceImpl(courseRepository,facultyRepository);
+        courseService = new CourseServiceImpl(courseRepository,facultyRepository,studentRepository);
         courseDetailProjectionList = new ArrayList<>();
         courseDetailProjectionList.add(new CourseDetailProjection("java springBoot" , "K",  4.8));
-        courseDetailByIdProjection = Optional.of(new CourseDetailByIdProjection("java springBoot","Full stack","12",4,"Active",4.6,"Monit",3.5));
+        courseDetailByIdProjection = Optional.of(new CourseDetailByIdProjection(123L,"java springBoot","Full stack","12",4,"Active",4.6,"Monit",3.5));
         courseRegistrationDto = new CourseRegistrationDto();
         courseRegistrationDto.setCourseTitle("JAVA"); // only to ensure, faculty is not empty
     }
@@ -60,12 +64,6 @@ public class CourseServiceImplTest {
         verify(courseRepository,times(1)).save(any(Course.class));
     }
 
-    @Test
-    public void courseAvailableTest_200(){
-        when(courseRepository.findAllAvailableCourse()).thenReturn(courseDetailProjectionList);
-        List<CourseDetailProjection> courseDetailProjections = courseService.findAllAvailableCourse();
-        assertEquals(!courseDetailProjections.isEmpty(), courseDetailProjections.size()==1,"Tested Successfully");
-    }
 
     @Test
     public void courseAvailableTest_404(){

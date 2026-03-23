@@ -25,15 +25,15 @@ public class CourseController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerCourse(@RequestBody CourseRegistrationDto courseRegistrationDto){
-    public ResponseEntity<String> registerCourse(@Valid @RequestBody CourseRegistrationDto courseRegistrationDto){
         log.info("{} request for a new course registration",courseRegistrationDto.getFacultyId());
         return  ResponseEntity.status(200).body(iCourseService.registerCourse(courseRegistrationDto));
     }
 
     @GetMapping("/findCourseDetailsById/{courseId}")
-    public ResponseEntity<CourseDetailByIdProjection> findCourseById(@PathVariable Long courseId){
-        log.info("User requested for details of courseId: {} ",courseId);
+    public ResponseEntity<CourseDetailByIdProjection> findCourseById(@PathVariable Long courseId) {
+        log.info("User requested for details of courseId: {} ", courseId);
         return ResponseEntity.status(200).body(iCourseService.findCourseDetailsById(courseId));
+    }
     @PutMapping("/update/{courseId}")
     public ResponseEntity<String> updateCourse(@PathVariable Long courseId, @RequestBody CourseRegistrationDto courseRegistrationDto) {
         log.info("Received request to update course with ID: {}", courseId);
@@ -56,17 +56,15 @@ public class CourseController {
     }
 
     @GetMapping("/findAllAvailableCourse")
-    public ResponseEntity<List<CourseDetailProjection>> findALlAvailableCourse(){
     public ResponseEntity<List<CourseProjection>> findALlAvailableCourse(){
         log.info("User has called the endpoint successFully to fetch all available courses");
-        log.info("User has called the endpoint successFully to fetch all the available courses");
-        log.info("User has called the endpoint successFully to fetch all the available courses");
-        return ResponseEntity.status(200).body(iCourseService.findAllAvailableCourse());
+       return ResponseEntity.status(200).body(iCourseService.findAllAvailableCourse());
     }
     @GetMapping("/allCourseListByStudentId/{studentId}")
     public ResponseEntity<List<CourseDetailProjection>> findCourseListByStudentId(@PathVariable Long studentId){
-        log.info("Received GET request: Fetching courses for studentId: {}", studentId);
-        return ResponseEntity.status(200).body(iCourseService.findCourseListByStudentId(studentId));
+            log.info("Received GET request: Fetching courses for studentId: {}", studentId);
+            return ResponseEntity.status(200).body(iCourseService.findCourseListByStudentId(studentId));
+        }
 
     @GetMapping("/courses/{facultyId}")
     public ResponseEntity<List<CourseProjection>> getCoursesByFaculty(@PathVariable Long facultyId) {
@@ -79,14 +77,13 @@ public class CourseController {
         return ResponseEntity.status(200).body(iCourseService.courseEnrollmentRequest(courseEnrollmentDto));
     }
     @PatchMapping("/updateRating/{courseId}/{newCourseRating}")
-    public ResponseEntity<String> updateCourseRating(@PathVariable Long courseId, @PathVariable double newCourseRating){
+    public ResponseEntity<String> updateCourseRating(@PathVariable Long courseId, @PathVariable double newCourseRating) {
         log.info("Received PATCH request: Updating rating for courseId: {} to {}", courseId, newCourseRating);
-        return ResponseEntity.status(200).body(iCourseService.updateCourseRating(courseId,newCourseRating));
+        return ResponseEntity.status(200).body(iCourseService.updateCourseRating(courseId, newCourseRating));
+    }
     @GetMapping("/courseCount/{facultyId}")
     public Map<String, Integer> getFacultyCourseCount(@PathVariable Long facultyId) {
         int count = iCourseService.getFacultyCourseCount(facultyId);
         return Map.of("My Courses", count);
     }
-}
-
 }

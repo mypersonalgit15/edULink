@@ -7,17 +7,13 @@ import com.cts.eduLink.application.projection.ExamProjection;
 import com.cts.eduLink.application.repository.ExamRepository;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.classexception.ExamException;
-import com.cts.eduLink.application.util.ClassSeparatorUtils;
+import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,7 +30,7 @@ ExamRepository examRepository;
     public String createExam(ExamCreationRequestDto examCreationRequestDto) {
         log.info("Creating a new exam: {}", examCreationRequestDto.getExamName());
 
-        Exam exam = ClassSeparatorUtils.ExamDtoSeperator(examCreationRequestDto);
+        Exam exam = DtoMapper.ExamDtoSeperator(examCreationRequestDto);
 
         // Pass both the message and the HttpStatus to match your ExamException constructor
         Course course = courseRepository.findByCourseId(examCreationRequestDto.getCourseId())
@@ -60,7 +56,7 @@ ExamRepository examRepository;
                 .orElseThrow(() -> new ExamException("Exam not found with ID: " + examId, HttpStatus.NOT_FOUND));
 
         // 2. Update basic fields using utility
-        ClassSeparatorUtils.updateExamFromDto(existingExam, dto);
+        DtoMapper.updateExamFromDto(existingExam, dto);
 
         // 3. Update the associated course if a new courseId is provided
         if (dto.getCourseId() != null) {

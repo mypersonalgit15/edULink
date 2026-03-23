@@ -11,32 +11,22 @@ import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
-import com.cts.eduLink.application.util.ClassSeparatorUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import java.util.Map;
 import com.cts.eduLink.application.util.DtoMapper;
-import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.Optional;
 
 import static com.cts.eduLink.application.constants.ErrorConstant.Faculty_Error;
-import java.time.LocalDateTime;
 
 import com.cts.eduLink.application.entity.Exam;
 import com.cts.eduLink.application.entity.Course;
-import com.cts.eduLink.application.entity.Student;
 
 @Service
 @AllArgsConstructor
@@ -78,7 +68,7 @@ public class FacultyServiceImpl implements IFacultyService {
                 .orElseThrow(() -> new FacultyException("Faculty not found with ID: " + facultyId, org.springframework.http.HttpStatus.NOT_FOUND));
 
         // Use utility to map DTO fields to existing entity
-        ClassSeparatorUtils.updateFacultyFromDto(existingFaculty, dto);
+        DtoMapper.updateFacultyFromDto(existingFaculty, dto);
 
         // Save updated entity (JPA identifies this as an update because the ID is present)
         facultyRepository.save(existingFaculty);
@@ -91,14 +81,13 @@ public class FacultyServiceImpl implements IFacultyService {
     public List<FacultyDetailProjection> filterFacultyByRating(int facultyRating) throws FacultyException {
         log.info("Faculty rating filtration request has sent to database");
         List<FacultyDetailProjection> facultyDetailProjections = facultyRepository.filterFacultyByRating(facultyRating);
-        if (facultyDetailProjections.isEmpty()){
-            log.error("No faculty available with {} ratting",facultyRating);
-            throw new FacultyException("FACULTY_ERROR"+facultyRating, HttpStatus.NOT_FOUND);
-            throw new FacultyException("FACULTY_ERROR"+facultyRating, HttpStatus.NOT_FOUND);
-            throw new FacultyException(Faculty_Error+facultyRating, HttpStatus.NOT_FOUND);
+        if (facultyDetailProjections.isEmpty()) {
+            log.error("No faculty available with {} ratting", facultyRating);
+            throw new FacultyException(Faculty_Error + facultyRating, HttpStatus.NOT_FOUND);
         }
-        log.info("Faculty with rating {} fetch successfully and first faculty name is {}",facultyRating,facultyDetailProjections.getFirst().getFacultyName());
+        log.info("Faculty with rating {} fetch successfully and first faculty name is {}", facultyRating, facultyDetailProjections.getFirst().getFacultyName());
         return facultyDetailProjections;
+    }
     @Transactional
     public String patchFaculty(Long facultyId, Map<String, Object> updates) {
         log.info("Patch update initiated for Faculty ID: {}", facultyId);
@@ -115,7 +104,7 @@ public class FacultyServiceImpl implements IFacultyService {
                     faculty.setFacultyYearOfExperience((Integer) value);
                     break;
                 case "studentAddress":
-                    faculty.setStudentAddress((String) value);
+                    faculty.setFacultyAddress((String) value);
                     break;
                 // Add other fields as needed
             }

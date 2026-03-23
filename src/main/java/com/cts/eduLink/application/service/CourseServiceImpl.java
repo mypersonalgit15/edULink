@@ -14,19 +14,15 @@ import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.util.DtoMapper;
-import com.cts.eduLink.application.util.ClassSeparatorUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import java.util.Map;
 import com.cts.eduLink.application.repository.StudentRepository;
-import com.cts.eduLink.application.util.DtoMapper;
+
 import com.cts.eduLink.application.util.RatingCalculator;
-import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -49,9 +45,8 @@ public class CourseServiceImpl implements ICourseService{
             log.error("{} is not authorized to register course",courseRegistrationDto.getFacultyId());
             throw new FacultyException(courseRegistrationDto.getFacultyId()+" is not registered",HttpStatus.BAD_REQUEST);
         }
-        Course course = ClassSeparatorUtils.facultyDtoSeparator(courseRegistrationDto);
-        log.error("Unable to separate faculty from courseRegistrationDto");
         Course course = DtoMapper.facultyDtoSeparator(courseRegistrationDto);
+        log.error("Unable to separate faculty from courseRegistrationDto");
         course.setCourseStatus("ACTIVE");
         course.getFacultySet().add(facultyOption.get());
         facultyOption.get().getCourseSet().add(course);
@@ -71,7 +66,7 @@ public class CourseServiceImpl implements ICourseService{
                 .orElseThrow(() -> new CourseException("Course not found with ID: " + courseId, HttpStatus.NOT_FOUND));
 
         // 2. Map DTO fields to existing entity using utility
-        ClassSeparatorUtils.updateCourseFromDto(existingCourse, courseRegistrationDto);
+        DtoMapper.updateCourseFromDto(existingCourse, courseRegistrationDto);
 
         // 3. Save the updated entity
         courseRepository.save(existingCourse);
@@ -139,21 +134,14 @@ public class CourseServiceImpl implements ICourseService{
 
     @Override
     public List<CourseProjection> findAllAvailableCourse() throws CourseException {
-    public List<CourseDetailProjection> findAllAvailableCourse() throws CourseException {
         log.info("User has requested to display course List!");
-        log.info("User has requested to display course List!");
-        log.info("User has requested to display course List");
         List<CourseProjection> courseProjections = courseRepository.findAllAvailableCourse();
         if(courseProjections.isEmpty()){
-        List<CourseDetailProjection> courseDetailProjections = courseRepository.findAllAvailableCourse();
-        if(courseDetailProjections.isEmpty()){
             log.error("no course is available to display");
             throw new CourseException("No course Available!", HttpStatus.NOT_FOUND);
         }
         log.info("Course List has been accessed SuccessFully and first course name is {}",courseProjections.getFirst().getCourseTitle());
         return courseProjections;
-        log.info("Course List has been accessed SuccessFully and first course name is {}", courseDetailProjections.getFirst().getCourseTitle());
-        return courseDetailProjections;
     }
 
     @Override
@@ -169,7 +157,8 @@ public class CourseServiceImpl implements ICourseService{
 
     @Override
     public List<CourseProjection> getCoursesByFaculty(Long facultyId) {
-        return courseRepository.findCoursesByFacultyId(facultyId)
+        return courseRepository.findCoursesByFacultyId(facultyId);
+    }
     @Transactional
     public String courseEnrollmentRequest(CourseEnrollmentDto courseEnrollmentDto) throws StudentException,CourseException {
         log.info("Received enrollment request: Student ID {} for Course ID {}", courseEnrollmentDto.getStudentId(), courseEnrollmentDto.getCourseId());
@@ -211,9 +200,10 @@ public class CourseServiceImpl implements ICourseService{
         return "Thanks for you feedBack!";
     }
 
-    public int getFacultyCourseCount(Long facultyId ){
+    public int getFacultyCourseCount(Long facultyId ) {
         int count = courseRepository.getFacultyCourseCount(facultyId);
         return count;
+    }
     @Override
     public List<CourseDetailProjection> findCourseListByStudentId(Long studentId) throws CourseException,StudentException{
         log.info("Fetching course list for student ID: {}", studentId);

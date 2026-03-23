@@ -25,7 +25,6 @@ public class StudentController {
     private final IStudentService iStudentService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> studentRegistration(@RequestBody StudentRegistrationDto studentRegistrationDto){
     public ResponseEntity<String> studentRegistration(@Valid @RequestBody StudentRegistrationDto studentRegistrationDto){
         log.info("Student's registration request has been initiated successFully by {}",studentRegistrationDto.getUserName());
         return ResponseEntity.status(200).body(iStudentService.registerStudent(studentRegistrationDto));
@@ -40,7 +39,5 @@ public class StudentController {
         log.info("REST request received to fetch details for Student ID: {}", studentId);
         return ResponseEntity.status(200).body(iStudentService.findStudentDetailsById(studentId));
     }
-
-}
 
 }

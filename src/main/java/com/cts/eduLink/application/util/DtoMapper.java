@@ -1,6 +1,5 @@
 package com.cts.eduLink.application.util;
 
-import com.cts.eduLink.application.classexception.FileException;
 import com.cts.eduLink.application.dto.*;
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.dto.ExamCreationRequestDto;
@@ -59,7 +58,7 @@ public class DtoMapper {
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
-        faculty.setStudentAddress(facultyRegistrationDto.getStudentAddress());
+        faculty.setFacultyAddress(facultyRegistrationDto.getStudentAddress());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         faculty.setTotalFacultyRatingCount(0L);
@@ -72,7 +71,7 @@ public class DtoMapper {
         // Update Faculty-specific fields
         faculty.setFacultyGender(dto.getFacultyGender());
         faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
-        faculty.setStudentAddress(dto.getStudentAddress());
+        faculty.setFacultyAddress(dto.getStudentAddress());
 
         // Update associated AppUser fields
         if (faculty.getAppUser() != null) {
@@ -89,7 +88,7 @@ public class DtoMapper {
         appUser.setPhoneNumber(facultyRegistrationDto.getPhoneNumber());
         return appUser;
     }
-    public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto){
+    public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto) {
         Exam exam = new Exam();
         exam.setExamName(examCreationRequestDto.getExamName());
         exam.setExamLocalDateTime(LocalDateTime.now());
@@ -97,12 +96,18 @@ public class DtoMapper {
         exam.setCandidates(examCreationRequestDto.getCandidates());
 
         return exam;
+    }
 
     public static FeedBack feedBackDtoSeparator(FeedbackDto feedbackDto){
         FeedBack feedBack = new FeedBack();
         feedBack.setMessage(feedbackDto.getComment());
         feedBack.setRating(feedbackDto.getRating());
         return feedBack;
+    }
+    public static void updateExamFromDto(Exam exam, ExamCreationRequestDto dto) {
+        exam.setExamName(dto.getExamName());
+        exam.setExamStatus(dto.getStatus());
+        exam.setCandidates(dto.getCandidates());
     }
 
     public static LearningMaterial learningMaterialDtoSeparator(LearningMaterialRegistrationDto dto) throws IOException {
@@ -113,12 +118,7 @@ public class DtoMapper {
         if (file == null || file.isEmpty()) {
             throw new IOException("File is empty or missing");
         }
-    public static void updateExamFromDto(Exam exam, ExamCreationRequestDto dto) {
-        exam.setExamName(dto.getExamName());
-        exam.setExamStatus(dto.getStatus());
-        exam.setCandidates(dto.getCandidates());
         // examLocalDateTime is usually set at creation, but you can update it here if needed
-    }
 
         File uploadDir = new File("uploads");
         if (!uploadDir.exists()) uploadDir.mkdirs();

@@ -26,7 +26,6 @@ public class FacultyController {
 
     @PostMapping("/register")
     public ResponseEntity<String> registerFaculty(@Valid @RequestBody FacultyRegistrationDto facultyRegistrationDto){
-    public ResponseEntity<String> registerFaculty(@RequestBody FacultyRegistrationDto facultyRegistrationDto){
         log.info("{} has initiated the registration as a Faculty",facultyRegistrationDto.getUserEmail());
         return ResponseEntity.status(200).body(facultyService.registerFaculty(facultyRegistrationDto));
     }

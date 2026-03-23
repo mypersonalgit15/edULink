@@ -31,11 +31,6 @@ public class Faculty {
     @JoinColumn(name = "app_user_id",referencedColumnName = "id")
     private AppUser appUser;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JsonIgnore
-    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
-    private AppUser appUser;
-
     @ManyToMany
     @JsonManagedReference
     @JoinTable(
