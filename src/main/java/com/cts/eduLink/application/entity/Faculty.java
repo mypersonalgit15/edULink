@@ -1,6 +1,8 @@
 
 package com.cts.eduLink.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +31,13 @@ public class Faculty {
     @JoinColumn(name = "app_user_id",referencedColumnName = "id")
     private AppUser appUser;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JoinColumn(name = "app_user_id",referencedColumnName = "id")
+    private AppUser appUser;
+
     @ManyToMany
+    @JsonManagedReference
     @JoinTable(
             name = "faculty_course_mapping",
             joinColumns = @JoinColumn(name = "faculty_id"),

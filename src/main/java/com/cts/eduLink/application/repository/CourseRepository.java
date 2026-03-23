@@ -1,6 +1,8 @@
 package com.cts.eduLink.application.repository;
 
 import com.cts.eduLink.application.entity.Course;
+import com.cts.eduLink.application.entity.Exam;
+import com.cts.eduLink.application.projection.CourseProjection;
 import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +15,17 @@ import java.util.Optional;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
+    @Query(" select new com.cts.eduLink.application.projection.CourseProjection(c.courseTitle," +
+            "c.courseSubject,c.courseGradeLevel,c.courseCredit,c.courseStatus,c.courseRating) from Course c")
+    List<CourseProjection> findAllAvailableCourse();
+
+     Optional<Course> findByCourseId(Long courseId);
+
+    @Query("SELECT c FROM Course c JOIN c.facultySet f WHERE f.facultyId = :facultyId")
+    List<CourseProjection> findCoursesByFacultyId(@Param("facultyId") Long facultyId);
+
+    @Query("SELECT COUNT(c) FROM Course c JOIN c.facultySet f WHERE f.facultyId = :facultyId")
+    int getFacultyCourseCount(@Param("facultyId") Long facultyId);
     @Query(" select new com.cts.eduLink.application.projection.CourseDetailProjection(c.courseTitle," +
             "c.courseGradeLevel,c.courseRating) from Course c")
     List<CourseDetailProjection> findAllAvailableCourse();

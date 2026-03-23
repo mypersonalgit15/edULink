@@ -1,5 +1,6 @@
 package com.cts.eduLink.application.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,8 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +29,11 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<PerformanceMetric> metrics;
 
+    @ManyToMany(mappedBy = "courseSet")
+    @JsonBackReference
+    private Set<Faculty> facultySet = new HashSet<>();
+
+
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private List<Exam> examList;
 
@@ -44,5 +48,9 @@ public class Course {
 
     @ManyToMany(mappedBy = "courseSet")
     private Set<Student> studentSet = new HashSet<>();
+    @ManyToMany(mappedBy = "courseSet")
+    private Set<Student> studentSet=new HashSet<>();
+
+}
 
 }

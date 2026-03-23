@@ -18,8 +18,11 @@ public class AppUserRepositoryTest {
     @Autowired
     private AppUserRepository appUserRepository;
 
+    private Optional<AppUser> appUser;
+
     @BeforeEach
     public void setUp(){
+        appUser = Optional.of(new AppUser());
         Optional<AppUser> appUser = Optional.of(new AppUser());
         appUser.get().setUserName("Nikhil");
         appUser.get().setUserEmail("nikhil@gmail.com");
@@ -30,12 +33,14 @@ public class AppUserRepositoryTest {
     }
 
     @Test
+    public void findUserByEmailTest(){
     public void findUserByEmailTest_200(){
         Optional<AppUser> appUserOptional = appUserRepository.findAppUserByUserEmail("nikhil@gmail.com");
         assertTrue(appUserOptional.isPresent());
     }
 
     @Test
+    public void findUserByPhoneNumberTest(){
     public void findUserByPhoneNumberTest_200(){
         Optional<AppUser> appUserOptional = appUserRepository.findAppUserByUserPhoneNumber(123242112L);
         assertTrue(appUserOptional.isPresent());

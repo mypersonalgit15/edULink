@@ -21,18 +21,24 @@ public class RoleRepositoryTest {
     @Autowired
     private RoleRepository roleRepository;
 
+    private Optional<Role> role;
     private List<Role> roleList;
 
     @BeforeEach
     public void setUp(){
+        role = Optional.of(new Role());
         Optional<Role> role = Optional.of(new Role());
         role.get().setRoleName("Student");
         roleRepository.save(role.get());
         roleList = new ArrayList<>();
     }
     @Test
+    public void getRoleList(){
     public void getRoleList_200(){
         roleList = roleRepository.findAll();
+        for(Role r:roleList){
+            log.info("{}",r.getRoleName());
+        }
         assertFalse(roleList.isEmpty());
     }
 }

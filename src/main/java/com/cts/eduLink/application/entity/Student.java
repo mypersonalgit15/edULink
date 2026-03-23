@@ -49,4 +49,5 @@ public class Student {
     )
     @JsonIgnore
     private Set<Course> courseSet = new HashSet<>();
+    private Set<Course> courseSet=new HashSet<>();
 }

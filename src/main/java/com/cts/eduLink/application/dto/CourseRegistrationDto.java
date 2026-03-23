@@ -22,6 +22,7 @@ public class CourseRegistrationDto {
     @Min(value = 1, message = "Course must be worth at least 1 credit")
     @Max(value = 5, message = "Course cannot exceed 10 credits")
     private int courseCredit;
+    private String courseStatus;
 
     @NotNull(message = "Faculty ID must be provided")
     @Positive(message = "Invalid Faculty ID")

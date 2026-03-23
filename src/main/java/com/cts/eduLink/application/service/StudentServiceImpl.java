@@ -9,6 +9,7 @@ import com.cts.eduLink.application.entity.Student;
 import com.cts.eduLink.application.projection.StudentDetailByIdProjection;
 import com.cts.eduLink.application.repository.RoleRepository;
 import com.cts.eduLink.application.repository.StudentRepository;
+import com.cts.eduLink.application.util.ClassSeparatorUtils;
 import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,8 @@ public class StudentServiceImpl implements IStudentService {
         log.debug("Extracting student and user entities from DTO");
         Student student = DtoMapper.studentDtoSeparator(studentRegistrationDto);
         AppUser appUser = DtoMapper.appUserDtoSeparator(studentRegistrationDto);
+        Student student = ClassSeparatorUtils.studentDtoSeparator(studentRegistrationDto);
+        AppUser appUser = ClassSeparatorUtils.appUserDtoSeparator(studentRegistrationDto);
         log.info("Extraction completed for student and user entities from DTO");
         Optional<Role> role = roleRepository.findRoleByName("STUDENT");
         appUser.setRole(role.get());
@@ -42,9 +45,11 @@ public class StudentServiceImpl implements IStudentService {
         iAppUserService.registerAppUser(appUser);
         studentRepository.save(student);
         log.info("Successfully registered student. Assigned Student ID: {}", student.getStudentId());
+//        return "Thanks for Registration, Your User Id "; // return for testing
 //        return "Thanks for Registration, Your User id "; // return for testing
         return "Thanks for Registration, Your User Id is: "+student.getStudentId(); // return for development
     }
+}
 
     @Override
     public int studentCourseEnrollCount(Long studentId) throws StudentException{

@@ -11,6 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/student")
@@ -21,6 +25,7 @@ public class StudentController {
     private final IStudentService iStudentService;
 
     @PostMapping("/register")
+    public ResponseEntity<String> studentRegistration(@RequestBody StudentRegistrationDto studentRegistrationDto){
     public ResponseEntity<String> studentRegistration(@Valid @RequestBody StudentRegistrationDto studentRegistrationDto){
         log.info("Student's registration request has been initiated successFully by {}",studentRegistrationDto.getUserName());
         return ResponseEntity.status(200).body(iStudentService.registerStudent(studentRegistrationDto));
@@ -35,5 +40,7 @@ public class StudentController {
         log.info("REST request received to fetch details for Student ID: {}", studentId);
         return ResponseEntity.status(200).body(iStudentService.findStudentDetailsById(studentId));
     }
+
+}
 
 }

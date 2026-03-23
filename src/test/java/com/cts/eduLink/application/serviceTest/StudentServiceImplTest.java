@@ -34,6 +34,7 @@ public class StudentServiceImplTest {
     private StudentRegistrationDto studentRegistrationDto;
 
     private Optional<Role> role;
+    private Optional<AppUser> appUser;
 
     @BeforeEach
     public void setUp() {
@@ -48,6 +49,7 @@ public class StudentServiceImplTest {
         role = Optional.of(new Role());
         role.get().setRoleName("STUDENT");
         Optional<AppUser> appUser = Optional.of(new AppUser());
+        appUser = Optional.of(new AppUser());
         appUser.get().setId(1L);
         appUser.get().setUserName(studentRegistrationDto.getUserName());
         appUser.get().setUserEmail(studentRegistrationDto.getUserEmail());
