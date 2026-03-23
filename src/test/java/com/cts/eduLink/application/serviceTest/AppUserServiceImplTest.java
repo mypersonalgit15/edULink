@@ -1,6 +1,5 @@
 package com.cts.eduLink.application.serviceTest;
 
-import com.cts.eduLink.application.classexception.AppUserException;
 import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.Role;
 import com.cts.eduLink.application.repository.AppUserRepository;

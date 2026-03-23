@@ -1,6 +1,7 @@
 package com.cts.eduLink.application.controller;
 
 import com.cts.eduLink.application.dto.FeedbackDto;
+import com.cts.eduLink.application.projection.FeedbackProjection;
 import com.cts.eduLink.application.service.FeedbackService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/feedback")
@@ -19,9 +23,14 @@ public class FeedbackController {
     private final FeedbackService feedbackService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerFeedback(@RequestBody FeedbackDto feedbackDto){
+    public ResponseEntity<String> registerFeedback(@RequestBody FeedbackDto feedbackDto) {
         log.info("Received POST request to register feedback for User ID: {}", feedbackDto.getUserId());
         return ResponseEntity.status(200).body(feedbackService.registerFeedback(feedbackDto));
+    }
+
+    @GetMapping("/getFeedbackList")
+    public ResponseEntity<List<FeedbackProjection>> findFeedBackList(){
+        return ResponseEntity.status(200).body(feedbackService.findFeedBackList());
     }
 
 }

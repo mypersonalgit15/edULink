@@ -5,8 +5,11 @@ import com.cts.eduLink.application.classexception.FeedbackException;
 import com.cts.eduLink.application.dto.FeedbackDto;
 import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.FeedBack;
+import com.cts.eduLink.application.projection.FeedbackProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
-import com.cts.eduLink.application.repository.FeedBackRepository;
+
+import com.cts.eduLink.application.repository.FeedbackRepository;
+
 import com.cts.eduLink.application.repository.StudentRepository;
 import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
@@ -14,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -21,7 +25,7 @@ import java.util.Optional;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-    private final FeedBackRepository feedBackRepository;
+    private final FeedbackRepository feedBackRepository;
     private final StudentRepository studentRepository;
     private final FacultyRepository facultyRepository;
 
@@ -47,5 +51,17 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedBackRepository.save(feedBack);
         log.info("Feedback successfully saved for User ID: {}", feedbackDto.getUserId());
         return "Thank you for your feedback!";
+    }
+
+    @Override
+    public List<FeedbackProjection> findFeedBackList() throws FeedbackException {
+        log.info("Fetching all feedback records from the repository");
+        List<FeedbackProjection> feedbackProjections = feedBackRepository.findFeedBackList();
+        if(feedbackProjections.isEmpty()){
+            log.warn("No feedback records found in the database");
+            throw new FeedbackException("No feedback yet for the platform",HttpStatus.NOT_FOUND);
+        }
+        log.info("Successfully retrieved {} feedback records", feedbackProjections.size());
+        return feedbackProjections;
     }
 }

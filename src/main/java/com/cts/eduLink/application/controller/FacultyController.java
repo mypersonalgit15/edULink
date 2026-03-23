@@ -4,6 +4,7 @@ import com.cts.eduLink.application.dto.FacultyRegistrationDto;
 import com.cts.eduLink.application.dto.FacultyDashboardDto;
 import com.cts.eduLink.application.entity.Exam;
 import com.cts.eduLink.application.projection.FacultyProjection;
+import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.service.IFacultyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -50,6 +51,10 @@ public class FacultyController {
         log.info("Received request to delete faculty with ID: {}", facultyId);
         String response = facultyService.deleteFaculty(facultyId);
         return ResponseEntity.ok(response);
+        }
+    @PatchMapping("/updateRating/{facultyId}/{newFacultyRating}")
+    public ResponseEntity<String> updateFacultyRating(@PathVariable Long facultyId, @PathVariable double newFacultyRating){
+        return ResponseEntity.status(200).body(facultyService.updateFacultyRating(facultyId,newFacultyRating));
     }
 
     @GetMapping("/dashboard/{facultyId}")
