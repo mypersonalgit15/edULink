@@ -13,7 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @AllArgsConstructor
-public class FacilityServiceTest {
+public class FacultyServiceTest {
 
     @Mock
     private FacultyRepository facultyRepository;

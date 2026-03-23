@@ -22,7 +22,9 @@ logs/
 *.iws
 *.iml
 *.ipr
-
+Downloads/
+*.plantuml
+*.pdf
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/

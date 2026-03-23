@@ -2,18 +2,24 @@ package com.cts.eduLink.application.service;
 
 import com.cts.eduLink.application.classexception.CourseException;
 import com.cts.eduLink.application.classexception.FacultyException;
+import com.cts.eduLink.application.classexception.StudentException;
+import com.cts.eduLink.application.dto.CourseEnrollmentDto;
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.entity.Course;
 import com.cts.eduLink.application.entity.Faculty;
+import com.cts.eduLink.application.entity.Student;
 import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
-import com.cts.eduLink.application.util.ClassSeparatorUtils;
+import com.cts.eduLink.application.repository.StudentRepository;
+import com.cts.eduLink.application.util.DtoMapper;
+import com.cts.eduLink.application.util.RatingCalculator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -25,8 +31,10 @@ import java.util.Optional;
 public class CourseServiceImpl implements ICourseService{
     private final CourseRepository courseRepository;
     private final FacultyRepository facultyRepository;
+    private final StudentRepository studentRepository;
 
     @Override
+    @Transactional
     public String registerCourse(CourseRegistrationDto courseRegistrationDto) throws FacultyException {
         log.info("Course registration has intercepted inside service");
         Optional<Faculty> facultyOption = facultyRepository.findFacultyById(courseRegistrationDto.getFacultyId());
@@ -35,7 +43,7 @@ public class CourseServiceImpl implements ICourseService{
             throw new FacultyException(courseRegistrationDto.getFacultyId()+" is not registered",HttpStatus.BAD_REQUEST);
         }
         log.error("Unable to separate faculty from courseRegistrationDto");
-        Course course = ClassSeparatorUtils.facultyDtoSeparator(courseRegistrationDto);
+        Course course = DtoMapper.facultyDtoSeparator(courseRegistrationDto);
         course.setCourseStatus("ACTIVE");
         course.getFacultySet().add(facultyOption.get());
         facultyOption.get().getCourseSet().add(course);
@@ -66,5 +74,64 @@ public class CourseServiceImpl implements ICourseService{
         }
         log.debug("{} has fetched successfully from course table",courseId);
         return courseDetailByIdProjection.get();
+    }
+
+    @Override
+    @Transactional
+    public String courseEnrollmentRequest(CourseEnrollmentDto courseEnrollmentDto) throws StudentException,CourseException {
+        log.info("Received enrollment request: Student ID {} for Course ID {}", courseEnrollmentDto.getStudentId(), courseEnrollmentDto.getCourseId());
+        Optional<Student> student = studentRepository.findStudentById(courseEnrollmentDto.getStudentId());
+        if (student.isEmpty()){
+            log.error("Enrollment failed: Student ID {} not found", courseEnrollmentDto.getStudentId());
+            throw new StudentException("Invalid student id: "+courseEnrollmentDto.getStudentId(),HttpStatus.BAD_REQUEST);
+        }
+        Optional<Course> course = courseRepository.findCourseById(courseEnrollmentDto.getCourseId());
+        if(course.isEmpty()){
+            log.error("Enrollment failed: Course ID {} not found", courseEnrollmentDto.getCourseId());
+            throw new CourseException("Invalid course id: "+courseEnrollmentDto.getCourseId(),HttpStatus.BAD_REQUEST);
+        }
+        if (student.get().getCourseSet().contains(course.get())) {
+            log.warn("Student {} already registered for course {}", courseEnrollmentDto.getStudentId(), courseEnrollmentDto.getCourseId());
+            throw new CourseException("You are already registered with this course", HttpStatus.CONFLICT);
+        }
+        student.get().getCourseSet().add(course.get());
+        course.get().getStudentSet().add(student.get());
+        courseRepository.save(course.get());
+        log.info("Successfully enrolled Student ID {} into Course ID {}", courseEnrollmentDto.getStudentId(), courseEnrollmentDto.getCourseId());
+        return "Enrolled SuccessFull!";
+    }
+
+    @Override
+    @Transactional
+    public String updateCourseRating(Long courseId, double newCourseRating) throws CourseException {
+        log.info("Updating rating for course ID: {} with new rating: {}", courseId, newCourseRating);
+        Optional<Course> course = courseRepository.findCourseById(courseId);
+        if (course.isEmpty()){
+            log.error("Course not found with ID: {}", courseId);
+            throw new CourseException("Course is not registered",HttpStatus.NOT_FOUND);
+        }
+        double newRating = RatingCalculator.calculateRating(course.get().getCourseRating(),newCourseRating,course.get().getTotalCourseRatingCount());
+        course.get().setTotalCourseRatingCount(course.get().getTotalCourseRatingCount()+1);
+        course.get().setCourseRating(newRating);
+        log.info("Course {} updated. New Rating: {}, Total Reviews: {}",
+                courseId, newRating, course.get().getTotalCourseRatingCount());
+        return "Thanks for you feedBack!";
+    }
+
+    @Override
+    public List<CourseDetailProjection> findCourseListByStudentId(Long studentId) throws CourseException,StudentException{
+        log.info("Fetching course list for student ID: {}", studentId);
+        Optional<Student> student = studentRepository.findStudentById(studentId);
+        if(student.isEmpty()){
+            log.error("Student lookup failed: ID {} not registered", studentId);
+            throw new StudentException("Student is not registered with id: "+studentId,HttpStatus.UNAUTHORIZED);
+        }
+        List<CourseDetailProjection> courseDetailProjections = courseRepository.findCourseListByStudentId(studentId);
+        if(courseDetailProjections.isEmpty()){
+            log.warn("No courses found for student ID: {}", studentId);
+            throw new CourseException("No course available for student id: "+studentId,HttpStatus.NOT_FOUND);
+        }
+        log.info("Successfully retrieved {} courses for student ID: {}", courseDetailProjections.size(), studentId);
+        return courseDetailProjections;
     }
 }

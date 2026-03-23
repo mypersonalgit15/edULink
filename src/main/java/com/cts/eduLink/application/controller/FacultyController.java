@@ -1,12 +1,15 @@
 package com.cts.eduLink.application.controller;
 
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
+import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.service.IFacultyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/faculty")
@@ -22,10 +25,6 @@ public class FacultyController {
         return ResponseEntity.status(200).body(facultyService.registerFaculty(facultyRegistrationDto));
     }
 
-    @GetMapping("/filterByRatting/{facultyRating}")
-    public ResponseEntity<?> filterFacultyByRating(@PathVariable int facultyRating){
-        log.info("Faculty filter request by ratting intercepted");
-        return ResponseEntity.status(200).body(facultyService.filterFacultyByRating(facultyRating));
-    }
+
 
 }

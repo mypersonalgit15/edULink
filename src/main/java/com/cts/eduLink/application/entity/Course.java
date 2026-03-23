@@ -1,7 +1,6 @@
 package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Data
 @Entity
 @Getter
 @Setter
@@ -27,18 +25,22 @@ public class Course {
     private int courseCredit;
     private String courseStatus;
     private double courseRating;
+    private Long totalCourseRatingCount;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<PerformanceMetric> metrics;
-
-    @ManyToMany(mappedBy = "courseSet")
-    private Set<Faculty> facultySet = new HashSet<>();
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
     private List<Exam> examList;
 
     @OneToMany(mappedBy = "course")
     private List<LearningMaterial> learningMaterialList;
+
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL)
+    private List<Attendance> attendanceList;
+
+    @ManyToMany(mappedBy = "courseSet")
+    private Set<Faculty> facultySet = new HashSet<>();
 
     @ManyToMany(mappedBy = "courseSet")
     private Set<Student> studentSet = new HashSet<>();

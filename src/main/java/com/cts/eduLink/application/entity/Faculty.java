@@ -1,3 +1,4 @@
+
 package com.cts.eduLink.application.entity;
 
 import jakarta.persistence.*;
@@ -22,6 +23,7 @@ public class Faculty {
     private String facultyAddress;
     private int facultyYearOfExperience;
     private double facultyRating;
+    private Long totalFacultyRatingCount;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "app_user_id",referencedColumnName = "id")

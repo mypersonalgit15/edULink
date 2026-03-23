@@ -2,6 +2,7 @@ package com.cts.eduLink.application.repository;
 
 import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.Student;
+import com.cts.eduLink.application.projection.StudentDetailByIdProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
