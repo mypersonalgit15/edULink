@@ -3,12 +3,11 @@ package com.cts.eduLink.application.repository;
 import com.cts.eduLink.application.entity.Exam;
 import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.Faculty;
-import com.cts.eduLink.application.projection.IFacultyProjection;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
+import com.cts.eduLink.application.projection.FacultyProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,17 +19,17 @@ public interface FacultyRepository extends JpaRepository<Faculty,Long> {
     @Query("select f from Faculty f where f.facultyId = :facultyId")
     Optional<Faculty> findFacultyById(@Param("facultyId") Long facultyId);
 
-    @Query("SELECT u.userName as userName, " +
-            "u.userEmail as userEmail, " +
-            "u.phoneNumber as phoneNumber, " +
-            "f.facultyGender as facultyGender, " +
-            "f.facultyYearOfExperience as facultyYearOfExperience, " +
-            "f.studentAddress as facultyAddress, " + // Notice: f.studentAddress matches your entity
-            "f.facultyRating as facultyRating " +
+    @Query("SELECT new com.cts.eduLink.application.projection.FacultyProjection(" +
+            "u.userName, " +
+            "u.userEmail, " +
+            "u.phoneNumber, " +
+            "f.facultyGender, " +
+            "f.facultyYearOfExperience, " +
+            "f.facultyAddress, " +
+            "f.facultyRating) " +
             "FROM Faculty f JOIN f.appUser u " +
             "WHERE f.facultyId = :facultyId")
-    Optional<IFacultyProjection> findFacultyProfile(@Param("facultyId") Long facultyId);
-
+    Optional<FacultyProjection> findFacultyProfile(@Param("facultyId") Long facultyId);
 
 
     @Query("SELECT e FROM Exam e " +

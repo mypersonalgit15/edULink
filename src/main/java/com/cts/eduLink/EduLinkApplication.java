@@ -10,5 +10,4 @@ public class EduLinkApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EduLinkApplication.class, args);
 	}
-
 }

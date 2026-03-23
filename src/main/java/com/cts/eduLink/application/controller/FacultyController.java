@@ -1,11 +1,9 @@
 package com.cts.eduLink.application.controller;
 
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
-import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.dto.FacultyDashboardDto;
 import com.cts.eduLink.application.entity.Exam;
-import com.cts.eduLink.application.projection.IFacultyProjection;
-import com.cts.eduLink.application.service.FacultyServiceImpl;
+import com.cts.eduLink.application.projection.FacultyProjection;
 import com.cts.eduLink.application.service.IFacultyService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -62,7 +60,7 @@ public class FacultyController {
     }
 
     @GetMapping("/profile/{facultyId}")
-    public ResponseEntity<IFacultyProjection> getFacultyProfile(@PathVariable Long facultyId){
+    public ResponseEntity<FacultyProjection> getFacultyProfile(@PathVariable Long facultyId){
         return facultyService.getFacultyProfile(facultyId)
                 .map(app -> ResponseEntity.ok(app))
                 .orElse(ResponseEntity.notFound().build());

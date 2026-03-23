@@ -32,8 +32,9 @@ public class GlobalException {
         return ResponseEntity.status(l.getHttpStatus()).body(l.getMessage());
     }
     @ExceptionHandler(FileException.class)
-    public ResponseEntity<String> fileExceptionHandler(FileException f){
-        return ResponseEntity.status(f.getHttpStatus()).body(f.getMessage()+" "+f.getCause());
+    public ResponseEntity<String> fileExceptionHandler(FileException f) {
+        return ResponseEntity.status(f.getHttpStatus()).body(f.getMessage() + " " + f.getCause());
+    }
     @ExceptionHandler(ExamException.class)
     public ResponseEntity<String> handleExamException(ExamException ex) {
         return new ResponseEntity<>(ex.getMessage(), ex.getHttpStatus());

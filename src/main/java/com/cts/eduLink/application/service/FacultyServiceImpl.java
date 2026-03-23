@@ -6,7 +6,7 @@ import com.cts.eduLink.application.dto.FacultyDashboardDto;
 import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.entity.Faculty;
 import com.cts.eduLink.application.entity.Role;
-import com.cts.eduLink.application.projection.IFacultyProjection;
+import com.cts.eduLink.application.projection.FacultyProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
@@ -194,7 +194,7 @@ public class FacultyServiceImpl implements IFacultyService {
 //        log.debug("Found {} total students for faculty: {}", totalStudents, facultyId);
 //        return totalStudents;
 //    }
-    public Optional<IFacultyProjection> getFacultyProfile(Long facultyId) throws FacultyException {
+    public Optional<FacultyProjection> getFacultyProfile(Long facultyId) throws FacultyException {
         return facultyRepository.findFacultyProfile(facultyId);
     }
 
