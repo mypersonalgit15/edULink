@@ -3,7 +3,6 @@ package com.cts.eduLink.application.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,6 +12,8 @@ public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Long examId;
     private LocalDateTime examLocalDateTime;
     private String examName;
     private String examStatus;

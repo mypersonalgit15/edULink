@@ -13,21 +13,23 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private Long userId;
-
-    @Column(nullable = false)
     private String userName;
-
-    @Column(unique = true, nullable = false)
     private String userEmail;
-
-    @Column(unique = true, nullable = false)
     private Long phoneNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
     @OneToOne(mappedBy = "appUser")
-    private AppUser role;
+    private Student student;
+
+    @OneToOne(mappedBy = "appUser")
+    private Faculty faculty;
 
     @OneToMany(mappedBy = "appUser", cascade = CascadeType.ALL)
     private List<Notification> notificationList;
+
+    @OneToMany(mappedBy = "appUser")
+    private List<FeedBack> feedBackList;
 }
