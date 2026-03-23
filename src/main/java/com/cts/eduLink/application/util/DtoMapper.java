@@ -2,6 +2,11 @@ package com.cts.eduLink.application.util;
 
 import com.cts.eduLink.application.classexception.FileException;
 import com.cts.eduLink.application.dto.*;
+import com.cts.eduLink.application.dto.CourseRegistrationDto;
+import com.cts.eduLink.application.dto.ExamCreationRequestDto;
+import com.cts.eduLink.application.dto.FacultyRegistrationDto;
+import com.cts.eduLink.application.dto.FeedbackDto;
+import com.cts.eduLink.application.dto.StudentRegistrationDto;
 import com.cts.eduLink.application.entity.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,10 +47,19 @@ public class DtoMapper {
         return course;
     }
 
+    public static void updateCourseFromDto(Course course, CourseRegistrationDto dto) {
+        course.setCourseTitle(dto.getCourseTitle());
+        course.setCourseSubject(dto.getCourseSubject());
+        course.setCourseCredit(dto.getCourseCredit());
+        course.setCourseGradeLevel(dto.getCourseGradeLevel());
+        course.setCourseStatus(dto.getCourseStatus());
+    }
+
     public static Faculty facultyDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
+        faculty.setStudentAddress(facultyRegistrationDto.getStudentAddress());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         faculty.setTotalFacultyRatingCount(0L);
@@ -53,6 +67,21 @@ public class DtoMapper {
         faculty.setFacultyId(facultyId);
         return faculty;
     }
+
+    public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
+        // Update Faculty-specific fields
+        faculty.setFacultyGender(dto.getFacultyGender());
+        faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
+        faculty.setStudentAddress(dto.getStudentAddress());
+
+        // Update associated AppUser fields
+        if (faculty.getAppUser() != null) {
+            faculty.getAppUser().setUserName(dto.getUserName());
+            faculty.getAppUser().setUserEmail(dto.getUserEmail());
+            faculty.getAppUser().setPhoneNumber(dto.getPhoneNumber());
+        }
+    }
+
     public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         AppUser appUser = new AppUser();
         appUser.setUserName(facultyRegistrationDto.getUserName());
@@ -60,8 +89,21 @@ public class DtoMapper {
         appUser.setPhoneNumber(facultyRegistrationDto.getPhoneNumber());
         return appUser;
     }
+    public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto){
+        Exam exam = new Exam();
+        exam.setExamName(examCreationRequestDto.getExamName());
+        exam.setExamLocalDateTime(LocalDateTime.now());
+        exam.setExamStatus(examCreationRequestDto.getStatus());
+        exam.setCandidates(examCreationRequestDto.getCandidates());
 
+        return exam;
 
+    public static FeedBack feedBackDtoSeparator(FeedbackDto feedbackDto){
+        FeedBack feedBack = new FeedBack();
+        feedBack.setMessage(feedbackDto.getComment());
+        feedBack.setRating(feedbackDto.getRating());
+        return feedBack;
+    }
 
     public static LearningMaterial learningMaterialDtoSeparator(LearningMaterialRegistrationDto dto) throws IOException {
         LearningMaterial learningMaterial = new LearningMaterial();
@@ -71,6 +113,12 @@ public class DtoMapper {
         if (file == null || file.isEmpty()) {
             throw new IOException("File is empty or missing");
         }
+    public static void updateExamFromDto(Exam exam, ExamCreationRequestDto dto) {
+        exam.setExamName(dto.getExamName());
+        exam.setExamStatus(dto.getStatus());
+        exam.setCandidates(dto.getCandidates());
+        // examLocalDateTime is usually set at creation, but you can update it here if needed
+    }
 
         File uploadDir = new File("uploads");
         if (!uploadDir.exists()) uploadDir.mkdirs();

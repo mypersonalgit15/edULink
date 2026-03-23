@@ -19,5 +19,9 @@ public class Attendance {
     @JoinColumn(name = "course_id",referencedColumnName = "id")
     private Course course;
 
+    @ManyToOne
+    @JoinColumn(name = "course_id",referencedColumnName = "id")
+    private Course course;
+
     private LocalDateTime localDateTime;
 }

@@ -20,6 +20,7 @@ import java.util.Map;
 import com.cts.eduLink.application.repository.StudentRepository;
 import com.cts.eduLink.application.util.DtoMapper;
 import com.cts.eduLink.application.util.RatingCalculator;
+import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -138,6 +139,7 @@ public class CourseServiceImpl implements ICourseService{
     @Override
     public List<CourseProjection> findAllAvailableCourse() throws CourseException {
     public List<CourseDetailProjection> findAllAvailableCourse() throws CourseException {
+        log.info("User has requested to display course List!");
         log.info("User has requested to display course List");
         List<CourseProjection> courseProjections = courseRepository.findAllAvailableCourse();
         if(courseProjections.isEmpty()){
@@ -156,8 +158,8 @@ public class CourseServiceImpl implements ICourseService{
     public CourseDetailByIdProjection findCourseDetailsById(Long courseId) throws CourseException{
         Optional<CourseDetailByIdProjection> courseDetailByIdProjection = courseRepository.findCourseDetailsById(courseId);
         if (courseDetailByIdProjection.isEmpty()){
-            log.debug("User requested for {} which is not available",courseId);
-            throw new CourseException("No Course available for course id: "+courseId,HttpStatus.NOT_FOUND);
+            log.debug("User requested for course {} which is not available",courseId);
+            throw new CourseException("No Course available for course id : "+courseId,HttpStatus.NOT_FOUND);
         }
         log.debug("{} has fetched successfully from course table",courseId);
         return courseDetailByIdProjection.get();

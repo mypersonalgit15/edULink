@@ -4,20 +4,16 @@ import com.cts.eduLink.application.classexception.AppUserException;
 import com.cts.eduLink.application.classexception.FeedbackException;
 import com.cts.eduLink.application.dto.FeedbackDto;
 import com.cts.eduLink.application.entity.AppUser;
-import com.cts.eduLink.application.entity.Faculty;
 import com.cts.eduLink.application.entity.FeedBack;
-import com.cts.eduLink.application.entity.Student;
-import com.cts.eduLink.application.repository.AppUserRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.FeedBackRepository;
 import com.cts.eduLink.application.repository.StudentRepository;
-import com.cts.eduLink.application.util.ClassSeparatorUtils;
+import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -46,7 +42,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                     feedbackDto.getUserId(), feedbackDto.getReviewerType());
             throw new AppUserException("Invalid feedback type", HttpStatus.BAD_REQUEST);
         }
-        FeedBack feedBack = ClassSeparatorUtils.feedBackDtoSeparator(feedbackDto);
+        FeedBack feedBack = DtoMapper.feedBackDtoSeparator(feedbackDto);
         feedBack.setAppUser(appUser.get());
         feedBackRepository.save(feedBack);
         log.info("Feedback successfully saved for User ID: {}", feedbackDto.getUserId());
