@@ -12,6 +12,7 @@ import com.cts.eduLink.application.repository.StudentRepository;
 import com.cts.eduLink.application.util.ClassSeparatorUtils;
 import com.cts.eduLink.application.util.DtoMapper;
 import com.cts.eduLink.application.util.DtoMapper;
+import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,8 @@ public class StudentServiceImpl implements IStudentService {
         AppUser appUser = DtoMapper.appUserDtoSeparator(studentRegistrationDto);
         Student student = ClassSeparatorUtils.studentDtoSeparator(studentRegistrationDto);
         AppUser appUser = ClassSeparatorUtils.appUserDtoSeparator(studentRegistrationDto);
+        Student student = DtoMapper.studentDtoSeparator(studentRegistrationDto);
+        AppUser appUser = DtoMapper.appUserDtoSeparator(studentRegistrationDto);
         Student student = DtoMapper.studentDtoSeparator(studentRegistrationDto);
         AppUser appUser = DtoMapper.appUserDtoSeparator(studentRegistrationDto);
         log.info("Extraction completed for student and user entities from DTO");

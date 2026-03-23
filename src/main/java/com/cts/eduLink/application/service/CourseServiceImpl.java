@@ -13,6 +13,7 @@ import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
+import com.cts.eduLink.application.util.DtoMapper;
 import com.cts.eduLink.application.util.ClassSeparatorUtils;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
@@ -139,6 +140,7 @@ public class CourseServiceImpl implements ICourseService{
     @Override
     public List<CourseProjection> findAllAvailableCourse() throws CourseException {
     public List<CourseDetailProjection> findAllAvailableCourse() throws CourseException {
+        log.info("User has requested to display course List!");
         log.info("User has requested to display course List!");
         log.info("User has requested to display course List");
         List<CourseProjection> courseProjections = courseRepository.findAllAvailableCourse();

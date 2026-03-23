@@ -47,4 +47,8 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
             "c.courseGradeLevel,c.courseRating) from Course c inner join c.studentSet s where s.studentId = :studentId")
     List<CourseDetailProjection> findCourseListByStudentId(@Param("studentId") Long studentId);
 
+    @Query("select new com.cts.eduLink.application.projection.CourseSummaryProjection(c.id, c.courseId, c.courseTitle)"+" from Course c"+
+            " inner join c.studentSet s where s.studentId = :studentId")
+    List<CourseSummaryProjection> findCourseSummaryListByStudentId(@Param("studentId") Long studentId);
+
 }

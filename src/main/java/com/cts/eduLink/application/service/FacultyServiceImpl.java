@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import java.util.Map;
 import com.cts.eduLink.application.util.DtoMapper;
+import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -92,6 +93,7 @@ public class FacultyServiceImpl implements IFacultyService {
         List<FacultyDetailProjection> facultyDetailProjections = facultyRepository.filterFacultyByRating(facultyRating);
         if (facultyDetailProjections.isEmpty()){
             log.error("No faculty available with {} ratting",facultyRating);
+            throw new FacultyException("FACULTY_ERROR"+facultyRating, HttpStatus.NOT_FOUND);
             throw new FacultyException("FACULTY_ERROR"+facultyRating, HttpStatus.NOT_FOUND);
             throw new FacultyException(Faculty_Error+facultyRating, HttpStatus.NOT_FOUND);
         }
