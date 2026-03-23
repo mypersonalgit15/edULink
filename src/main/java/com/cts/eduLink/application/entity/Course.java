@@ -13,8 +13,6 @@ import java.util.Set;
 
 @Data
 @Entity
-@Getter
-@Setter
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
