@@ -34,7 +34,7 @@ public class CourseController {
 
     @GetMapping("/findAllAvailableCourse")
     public ResponseEntity<List<CourseDetailProjection>> findALlAvailableCourse(){
-        log.info("User has called the endpoint successFully to fetch all available courses");
+        log.info("User has called the endpoint successFully to fetch all the available courses");
         return ResponseEntity.status(200).body(iCourseService.findAllAvailableCourse());
     }
 }

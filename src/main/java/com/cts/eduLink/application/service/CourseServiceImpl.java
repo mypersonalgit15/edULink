@@ -9,7 +9,7 @@ import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
-import com.cts.eduLink.application.util.ClassSeparatorUtils;
+import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,7 +35,7 @@ public class CourseServiceImpl implements ICourseService{
             throw new FacultyException(courseRegistrationDto.getFacultyId()+" is not registered",HttpStatus.BAD_REQUEST);
         }
         log.error("Unable to separate faculty from courseRegistrationDto");
-        Course course = ClassSeparatorUtils.facultyDtoSeparator(courseRegistrationDto);
+        Course course = DtoMapper.facultyDtoSeparator(courseRegistrationDto);
         course.setCourseStatus("ACTIVE");
         course.getFacultySet().add(facultyOption.get());
         facultyOption.get().getCourseSet().add(course);
@@ -47,7 +47,7 @@ public class CourseServiceImpl implements ICourseService{
 
     @Override
     public List<CourseDetailProjection> findAllAvailableCourse() throws CourseException {
-        log.info("User has requested to display course List");
+        log.info("User has requested to display course List!");
         List<CourseDetailProjection> courseDetailProjections = courseRepository.findAllAvailableCourse();
         if(courseDetailProjections.isEmpty()){
             log.error("no course is available to display");
@@ -61,8 +61,8 @@ public class CourseServiceImpl implements ICourseService{
     public CourseDetailByIdProjection findCourseDetailsById(Long courseId) throws CourseException{
         Optional<CourseDetailByIdProjection> courseDetailByIdProjection = courseRepository.findCourseDetailsById(courseId);
         if (courseDetailByIdProjection.isEmpty()){
-            log.debug("User requested for {} which is not available",courseId);
-            throw new CourseException("No Course available for course id: "+courseId,HttpStatus.NOT_FOUND);
+            log.debug("User requested for course {} which is not available",courseId);
+            throw new CourseException("No Course available for course id : "+courseId,HttpStatus.NOT_FOUND);
         }
         log.debug("{} has fetched successfully from course table",courseId);
         return courseDetailByIdProjection.get();
