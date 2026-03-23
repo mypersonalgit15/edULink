@@ -2,6 +2,7 @@ package com.cts.eduLink.application.util;
 
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
+import com.cts.eduLink.application.dto.FeedbackDto;
 import com.cts.eduLink.application.dto.StudentRegistrationDto;
 import com.cts.eduLink.application.entity.*;
 
@@ -57,5 +58,10 @@ public class ClassSeparatorUtils {
         return appUser;
     }
 
-    
+    public static FeedBack feedBackDtoSeparator(FeedbackDto feedbackDto){
+        FeedBack feedBack = new FeedBack();
+        feedBack.setMessage(feedbackDto.getComment());
+        feedBack.setRating(feedbackDto.getRating());
+        return feedBack;
+    }
 }
