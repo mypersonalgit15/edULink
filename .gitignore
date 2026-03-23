@@ -25,6 +25,7 @@ logs/
 Downloads/
 *.plantuml
 *.pdf
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
