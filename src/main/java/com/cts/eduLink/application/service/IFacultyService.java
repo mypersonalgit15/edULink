@@ -24,4 +24,5 @@ public interface IFacultyService {
     List<Exam> getupComingExams(Long facultyId );
     public  int getupComingExamsCount(Long facultyId);
     List<FacultyDetailProjection> filterFacultyByRating(@Param("facultyRating") int facultyRating);
+    String updateFacultyRating(Long facultyId, double newFacultyRating);
 }

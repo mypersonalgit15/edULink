@@ -30,4 +30,6 @@ public class FacultyRegistrationDto {
     @Max(value = 60, message = "Experience seems unrealistic")
     private String studentAddress;
     private int facultyYearOfExperience;
+
+    private String password;
 }

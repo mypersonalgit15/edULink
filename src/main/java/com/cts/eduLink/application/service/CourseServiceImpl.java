@@ -5,10 +5,8 @@ import com.cts.eduLink.application.classexception.FacultyException;
 import com.cts.eduLink.application.classexception.StudentException;
 import com.cts.eduLink.application.dto.CourseEnrollmentDto;
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
-import com.cts.eduLink.application.entity.Course;
-import com.cts.eduLink.application.entity.Faculty;
+import com.cts.eduLink.application.entity.*;
 import com.cts.eduLink.application.projection.CourseProjection;
-import com.cts.eduLink.application.entity.Student;
 import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
@@ -18,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import java.util.Map;
 import com.cts.eduLink.application.repository.StudentRepository;
-
 import com.cts.eduLink.application.util.RatingCalculator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +28,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @Slf4j
-public class CourseServiceImpl implements ICourseService{
+public class CourseServiceImpl implements ICourseService {
     private final CourseRepository courseRepository;
     private final FacultyRepository facultyRepository;
     private final StudentRepository studentRepository;
@@ -41,9 +38,9 @@ public class CourseServiceImpl implements ICourseService{
     public String registerCourse(CourseRegistrationDto courseRegistrationDto) throws FacultyException {
         log.info("Course registration has intercepted inside service");
         Optional<Faculty> facultyOption = facultyRepository.findFacultyById(courseRegistrationDto.getFacultyId());
-        if(facultyOption.isEmpty()){
-            log.error("{} is not authorized to register course",courseRegistrationDto.getFacultyId());
-            throw new FacultyException(courseRegistrationDto.getFacultyId()+" is not registered",HttpStatus.BAD_REQUEST);
+        if (facultyOption.isEmpty()) {
+            log.error("{} is not authorized to register course", courseRegistrationDto.getFacultyId());
+            throw new FacultyException(courseRegistrationDto.getFacultyId() + " is not registered", HttpStatus.BAD_REQUEST);
         }
         Course course = DtoMapper.facultyDtoSeparator(courseRegistrationDto);
         log.error("Unable to separate faculty from courseRegistrationDto");
@@ -51,8 +48,8 @@ public class CourseServiceImpl implements ICourseService{
         course.getFacultySet().add(facultyOption.get());
         facultyOption.get().getCourseSet().add(course);
         courseRepository.save(course);
-        log.info("Course with id {} saved successFully into database",course.getCourseId());
-        return "Course has registered successFully with course Id: "+course.getCourseId();
+        log.info("Course with id {} saved successFully into database", course.getCourseId());
+        return "Course has registered successFully with course Id: " + course.getCourseId();
 //        return "Course has registered successFully"; // for testing
     }
 
@@ -136,22 +133,22 @@ public class CourseServiceImpl implements ICourseService{
     public List<CourseProjection> findAllAvailableCourse() throws CourseException {
         log.info("User has requested to display course List!");
         List<CourseProjection> courseProjections = courseRepository.findAllAvailableCourse();
-        if(courseProjections.isEmpty()){
+        if (courseProjections.isEmpty()) {
             log.error("no course is available to display");
             throw new CourseException("No course Available!", HttpStatus.NOT_FOUND);
         }
-        log.info("Course List has been accessed SuccessFully and first course name is {}",courseProjections.getFirst().getCourseTitle());
+        log.info("Course List has been accessed SuccessFully and first course name is {}", courseProjections.getFirst().getCourseTitle());
         return courseProjections;
     }
 
     @Override
-    public CourseDetailByIdProjection findCourseDetailsById(Long courseId) throws CourseException{
+    public CourseDetailByIdProjection findCourseDetailsById(Long courseId) throws CourseException {
         Optional<CourseDetailByIdProjection> courseDetailByIdProjection = courseRepository.findCourseDetailsById(courseId);
-        if (courseDetailByIdProjection.isEmpty()){
-            log.debug("User requested for course {} which is not available",courseId);
-            throw new CourseException("No Course available for course id : "+courseId,HttpStatus.NOT_FOUND);
+        if (courseDetailByIdProjection.isEmpty()) {
+            log.debug("User requested for course {} which is not available", courseId);
+            throw new CourseException("No Course available for course id : " + courseId, HttpStatus.NOT_FOUND);
         }
-        log.debug("{} has fetched successfully from course table",courseId);
+        log.debug("{} has fetched successfully from course table", courseId);
         return courseDetailByIdProjection.get();
     }
 
@@ -159,18 +156,19 @@ public class CourseServiceImpl implements ICourseService{
     public List<CourseProjection> getCoursesByFaculty(Long facultyId) {
         return courseRepository.findCoursesByFacultyId(facultyId);
     }
+
     @Transactional
-    public String courseEnrollmentRequest(CourseEnrollmentDto courseEnrollmentDto) throws StudentException,CourseException {
+    public String courseEnrollmentRequest(CourseEnrollmentDto courseEnrollmentDto) throws StudentException, CourseException {
         log.info("Received enrollment request: Student ID {} for Course ID {}", courseEnrollmentDto.getStudentId(), courseEnrollmentDto.getCourseId());
         Optional<Student> student = studentRepository.findStudentById(courseEnrollmentDto.getStudentId());
-        if (student.isEmpty()){
+        if (student.isEmpty()) {
             log.error("Enrollment failed: Student ID {} not found", courseEnrollmentDto.getStudentId());
-            throw new StudentException("Invalid student id: "+courseEnrollmentDto.getStudentId(),HttpStatus.BAD_REQUEST);
+            throw new StudentException("Invalid student id: " + courseEnrollmentDto.getStudentId(), HttpStatus.BAD_REQUEST);
         }
         Optional<Course> course = courseRepository.findCourseById(courseEnrollmentDto.getCourseId());
-        if(course.isEmpty()){
+        if (course.isEmpty()) {
             log.error("Enrollment failed: Course ID {} not found", courseEnrollmentDto.getCourseId());
-            throw new CourseException("Invalid course id: "+courseEnrollmentDto.getCourseId(),HttpStatus.BAD_REQUEST);
+            throw new CourseException("Invalid course id: " + courseEnrollmentDto.getCourseId(), HttpStatus.BAD_REQUEST);
         }
         if (student.get().getCourseSet().contains(course.get())) {
             log.warn("Student {} already registered for course {}", courseEnrollmentDto.getStudentId(), courseEnrollmentDto.getCourseId());
@@ -188,36 +186,92 @@ public class CourseServiceImpl implements ICourseService{
     public String updateCourseRating(Long courseId, double newCourseRating) throws CourseException {
         log.info("Updating rating for course ID: {} with new rating: {}", courseId, newCourseRating);
         Optional<Course> course = courseRepository.findCourseById(courseId);
-        if (course.isEmpty()){
+        if (course.isEmpty()) {
             log.error("Course not found with ID: {}", courseId);
-            throw new CourseException("Course is not registered",HttpStatus.NOT_FOUND);
+            throw new CourseException("Course is not registered", HttpStatus.NOT_FOUND);
         }
-        double newRating = RatingCalculator.calculateRating(course.get().getCourseRating(),newCourseRating,course.get().getTotalCourseRatingCount());
-        course.get().setTotalCourseRatingCount(course.get().getTotalCourseRatingCount()+1);
+        double newRating = RatingCalculator.calculateRating(course.get().getCourseRating(), newCourseRating, course.get().getTotalCourseRatingCount());
+        course.get().setTotalCourseRatingCount(course.get().getTotalCourseRatingCount() + 1);
         course.get().setCourseRating(newRating);
         log.info("Course {} updated. New Rating: {}, Total Reviews: {}",
                 courseId, newRating, course.get().getTotalCourseRatingCount());
         return "Thanks for you feedBack!";
     }
 
-    public int getFacultyCourseCount(Long facultyId ) {
+    public int getFacultyCourseCount(Long facultyId) {
         int count = courseRepository.getFacultyCourseCount(facultyId);
         return count;
     }
+
     @Override
-    public List<CourseDetailProjection> findCourseListByStudentId(Long studentId) throws CourseException,StudentException{
+    public List<CourseDetailProjection> findCourseListByStudentId(Long studentId) throws CourseException, StudentException {
         log.info("Fetching course list for student ID: {}", studentId);
         Optional<Student> student = studentRepository.findStudentById(studentId);
-        if(student.isEmpty()){
+        if (student.isEmpty()) {
             log.error("Student lookup failed: ID {} not registered", studentId);
-            throw new StudentException("Student is not registered with id: "+studentId,HttpStatus.UNAUTHORIZED);
+            throw new StudentException("Student is not registered with id: " + studentId, HttpStatus.UNAUTHORIZED);
         }
         List<CourseDetailProjection> courseDetailProjections = courseRepository.findCourseListByStudentId(studentId);
-        if(courseDetailProjections.isEmpty()){
+        if (courseDetailProjections.isEmpty()) {
             log.warn("No courses found for student ID: {}", studentId);
-            throw new CourseException("No course available for student id: "+studentId,HttpStatus.NOT_FOUND);
+            throw new CourseException("No course available for student id: " + studentId, HttpStatus.NOT_FOUND);
         }
         log.info("Successfully retrieved {} courses for student ID: {}", courseDetailProjections.size(), studentId);
         return courseDetailProjections;
     }
 }
+//    @Service
+//    @AllArgsConstructor
+//    @Slf4j
+//    public class FacultyServiceImpl implements IFacultyService {
+//
+//        private final FacultyRepository facultyRepository;
+//        private final AppUserServiceImpl appUserService;
+//        private final RoleRepository roleRepository;
+//
+//        @Override
+//        public String registerFaculty(FacultyRegistrationDto facultyRegistrationDto) {
+//
+//            log.debug("AppUser and Faculty separation initiated");
+//            AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto);
+//            Faculty faculty = DtoMapper.facultyDtoSeparator(facultyRegistrationDto);
+//            Optional<Role> role = roleRepository.findRoleByName("FACULTY");
+//
+//            appUser.setRole(role.get());
+//            log.debug("appUser instance has sent for registration");
+//            appUserService.registerAppUser(appUser);
+//            faculty.setAppUser(appUser);
+//            facultyRepository.save(faculty);
+//            log.info("faculty entity has saved into database for {}",appUser.getUserEmail());
+//            return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
+//        }
+//
+//        @Override
+//        public List<FacultyDetailProjection> filterFacultyByRating(int facultyRating) throws FacultyException {
+//            log.info("Faculty rating filtration request has sent to database");
+//            List<FacultyDetailProjection> facultyDetailProjections = facultyRepository.filterFacultyByRating(facultyRating);
+//            if (facultyDetailProjections.isEmpty()) {
+//                log.error("No faculty available with {} ratting", facultyRating);
+//                throw new FacultyException(Faculty_Error + facultyRating, HttpStatus.NOT_FOUND);
+//            }
+//            log.info("Faculty with rating {} fetch successfully and first faculty name is {}", facultyRating, facultyDetailProjections.getFirst().getFacultyName());
+//            return facultyDetailProjections;
+//        }
+//
+//        @Override
+//        public String updateFacultyRating(Long facultyId, double newFacultyRating) throws FacultyException {
+//            log.info("Updating rating for Faculty ID: {} with new score: {}", facultyId, newFacultyRating);
+//            Optional<Faculty> faculty = facultyRepository.findFacultyById(facultyId);
+//            if(faculty.isEmpty()){
+//                log.error("Faculty with ID {} not found", facultyId);
+//                throw new FacultyException("Faculty is not registered",HttpStatus.NOT_FOUND);
+//            }
+//            Long totalFacultyRating = faculty.get().getTotalFacultyRatingCount();
+//            double newRating = RatingCalculator.calculateRating(faculty.get().getFacultyRating(),newFacultyRating,totalFacultyRating);
+//            faculty.get().setFacultyRating(newRating);
+//            faculty.get().setTotalFacultyRatingCount(totalFacultyRating+1);
+//            log.info("Update successful for Faculty ID: {}. Rating changed to {} (Total reviews: {})",facultyId, newRating, totalFacultyRating + 1);
+//            return "Thanks for you feedBack!";
+//        }
+//    }
+//}

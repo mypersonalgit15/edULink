@@ -11,6 +11,7 @@ import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import java.util.Map;
@@ -19,9 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static com.cts.eduLink.application.constants.ErrorConstant.Faculty_Error;
 
@@ -36,13 +37,15 @@ public class FacultyServiceImpl implements IFacultyService {
     private final FacultyRepository facultyRepository;
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
     private final CourseRepository courseRepository;
 
+    @Transactional
     @Override
     public String registerFaculty(FacultyRegistrationDto facultyRegistrationDto) {
 
         log.debug("AppUser and Faculty separation initiated");
-        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto);
+        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto,passwordEncoder);
         Faculty faculty = DtoMapper.facultyDtoSeparator(facultyRegistrationDto);
         Optional<Role> role = roleRepository.findRoleByName("FACULTY");
 
@@ -51,7 +54,7 @@ public class FacultyServiceImpl implements IFacultyService {
         appUserService.registerAppUser(appUser);
         faculty.setAppUser(appUser);
         facultyRepository.save(faculty);
-        log.info("faculty entity has saved into database for "+appUser.getUserEmail());
+        log.info("faculty entity has saved into database for {}",appUser.getUserEmail());
         return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
     }
 
