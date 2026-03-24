@@ -5,6 +5,7 @@ import com.cts.eduLink.application.service.IAttendanceService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class AttendanceController {
 
     private final IAttendanceService attendanceService;
 
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/attendanceDetailsByStudentId/{studentId}")
     public ResponseEntity<List<CourseAttendanceProjection>> findAttendanceDetailsByStudentId(@PathVariable Long studentId){
         log.info("REST request to get attendance details for Student ID: {}", studentId);

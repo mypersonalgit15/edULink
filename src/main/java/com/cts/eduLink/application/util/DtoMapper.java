@@ -61,7 +61,6 @@ public class DtoMapper {
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
-        faculty.setFacultyAddress(facultyRegistrationDto.getStudentAddress());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         faculty.setTotalFacultyRatingCount(0L);
@@ -74,7 +73,7 @@ public class DtoMapper {
         // Update Faculty-specific fields
         faculty.setFacultyGender(dto.getFacultyGender());
         faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
-        faculty.setFacultyAddress(dto.getStudentAddress());
+        faculty.setFacultyAddress(dto.getFacultyAddress());
 
         // Update associated AppUser fields
         if (faculty.getAppUser() != null) {
