@@ -31,8 +31,9 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/appUser/login", "/appUser/register","/student/register").permitAll() // Public endpoints
+                        .requestMatchers("/appUser/login", "/appUser/register","/student/register","/course/register","/faculty/register").permitAll() // Public endpoints
                         .requestMatchers("/student/enrolledList/**").hasRole("STUDENT")
+                        .requestMatchers("/faculty/register/**").hasRole("FACULTY")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

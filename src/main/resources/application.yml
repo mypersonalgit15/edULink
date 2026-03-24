@@ -11,8 +11,8 @@ spring:
     name: ems
   datasource:
     url: jdbc:mysql://localhost:3306/ems
-    username: root
-    password: 2478208
+    username: ${username}
+    password: ${password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
