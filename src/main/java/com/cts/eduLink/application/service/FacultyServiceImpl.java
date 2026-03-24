@@ -88,6 +88,12 @@ public class FacultyServiceImpl implements IFacultyService {
         log.info("Faculty with rating {} fetch successfully and first faculty name is {}", facultyRating, facultyDetailProjections.getFirst().getFacultyName());
         return facultyDetailProjections;
     }
+
+    @Override
+    public String updateFacultyRating(Long facultyId, double newFacultyRating) {
+        return "";
+    }
+
     @Transactional
     public String patchFaculty(Long facultyId, Map<String, Object> updates) {
         log.info("Patch update initiated for Faculty ID: {}", facultyId);

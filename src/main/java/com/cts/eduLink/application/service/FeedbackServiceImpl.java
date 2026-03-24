@@ -24,7 +24,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Slf4j
 @Service
-public class FeedbackServiceImpl implements FeedbackService {
+public class FeedbackServiceImpl implements IFeedbackService {
 
     private final FeedBackRepository feedBackRepository;
     private final StudentRepository studentRepository;
