@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/appUser/login", "/appUser/register","/student/register").permitAll() // Public endpoints
+                        .requestMatchers("/appUser/login", "/appUser/register","/student/register","/faculty/**","/exam/**").permitAll() // Public endpoints
                         .requestMatchers("/student/enrolledList/**").hasRole("STUDENT")
                         .anyRequest().authenticated()
                 )
