@@ -1,49 +1,58 @@
-2026-03-24 15:14:10 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 21472 (C:\Users\2478275\Documents\fullStack\backend\springBoot\eduLinkM\target\classes started by root in C:\Users\2478275\Documents\fullStack\backend\springBoot\eduLinkM)
-2026-03-24 15:14:10 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-24 15:14:11 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-24 15:14:12 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 144 ms. Found 12 JPA repository interfaces.
-2026-03-24 15:14:13 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
-2026-03-24 15:14:13 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
-2026-03-24 15:14:13 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-24 15:14:13 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-24 15:14:13 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2764 ms
-2026-03-24 15:14:14 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-24 15:14:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-24 15:14:15 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7c8a91e2
-2026-03-24 15:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-24 15:14:15 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-03-24 15:14:17 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24 15:14:18 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-24 15:14:19 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
-2026-03-24 15:14:20 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-24 15:14:22 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
-2026-03-24 15:14:22 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
-2026-03-24 15:14:22 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 12.595 seconds (process running for 13.154)
-2026-03-24 15:14:22 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-03-24 15:14:22 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: prash@gmail.com
-2026-03-24 15:14:37 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.AppUserController - Authentication successful for user: prash@gmail.com
-2026-03-24 15:14:37 [http-nio-8081-exec-1] INFO  c.c.eduLink.security.utils.JwtUtils - Generating JWT token for user: prash@gmail.com
-2026-03-24 15:14:37 [http-nio-8081-exec-1] INFO  c.c.eduLink.security.utils.JwtUtils - GENERATED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
-2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
-2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: prash@gmail.com for URI: /course/allCourseListByStudentId/1446312
-2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.a.controller.CourseController - Received GET request: Fetching courses for studentId: 1446312
-2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.a.service.CourseServiceImpl - Fetching course list for student ID: 1446312
-2026-03-24 15:15:20 [http-nio-8081-exec-3] ERROR c.c.e.a.service.CourseServiceImpl - Student lookup failed: ID 1446312 not registered
-2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
-2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: prash@gmail.com for URI: /student/studentDetailsById/1446371
-2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.a.controller.StudentController - REST request received to fetch details for Student ID: 1446371
-2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.a.service.StudentServiceImpl - Initiating request to find details for student ID: 1446371
-2026-03-24 15:16:39 [http-nio-8081-exec-6] ERROR c.c.e.a.service.StudentServiceImpl - Lookup failed: Student ID 1446371 does not exist.
-2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
-2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: prash@gmail.com for URI: /student/enrolledList/2186285
-2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Request received to fetch course enrollment count for Student ID: 2186285
-2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Successfully retrieved enrollment count for Student ID: 2186285. Count: 0
-2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-24 15:17:11 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-24 16:31:38 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 3916 (C:\Users\2478275\Documents\fullStack\backend\springBoot\eduLinkM\target\classes started by root in C:\Users\2478275\Documents\fullStack\backend\springBoot\eduLinkM)
+2026-03-24 16:31:38 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-24 16:31:39 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-24 16:31:39 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 140 ms. Found 12 JPA repository interfaces.
+2026-03-24 16:31:41 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-03-24 16:31:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2026-03-24 16:31:41 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-24 16:31:41 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-24 16:31:41 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 3117 ms
+2026-03-24 16:31:42 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-24 16:31:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-24 16:31:43 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1d2d793d
+2026-03-24 16:31:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-24 16:31:43 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-24 16:31:45 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 16:31:46 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-24 16:31:47 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
+2026-03-24 16:31:49 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-24 16:31:50 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2026-03-24 16:31:50 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2026-03-24 16:31:50 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 13.564 seconds (process running for 14.21)
+2026-03-24 16:31:50 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-03-24 16:31:50 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-03-24 16:33:00 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-24 16:33:00 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-24 16:33:00 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2026-03-24 16:33:00 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.FacultyController - faculty@gmail.com has initiated the registration as a Faculty
+2026-03-24 16:33:00 [http-nio-8081-exec-1] INFO  c.c.e.a.service.AppUserServiceImpl - AppUser registration intercepted 
+2026-03-24 16:33:01 [http-nio-8081-exec-1] INFO  c.c.e.a.service.AppUserServiceImpl - faculty@gmail.com information saved into database successFully
+2026-03-24 16:33:01 [http-nio-8081-exec-1] INFO  c.c.e.a.service.FacultyServiceImpl - faculty entity has saved into database for faculty@gmail.com
+2026-03-24 16:34:06 [http-nio-8081-exec-5] INFO  c.c.e.a.controller.StudentController - Student's registration request has been initiated successFully by student
+2026-03-24 16:34:06 [http-nio-8081-exec-5] INFO  c.c.e.a.service.StudentServiceImpl - Initiating student registration for user: student@gmail.com
+2026-03-24 16:34:06 [http-nio-8081-exec-5] INFO  c.c.e.a.service.StudentServiceImpl - Extraction completed for student and user entities from DTO
+2026-03-24 16:34:06 [http-nio-8081-exec-5] ERROR c.c.e.a.service.StudentServiceImpl - Attempting to register AppUser and save Student entity
+2026-03-24 16:34:06 [http-nio-8081-exec-5] INFO  c.c.e.a.service.AppUserServiceImpl - AppUser registration intercepted 
+2026-03-24 16:34:06 [http-nio-8081-exec-5] ERROR c.c.e.a.service.AppUserServiceImpl - student's phone number is Already present into database with phone number 9876543210
+2026-03-24 16:34:11 [http-nio-8081-exec-7] INFO  c.c.e.a.controller.StudentController - Student's registration request has been initiated successFully by student
+2026-03-24 16:34:11 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Initiating student registration for user: student@gmail.com
+2026-03-24 16:34:11 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Extraction completed for student and user entities from DTO
+2026-03-24 16:34:11 [http-nio-8081-exec-7] ERROR c.c.e.a.service.StudentServiceImpl - Attempting to register AppUser and save Student entity
+2026-03-24 16:34:11 [http-nio-8081-exec-7] INFO  c.c.e.a.service.AppUserServiceImpl - AppUser registration intercepted 
+2026-03-24 16:34:11 [http-nio-8081-exec-7] INFO  c.c.e.a.service.AppUserServiceImpl - student@gmail.com information saved into database successFully
+2026-03-24 16:34:11 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Successfully registered student. Assigned Student ID: 3745587
+2026-03-24 16:38:27 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: faculty@gmail.com
+2026-03-24 16:38:27 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.AppUserController - Authentication successful for user: faculty@gmail.com
+2026-03-24 16:38:27 [http-nio-8081-exec-1] INFO  c.c.eduLink.security.utils.JwtUtils - Generating JWT token for user: faculty@gmail.com
+2026-03-24 16:38:27 [http-nio-8081-exec-1] INFO  c.c.eduLink.security.utils.JwtUtils - GENERATED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWN1bHR5QGdtYWlsLmNvbSIsImlhdCI6MTc3NDM1MDUwNywiZXhwIjoxNzc0NDM2OTA3fQ.j-KKFFKdh7VFB615p5x8b9lKawgnmQ6zqC13GsVNe3E]
+2026-03-24 16:38:50 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYWN1bHR5QGdtYWlsLmNvbSIsImlhdCI6MTc3NDM1MDUwNywiZXhwIjoxNzc0NDM2OTA3fQ.j-KKFFKdh7VFB615p5x8b9lKawgnmQ6zqC13GsVNe3E]
+2026-03-24 16:38:50 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: faculty@gmail.com for URI: /course/register
+2026-03-24 16:38:51 [http-nio-8081-exec-2] INFO  c.c.e.a.controller.CourseController - 1204144 request for a new course registration
+2026-03-24 16:38:51 [http-nio-8081-exec-2] INFO  c.c.e.a.service.CourseServiceImpl - Course registration has intercepted inside service
+2026-03-24 16:38:51 [http-nio-8081-exec-2] ERROR c.c.e.a.service.CourseServiceImpl - Unable to separate faculty from courseRegistrationDto
+2026-03-24 16:38:51 [http-nio-8081-exec-2] INFO  c.c.e.a.service.CourseServiceImpl - Course with id 4488821 saved successFully into database
+2026-03-24 16:40:00 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-24 16:40:00 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-24 16:40:00 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 16:40:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-24 16:40:00 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -1,9 +1,13 @@
 package com.cts.eduLink.application.globalexception;
 
 import com.cts.eduLink.application.classexception.*;
+import com.cts.eduLink.application.classexception.SecurityException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.nio.file.AccessDeniedException;
 
 @ControllerAdvice
 public class GlobalException {
@@ -38,5 +42,15 @@ public class GlobalException {
     @ExceptionHandler(ExamException.class)
     public ResponseEntity<String> handleExamException(ExamException ex) {
         return new ResponseEntity<>(ex.getMessage(), ex.getHttpStatus());
+    }
+
+    @ExceptionHandler(SecurityException.class)
+    public ResponseEntity<String> handleSecurityException(SecurityException ex) {
+        return new ResponseEntity<>(ex.getMessage(), ex.getHttpStatus());
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<String> accessDeniedException(AccessDeniedException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }

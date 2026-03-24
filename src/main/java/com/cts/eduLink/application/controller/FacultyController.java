@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class FacultyController {
         return ResponseEntity.status(200).body(facultyService.registerFaculty(facultyRegistrationDto));
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @PutMapping("/update/{facultyId}")
     public ResponseEntity<String> updateFaculty(@PathVariable Long facultyId, @RequestBody FacultyRegistrationDto facultyRegistrationDto) {
         log.info("Received request to update faculty with ID: {}", facultyId);
@@ -36,6 +38,7 @@ public class FacultyController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @PatchMapping("/patch/{facultyId}")
     public ResponseEntity<String> patchFaculty(
             @PathVariable Long facultyId,
@@ -46,17 +49,20 @@ public class FacultyController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{facultyId}")
     public ResponseEntity<String> deleteFaculty(@PathVariable Long facultyId) {
         log.info("Received request to delete faculty with ID: {}", facultyId);
         String response = facultyService.deleteFaculty(facultyId);
         return ResponseEntity.ok(response);
         }
+    @PreAuthorize("hasRole('STUDENT')")
     @PatchMapping("/updateRating/{facultyId}/{newFacultyRating}")
     public ResponseEntity<String> updateFacultyRating(@PathVariable Long facultyId, @PathVariable double newFacultyRating){
         return ResponseEntity.status(200).body(facultyService.updateFacultyRating(facultyId,newFacultyRating));
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/dashboard/{facultyId}")
     public ResponseEntity<FacultyDashboardDto> getFacultyDashboard(@PathVariable Long facultyId){
         log.info("Faculty dashboard requested for facultyId: {}", facultyId);
@@ -64,6 +70,7 @@ public class FacultyController {
         return ResponseEntity.status(200).body(dashboardDto);
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/profile/{facultyId}")
     public ResponseEntity<FacultyProjection> getFacultyProfile(@PathVariable Long facultyId){
         return facultyService.getFacultyProfile(facultyId)
@@ -71,12 +78,14 @@ public class FacultyController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/upcoming/{facultyId}")
     public ResponseEntity<List<Exam>> getupComingExams(@PathVariable Long facultyId) {
         // This now matches the return type of your service/repository
         return ResponseEntity.ok(facultyService.getupComingExams(facultyId));
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/upComingCount/{facultyId}")
     public Map<String,Integer> getupComingExamsCount(@PathVariable Long facultyId){
         int count = facultyService.getupComingExamsCount(facultyId);
