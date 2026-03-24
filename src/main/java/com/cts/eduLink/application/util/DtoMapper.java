@@ -48,26 +48,6 @@ public class DtoMapper {
         course.setCourseId(courseId);
         return course;
     }
-    public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
-        // Update Faculty-specific fields
-        faculty.setFacultyGender(dto.getFacultyGender());
-        faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
-        faculty.setFacultyAddress(dto.getFacultyAddress());
-
-        // Update associated AppUser fields
-        if (faculty.getAppUser() != null) {
-            faculty.getAppUser().setUserName(dto.getUserName());
-            faculty.getAppUser().setUserEmail(dto.getUserEmail());
-            faculty.getAppUser().setPhoneNumber(dto.getPhoneNumber());
-        }
-    }
-    public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
-        AppUser appUser = new AppUser();
-        appUser.setUserName(facultyRegistrationDto.getUserName());
-        appUser.setUserEmail(facultyRegistrationDto.getUserEmail());
-        appUser.setPhoneNumber(facultyRegistrationDto.getPhoneNumber());
-        return appUser;
-    }
 
     public static void updateCourseFromDto(Course course, CourseRegistrationDto dto) {
         course.setCourseTitle(dto.getCourseTitle());
@@ -82,7 +62,6 @@ public class DtoMapper {
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
-        faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         faculty.setTotalFacultyRatingCount(0L);
         Long facultyId = UIDGeneratorUtils.uidGenerator();
@@ -90,7 +69,19 @@ public class DtoMapper {
         return faculty;
     }
 
+    public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
+        // Update Faculty-specific fields
+        faculty.setFacultyGender(dto.getFacultyGender());
+        faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
+        faculty.setFacultyAddress(dto.getFacultyAddress());
 
+        // Update associated AppUser fields
+        if (faculty.getAppUser() != null) {
+            faculty.getAppUser().setUserName(dto.getUserName());
+            faculty.getAppUser().setUserEmail(dto.getUserEmail());
+            faculty.getAppUser().setPhoneNumber(dto.getPhoneNumber());
+        }
+    }
 
     public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto,PasswordEncoder passwordEncoder){
         AppUser appUser = new AppUser();

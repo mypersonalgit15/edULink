@@ -8,6 +8,7 @@ import com.cts.eduLink.application.service.IExamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ExamController {
         this.examService = examService;
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @PostMapping("/register")
     public ResponseEntity<String> createExam(@RequestBody ExamCreationRequestDto request) {
         log.info("Creating a new exam: {}", request.getExamName());
@@ -31,6 +33,7 @@ public class ExamController {
         return ResponseEntity.status(HttpStatus.OK).body("created successfully");
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @PutMapping("/update/{examId}")
     public ResponseEntity<String> updateExam(@PathVariable Long examId, @RequestBody ExamCreationRequestDto request) {
         log.info("Received request to update exam with ID: {}", examId);
@@ -38,18 +41,21 @@ public class ExamController {
         return ResponseEntity.ok(response);
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @PatchMapping("/patch/{examId}")
     public ResponseEntity<String> patchExam(@PathVariable Long examId, @RequestBody Map<String, Object> updates) {
         log.info("Patch update for examId: {} has been initiated successfully", examId);
         return ResponseEntity.status(200).body(examService.patchExam(examId, updates));
     }
 
+    @PreAuthorize("hasRole('FACULTY')")
     @DeleteMapping("/delete/{examId}")
     public ResponseEntity<String> deleteExam(@PathVariable Long examId) {
         log.info("Delete operation for examId: {} has been initiated successfully", examId);
         return ResponseEntity.status(200).body(examService.deleteExam(examId));
     }
 
+    @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/allExams")
     public ResponseEntity<List<ExamProjection>> getAllExams() throws ExamException {
         log.info("Controller: Request received to fetch all exam projections");
