@@ -11,8 +11,8 @@ spring:
     name: ems
   datasource:
     url: jdbc:mysql://localhost:3306/edulink
-    username: root
-    password: prasha
+    username: ${username}
+    password: ${password}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
