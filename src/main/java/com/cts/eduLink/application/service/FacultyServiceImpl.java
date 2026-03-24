@@ -11,7 +11,7 @@ import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
-import com.cts.eduLink.application.util.RatingCalculator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
 import java.util.Map;
@@ -20,9 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static com.cts.eduLink.application.constants.ErrorConstant.Faculty_Error;
 
@@ -37,13 +37,15 @@ public class FacultyServiceImpl implements IFacultyService {
     private final FacultyRepository facultyRepository;
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
     private final CourseRepository courseRepository;
 
+    @Transactional
     @Override
     public String registerFaculty(FacultyRegistrationDto facultyRegistrationDto) {
 
         log.debug("AppUser and Faculty separation initiated");
-        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto);
+        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto,passwordEncoder);
         Faculty faculty = DtoMapper.facultyDtoSeparator(facultyRegistrationDto);
         Optional<Role> role = roleRepository.findRoleByName("FACULTY");
 
@@ -52,12 +54,9 @@ public class FacultyServiceImpl implements IFacultyService {
         appUserService.registerAppUser(appUser);
         faculty.setAppUser(appUser);
         facultyRepository.save(faculty);
-        log.info("faculty entity has saved into database for "+appUser.getUserEmail());
         log.info("faculty entity has saved into database for {}",appUser.getUserEmail());
         return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
     }
-
-    // Add to edULink-dev last update 17032026/src/main/java/com/cts/eduLink/application/service/FacultyServiceImpl.java
 
     @Override
     @org.springframework.transaction.annotation.Transactional
@@ -67,14 +66,17 @@ public class FacultyServiceImpl implements IFacultyService {
         // Find existing faculty or throw exception
         Faculty existingFaculty = facultyRepository.findFacultyById(facultyId)
                 .orElseThrow(() -> new FacultyException("Faculty not found with ID: " + facultyId, org.springframework.http.HttpStatus.NOT_FOUND));
+
         // Use utility to map DTO fields to existing entity
         DtoMapper.updateFacultyFromDto(existingFaculty, dto);
+
         // Save updated entity (JPA identifies this as an update because the ID is present)
         facultyRepository.save(existingFaculty);
 
         log.info("Faculty profile updated successfully for ID: {}", facultyId);
         return "Faculty profile updated successfully!";
     }
+
     @Override
     public List<FacultyDetailProjection> filterFacultyByRating(int facultyRating) throws FacultyException {
         log.info("Faculty rating filtration request has sent to database");
@@ -88,19 +90,8 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public String updateFacultyRating(Long facultyId, double newFacultyRating) throws FacultyException {
-        log.info("Updating rating for Faculty ID: {} with new score: {}", facultyId, newFacultyRating);
-        Optional<Faculty> faculty = facultyRepository.findFacultyById(facultyId);
-        if(faculty.isEmpty()){
-            log.error("Faculty with ID {} not found", facultyId);
-            throw new FacultyException("Faculty is not registered",HttpStatus.NOT_FOUND);
-        }
-        Long totalFacultyRating = faculty.get().getTotalFacultyRatingCount();
-        double newRating = RatingCalculator.calculateRating(faculty.get().getFacultyRating(),newFacultyRating,totalFacultyRating);
-        faculty.get().setFacultyRating(newRating);
-        faculty.get().setTotalFacultyRatingCount(totalFacultyRating+1);
-        log.info("Update successful for Faculty ID: {}. Rating changed to {} (Total reviews: {})",facultyId, newRating, totalFacultyRating + 1);
-        return "Thanks for you feedBack!";
+    public String updateFacultyRating(Long facultyId, double newFacultyRating) {
+        return "";
     }
 
     @Transactional
@@ -188,7 +179,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
 
-    //    @Override
+//    @Override
 //    public Long getTotalStudents(Long facultyId) {
 //        log.debug("Fetching total students for faculty: {}", facultyId);
 //        Optional<Faculty> facultyOptional = facultyRepository.findFacultyById(facultyId);
@@ -214,3 +205,4 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
 }
+
