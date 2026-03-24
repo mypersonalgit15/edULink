@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FeedbackRepository extends JpaRepository<FeedBack,Long> {
+public interface FeedBackRepository extends JpaRepository<FeedBack,Long> {
     @Query("select new com.cts.eduLink.application.projection.FeedbackProjection(a.userName,f.message,f.rating) from FeedBack f inner join f.appUser a")
     List<FeedbackProjection> findFeedBackList();
 }
