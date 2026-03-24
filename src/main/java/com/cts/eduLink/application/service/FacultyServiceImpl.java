@@ -52,11 +52,8 @@ public class FacultyServiceImpl implements IFacultyService {
         faculty.setAppUser(appUser);
         facultyRepository.save(faculty);
         log.info("faculty entity has saved into database for "+appUser.getUserEmail());
-        log.info("faculty entity has saved into database for {}",appUser.getUserEmail());
         return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
     }
-
-    // Add to edULink-dev last update 17032026/src/main/java/com/cts/eduLink/application/service/FacultyServiceImpl.java
 
     @Override
     @org.springframework.transaction.annotation.Transactional
