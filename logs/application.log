@@ -1,0 +1,43 @@
+2026-03-23 15:19:59 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 26612 (C:\Users\2478197\IdeaProjects\edULink\target\classes started by 2478197 in C:\Users\2478197\IdeaProjects\edULink)
+2026-03-23 15:19:59 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-23 15:19:59 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [com.cts.eduLink.EduLinkApplication]: Could not find class [org.springdoc.core.conditions.MultipleOpenApiSupportCondition]
+2026-03-23 15:19:59 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-03-23 15:19:59 [main] ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [com.cts.eduLink.EduLinkApplication]: Could not find class [org.springdoc.core.conditions.MultipleOpenApiSupportCondition]
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:644)
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.lambda$processGroupImports$0(ConfigurationClassParser.java:864)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.processGroupImports(ConfigurationClassParser.java:860)
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorHandler.process(ConfigurationClassParser.java:831)
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:200)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:446)
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:310)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.cts.eduLink.EduLinkApplication.main(EduLinkApplication.java:11)
+Caused by: java.lang.IllegalArgumentException: Could not find class [org.springdoc.core.conditions.MultipleOpenApiSupportCondition]
+	at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:353)
+	at org.springframework.context.annotation.ConditionEvaluator.getCondition(ConditionEvaluator.java:138)
+	at org.springframework.context.annotation.ConditionEvaluator.collectConditions(ConditionEvaluator.java:122)
+	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:94)
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:634)
+	... 18 common frames omitted
+Caused by: java.lang.ClassNotFoundException: org.springdoc.core.conditions.MultipleOpenApiSupportCondition
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
+	at java.base/java.lang.Class.forName0(Native Method)
+	at java.base/java.lang.Class.forName(Class.java:543)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:302)
+	at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:343)
+	... 23 common frames omitted

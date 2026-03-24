@@ -8,7 +8,8 @@ import com.cts.eduLink.application.entity.FeedBack;
 import com.cts.eduLink.application.projection.FeedbackProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
 
-import com.cts.eduLink.application.repository.FeedbackRepository;
+import com.cts.eduLink.application.repository.FeedBackRepository;
+
 
 import com.cts.eduLink.application.repository.StudentRepository;
 import com.cts.eduLink.application.util.DtoMapper;
@@ -25,7 +26,7 @@ import java.util.Optional;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
-    private final FeedbackRepository feedBackRepository;
+    private final FeedBackRepository feedBackRepository;
     private final StudentRepository studentRepository;
     private final FacultyRepository facultyRepository;
 
