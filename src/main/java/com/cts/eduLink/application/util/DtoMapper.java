@@ -1,6 +1,5 @@
 package com.cts.eduLink.application.util;
 
-import com.cts.eduLink.application.classexception.FileException;
 import com.cts.eduLink.application.dto.*;
 import com.cts.eduLink.application.dto.CourseRegistrationDto;
 import com.cts.eduLink.application.dto.ExamCreationRequestDto;
@@ -8,6 +7,7 @@ import com.cts.eduLink.application.dto.FacultyRegistrationDto;
 import com.cts.eduLink.application.dto.FeedbackDto;
 import com.cts.eduLink.application.dto.StudentRegistrationDto;
 import com.cts.eduLink.application.entity.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -26,11 +26,13 @@ public class DtoMapper {
         student.setStudentId(studentId);
         return student;
     }
-    public static AppUser appUserDtoSeparator(StudentRegistrationDto appUserDto){
+    public static AppUser appUserDtoSeparator(StudentRegistrationDto appUserDto, PasswordEncoder passwordEncoder){
         AppUser appUser = new AppUser();
         appUser.setUserEmail(appUserDto.getUserEmail());
         appUser.setUserName(appUserDto.getUserName());
         appUser.setPhoneNumber(appUserDto.getPhoneNumber());
+        String encodePassword = passwordEncoder.encode(appUserDto.getPassword());
+        appUser.setUserPassword(encodePassword);
         return appUser;
     }
 
@@ -54,10 +56,12 @@ public class DtoMapper {
         course.setCourseGradeLevel(dto.getCourseGradeLevel());
         course.setCourseStatus(dto.getCourseStatus());
     }
+
     public static Faculty facultyDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
+        faculty.setFacultyAddress(facultyRegistrationDto.getStudentAddress());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         faculty.setTotalFacultyRatingCount(0L);
@@ -65,10 +69,13 @@ public class DtoMapper {
         faculty.setFacultyId(facultyId);
         return faculty;
     }
+
     public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
         // Update Faculty-specific fields
         faculty.setFacultyGender(dto.getFacultyGender());
         faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
+        faculty.setFacultyAddress(dto.getStudentAddress());
+
         // Update associated AppUser fields
         if (faculty.getAppUser() != null) {
             faculty.getAppUser().setUserName(dto.getUserName());
@@ -76,11 +83,14 @@ public class DtoMapper {
             faculty.getAppUser().setPhoneNumber(dto.getPhoneNumber());
         }
     }
-    public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
+
+    public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto,PasswordEncoder passwordEncoder){
         AppUser appUser = new AppUser();
         appUser.setUserName(facultyRegistrationDto.getUserName());
         appUser.setUserEmail(facultyRegistrationDto.getUserEmail());
         appUser.setPhoneNumber(facultyRegistrationDto.getPhoneNumber());
+        String encodePassword = passwordEncoder.encode(facultyRegistrationDto.getPassword());
+        appUser.setUserPassword(encodePassword);
         return appUser;
     }
     public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto) {
@@ -89,8 +99,10 @@ public class DtoMapper {
         exam.setExamLocalDateTime(LocalDateTime.now());
         exam.setExamStatus(examCreationRequestDto.getStatus());
         exam.setCandidates(examCreationRequestDto.getCandidates());
+
         return exam;
     }
+
     public static FeedBack feedBackDtoSeparator(FeedbackDto feedbackDto){
         FeedBack feedBack = new FeedBack();
         feedBack.setMessage(feedbackDto.getComment());
@@ -103,32 +115,6 @@ public class DtoMapper {
         exam.setCandidates(dto.getCandidates());
     }
 
-    public static Exam examDtoSeparator(ExamRegistrationDto examRegistrationDto){
-        Exam exam = new Exam();
-        exam.setExamName(examRegistrationDto.getExamName());
-        exam.setExamStatus("ACTIVE");
-        exam.setExamLocalDateTime(LocalDateTime.now());
-        Long examId = UIDGeneratorUtils.uidGenerator();
-        exam.setExamId(examId);
-        return exam;
-    }
-
-    public static Grade gradeDtoSeparator(GradeRegistrationDto gradeRegistrationDto){
-        Grade grade = new Grade();
-        grade.setScore(gradeRegistrationDto.getScore());
-        grade.setStatus("COMPLETED");
-        String studentGrade = GradeCalculator.calculateGrade(gradeRegistrationDto.getScore());
-        grade.setGrade(studentGrade);
-        Long gradeId = UIDGeneratorUtils.uidGenerator();
-        grade.setGradeId(gradeId);
-        return  grade;
-    }
-
-    public static Attendance attendanceDtoSeparator(AttendanceRegistrationDto attendanceRegistrationDto){
-        Attendance attendance = new Attendance();
-        attendance.setLocalDateTime(LocalDateTime.now());
-        return attendance;
-    }
     public static LearningMaterial learningMaterialDtoSeparator(LearningMaterialRegistrationDto dto) throws IOException {
         LearningMaterial learningMaterial = new LearningMaterial();
         learningMaterial.setLearningMaterialTitle(dto.getLearningMaterialTitle());
@@ -137,6 +123,7 @@ public class DtoMapper {
         if (file == null || file.isEmpty()) {
             throw new IOException("File is empty or missing");
         }
+        // examLocalDateTime is usually set at creation, but you can update it here if needed
 
         File uploadDir = new File("uploads");
         if (!uploadDir.exists()) uploadDir.mkdirs();
@@ -149,6 +136,4 @@ public class DtoMapper {
 
         return learningMaterial;
     }
-
-
 }

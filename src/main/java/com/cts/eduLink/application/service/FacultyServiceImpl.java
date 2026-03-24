@@ -3,15 +3,17 @@ package com.cts.eduLink.application.service;
 import com.cts.eduLink.application.classexception.FacultyException;
 import com.cts.eduLink.application.dto.FacultyDashboardDto;
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
-import com.cts.eduLink.application.entity.Course;
-import com.cts.eduLink.application.entity.Exam;
-import com.cts.eduLink.application.entity.Faculty;
+import com.cts.eduLink.application.entity.*;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.projection.FacultyProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.repository.FacultyRepository;
+import com.cts.eduLink.application.repository.RoleRepository;
+import com.cts.eduLink.application.util.DtoMapper;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,13 +24,28 @@ import java.util.Optional;
 @AllArgsConstructor
 @Slf4j
 public class FacultyServiceImpl implements IFacultyService{
-    private final CourseRepository courseRepository;
     private final FacultyRepository facultyRepository;
     private final AppUserServiceImpl appUserService;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final CourseRepository courseRepository;
 
+    @Transactional
     @Override
     public String registerFaculty(FacultyRegistrationDto facultyRegistrationDto) {
-        return "";
+
+        log.debug("AppUser and Faculty separation initiated");
+        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto,passwordEncoder);
+        Faculty faculty = DtoMapper.facultyDtoSeparator(facultyRegistrationDto);
+        Optional<Role> role = roleRepository.findRoleByName("FACULTY");
+
+        appUser.setRole(role.get());
+        log.debug("appUser instance has sent for registration");
+        appUserService.registerAppUser(appUser);
+        faculty.setAppUser(appUser);
+        facultyRepository.save(faculty);
+        log.info("faculty entity has saved into database for {}",appUser.getUserEmail());
+        return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
     }
 
     @Override

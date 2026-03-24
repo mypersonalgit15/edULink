@@ -13,6 +13,7 @@ import com.cts.eduLink.application.util.DtoMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ public class StudentServiceImpl implements IStudentService {
     private final StudentRepository studentRepository ;
     private final RoleRepository roleRepository;
     private final IAppUserService iAppUserService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -33,7 +35,7 @@ public class StudentServiceImpl implements IStudentService {
         log.info("Initiating student registration for user: {}", studentRegistrationDto.getUserEmail());
         log.debug("Extracting student and user entities from DTO");
         Student student = DtoMapper.studentDtoSeparator(studentRegistrationDto);
-        AppUser appUser = DtoMapper.appUserDtoSeparator(studentRegistrationDto);
+        AppUser appUser = DtoMapper.appUserDtoSeparator(studentRegistrationDto,passwordEncoder);
         log.info("Extraction completed for student and user entities from DTO");
         Optional<Role> role = roleRepository.findRoleByName("STUDENT");
         appUser.setRole(role.get());
@@ -42,12 +44,12 @@ public class StudentServiceImpl implements IStudentService {
         iAppUserService.registerAppUser(appUser);
         studentRepository.save(student);
         log.info("Successfully registered student. Assigned Student ID: {}", student.getStudentId());
+//        return "Thanks for Registration, Your User id "; // return for testing
         return "Thanks for Registration, Your User Id is: "+student.getStudentId(); // return for development
     }
 
     @Override
-    public int studentCourseEnrollCount(Long studentId) {
-
+    public int studentCourseEnrollCount(Long studentId) throws StudentException{
         log.info("Request received to fetch course enrollment count for Student ID: {}", studentId);
         Optional<Student> student = studentRepository.findStudentById(studentId);
         if(student.isEmpty()){
@@ -56,11 +58,11 @@ public class StudentServiceImpl implements IStudentService {
         }
         int enrollCount = studentRepository.studentCourseEnrollCount(studentId);
         log.info("Successfully retrieved enrollment count for Student ID: {}. Count: {}", studentId, enrollCount);
-        return enrollCount;
+        return studentRepository.studentCourseEnrollCount(studentId);
     }
 
     @Override
-    public StudentDetailByIdProjection findStudentDetailsById(Long studentId) {
+    public StudentDetailByIdProjection findStudentDetailsById(Long studentId) throws StudentException{
         log.info("Initiating request to find details for student ID: {}", studentId);
         Optional<Student> student = studentRepository.findStudentById(studentId);
         if(student.isEmpty()){

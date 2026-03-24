@@ -36,4 +36,6 @@ public class StudentRegistrationDto {
     @NotBlank(message = "Address is required")
     @Column(nullable = false)
     private String studentAddress;
+
+    private String password;
 }
