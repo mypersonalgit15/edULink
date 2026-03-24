@@ -58,13 +58,13 @@ public class CourseController {
     @GetMapping("/findAllAvailableCourse")
     public ResponseEntity<List<CourseProjection>> findALlAvailableCourse(){
         log.info("User has called the endpoint successFully to fetch all available courses");
-       return ResponseEntity.status(200).body(iCourseService.findAllAvailableCourse());
+        return ResponseEntity.status(200).body(iCourseService.findAllAvailableCourse());
     }
     @GetMapping("/allCourseListByStudentId/{studentId}")
     public ResponseEntity<List<CourseDetailProjection>> findCourseListByStudentId(@PathVariable Long studentId){
-            log.info("Received GET request: Fetching courses for studentId: {}", studentId);
-            return ResponseEntity.status(200).body(iCourseService.findCourseListByStudentId(studentId));
-        }
+        log.info("Received GET request: Fetching courses for studentId: {}", studentId);
+        return ResponseEntity.status(200).body(iCourseService.findCourseListByStudentId(studentId));
+    }
 
     @GetMapping("/courses/{facultyId}")
     public ResponseEntity<List<CourseProjection>> getCoursesByFaculty(@PathVariable Long facultyId) {

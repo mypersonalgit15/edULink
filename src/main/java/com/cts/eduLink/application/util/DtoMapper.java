@@ -54,12 +54,10 @@ public class DtoMapper {
         course.setCourseGradeLevel(dto.getCourseGradeLevel());
         course.setCourseStatus(dto.getCourseStatus());
     }
-
     public static Faculty facultyDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         Faculty faculty = new Faculty();
         faculty.setFacultyGender(facultyRegistrationDto.getFacultyGender());
         faculty.setFacultyYearOfExperience(facultyRegistrationDto.getFacultyYearOfExperience());
-        faculty.setFacultyAddress(facultyRegistrationDto.getStudentAddress());
         faculty.setFacultyAddress(facultyRegistrationDto.getFacultyAddress());
         faculty.setFacultyRating(0.0);
         faculty.setTotalFacultyRatingCount(0L);
@@ -67,13 +65,10 @@ public class DtoMapper {
         faculty.setFacultyId(facultyId);
         return faculty;
     }
-
     public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
         // Update Faculty-specific fields
         faculty.setFacultyGender(dto.getFacultyGender());
         faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
-        faculty.setFacultyAddress(dto.getStudentAddress());
-
         // Update associated AppUser fields
         if (faculty.getAppUser() != null) {
             faculty.getAppUser().setUserName(dto.getUserName());
@@ -81,7 +76,6 @@ public class DtoMapper {
             faculty.getAppUser().setPhoneNumber(dto.getPhoneNumber());
         }
     }
-
     public static AppUser appUserDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){
         AppUser appUser = new AppUser();
         appUser.setUserName(facultyRegistrationDto.getUserName());
@@ -95,10 +89,8 @@ public class DtoMapper {
         exam.setExamLocalDateTime(LocalDateTime.now());
         exam.setExamStatus(examCreationRequestDto.getStatus());
         exam.setCandidates(examCreationRequestDto.getCandidates());
-
         return exam;
     }
-
     public static FeedBack feedBackDtoSeparator(FeedbackDto feedbackDto){
         FeedBack feedBack = new FeedBack();
         feedBack.setMessage(feedbackDto.getComment());
@@ -137,7 +129,6 @@ public class DtoMapper {
         attendance.setLocalDateTime(LocalDateTime.now());
         return attendance;
     }
-
     public static LearningMaterial learningMaterialDtoSeparator(LearningMaterialRegistrationDto dto) throws IOException {
         LearningMaterial learningMaterial = new LearningMaterial();
         learningMaterial.setLearningMaterialTitle(dto.getLearningMaterialTitle());
@@ -158,4 +149,6 @@ public class DtoMapper {
 
         return learningMaterial;
     }
+
+
 }

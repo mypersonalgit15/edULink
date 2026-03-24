@@ -19,7 +19,7 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
             "c.courseSubject,c.courseGradeLevel,c.courseCredit,c.courseStatus,c.courseRating) from Course c")
     List<CourseProjection> findAllAvailableCourse();
 
-     Optional<Course> findByCourseId(Long courseId);
+    Optional<Course> findByCourseId(Long courseId);
 
     @Query("SELECT c FROM Course c JOIN c.facultySet f WHERE f.facultyId = :facultyId")
     List<CourseProjection> findCoursesByFacultyId(@Param("facultyId") Long facultyId);

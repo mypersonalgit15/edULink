@@ -1,8 +1,5 @@
-
 package com.cts.eduLink.application.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,14 +22,12 @@ public class Faculty {
     private String facultyAddress;
     private int facultyYearOfExperience;
     private double facultyRating;
-    private Long totalFacultyRatingCount;
-
+    private long totalFacultyRatingCount;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "app_user_id",referencedColumnName = "id")
     private AppUser appUser;
 
     @ManyToMany
-    @JsonManagedReference
     @JoinTable(
             name = "faculty_course_mapping",
             joinColumns = @JoinColumn(name = "faculty_id"),

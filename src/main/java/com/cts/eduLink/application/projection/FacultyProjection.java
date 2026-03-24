@@ -1,8 +1,10 @@
 package com.cts.eduLink.application.projection;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class FacultyProjection {
     private final String userName;
     private final String userEmail;
