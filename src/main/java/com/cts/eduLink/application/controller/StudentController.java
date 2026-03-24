@@ -33,13 +33,13 @@ public class StudentController {
 
     @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/enrolledList/{studentId}")
-    public ResponseEntity<Integer> findCourseEnrollmentList(@PathVariable Long studentId){
+    public ResponseEntity<Integer> findCourseEnrollmentList(@Valid @PathVariable Long studentId){
         return ResponseEntity.status(200).body(iStudentService.studentCourseEnrollCount(studentId));
     }
 
     @PreAuthorize("hasRole('STUDENT')")
     @GetMapping("/studentDetailsById/{studentId}")
-    public ResponseEntity<StudentDetailByIdProjection> studentDetailsById(@PathVariable Long studentId){
+    public ResponseEntity<StudentDetailByIdProjection> studentDetailsById(@Valid @PathVariable Long studentId){
         log.info("REST request received to fetch details for Student ID: {}", studentId);
         return ResponseEntity.status(200).body(iStudentService.findStudentDetailsById(studentId));
     }

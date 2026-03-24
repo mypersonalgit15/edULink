@@ -35,7 +35,11 @@ public class DtoMapper {
         appUser.setUserPassword(encodePassword);
         return appUser;
     }
-
+    public static Attendance attendanceDtoSeparator(AttendanceRegistrationDto attendanceRegistrationDto){
+        Attendance attendance = new Attendance();
+        attendance.setLocalDateTime(LocalDateTime.now());
+        return attendance;
+    }
     public static Course facultyDtoSeparator(CourseRegistrationDto courseRegistrationDto){
         Course course = new Course();
         course.setCourseTitle(courseRegistrationDto.getCourseTitle());
