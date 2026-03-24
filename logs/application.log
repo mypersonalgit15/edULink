@@ -1,36 +1,146 @@
-2026-03-24 17:39:07 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 28824 (C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026\target\classes started by root in C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026)
-2026-03-24 17:39:07 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-24 17:39:09 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-24 17:39:09 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 119 ms. Found 12 JPA repository interfaces.
-2026-03-24 17:39:10 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
-2026-03-24 17:39:10 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
-2026-03-24 17:39:10 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-24 17:39:10 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-24 17:39:10 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 3023 ms
-2026-03-24 17:39:11 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-24 17:39:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-24 17:39:12 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30e15628
-2026-03-24 17:39:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-24 17:39:12 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-03-24 17:39:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24 17:39:14 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-24 17:39:15 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
-2026-03-24 17:39:16 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-24 17:39:17 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
-2026-03-24 17:39:17 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
-2026-03-24 17:39:17 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 10.384 seconds (process running for 11.204)
-2026-03-24 17:39:17 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-03-24 17:39:17 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsImlhdCI6MTc3NDM1Mzg5OCwiZXhwIjoxNzc0NDQwMjk4fQ.okA46uDDq4JEFoTl0mJKyvOjAeYIPIV_nhhZU0AZNv8]
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: student@gmail.com for URI: /exam/allExams
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.a.controller.ExamController - Controller: Request received to fetch all exam projections
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - User has requested to display all exams via projection
-2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - Exam list accessed successfully. Total exams found: 1. First exam: Unit Test 1: Java Programming
-2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-24 17:46:29 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-24 22:02:35 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 6188 (C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026\target\classes started by root in C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026)
+2026-03-24 22:02:35 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-24 22:02:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-24 22:02:37 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 156 ms. Found 12 JPA repository interfaces.
+2026-03-24 22:02:38 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-03-24 22:02:38 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2026-03-24 22:02:39 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-24 22:02:39 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-24 22:02:39 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 3126 ms
+2026-03-24 22:02:40 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-24 22:02:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-24 22:02:40 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ed19540
+2026-03-24 22:02:40 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-24 22:02:40 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-24 22:02:43 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 22:02:43 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-24 22:02:44 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
+2026-03-24 22:02:45 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-24 22:02:46 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2026-03-24 22:02:46 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2026-03-24 22:02:46 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 11.789 seconds (process running for 12.661)
+2026-03-24 22:02:46 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-03-24 22:02:46 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-03-24 22:05:21 [http-nio-8081-exec-3] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-24 22:05:21 [http-nio-8081-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-24 22:05:21 [http-nio-8081-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-03-24 22:05:21 [http-nio-8081-exec-3] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: nishanth@gmail.com
+2026-03-24 22:05:22 [http-nio-8081-exec-3] INFO  c.c.e.a.controller.AppUserController - Authentication successful for user: nishanth@gmail.com
+2026-03-24 22:05:22 [http-nio-8081-exec-3] INFO  c.c.eduLink.security.utils.JwtUtils - Generating JWT token for user: nishanth@gmail.com
+2026-03-24 22:05:22 [http-nio-8081-exec-3] INFO  c.c.eduLink.security.utils.JwtUtils - GENERATED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzAxMjIsImV4cCI6MTc3NDQ1NjUyMn0.NtcsaaIUOftuABTPeOn-kahFzyHvnl7dPzVsQqDdk4c]
+2026-03-24 22:06:35 [http-nio-8081-exec-5] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzAxMjIsImV4cCI6MTc3NDQ1NjUyMn0.NtcsaaIUOftuABTPeOn-kahFzyHvnl7dPzVsQqDdk4c]
+2026-03-24 22:06:35 [http-nio-8081-exec-5] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /course/enrollmentRequest
+2026-03-24 22:06:35 [http-nio-8081-exec-5] INFO  c.c.e.a.controller.CourseController - Received PATCH request: Enrollment attempt for Student: 3951878 on Course: 5148455
+2026-03-24 22:06:35 [http-nio-8081-exec-5] INFO  c.c.e.a.service.CourseServiceImpl - Received enrollment request: Student ID 3951878 for Course ID 5148455
+2026-03-24 22:06:35 [http-nio-8081-exec-5] INFO  c.c.e.a.service.CourseServiceImpl - Successfully enrolled Student ID 3951878 into Course ID 5148455
+2026-03-24 22:09:40 [http-nio-8081-exec-8] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: karthik@edulink.com
+2026-03-24 22:09:54 [http-nio-8081-exec-9] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: karthik@edulink.com
+2026-03-24 22:10:01 [http-nio-8081-exec-10] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: karthik@edulink.com
+2026-03-24 22:10:01 [http-nio-8081-exec-10] INFO  c.c.e.a.controller.AppUserController - Authentication successful for user: karthik@edulink.com
+2026-03-24 22:10:01 [http-nio-8081-exec-10] INFO  c.c.eduLink.security.utils.JwtUtils - Generating JWT token for user: karthik@edulink.com
+2026-03-24 22:10:01 [http-nio-8081-exec-10] INFO  c.c.eduLink.security.utils.JwtUtils - GENERATED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:10:31 [http-nio-8081-exec-1] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:10:31 [http-nio-8081-exec-1] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/register
+2026-03-24 22:10:31 [http-nio-8081-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<java.lang.String> com.cts.eduLink.application.controller.ExamController.createExam(com.cts.eduLink.application.dto.ExamCreationRequestDto): [Field error in object 'examCreationRequestDto' on field 'status': rejected value [Scheduled]; codes [Pattern.examCreationRequestDto.status,Pattern.status,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [examCreationRequestDto.status,status]; arguments []; default message [status],[Ljakarta.validation.constraints.Pattern$Flag;@1f5706f0,^(UPCOMING|ACTIVE|COMPLETED)$]; default message [Status must be UPCOMING, ACTIVE, or COMPLETED]] ]
+2026-03-24 22:12:07 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:12:07 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/register
+2026-03-24 22:12:07 [http-nio-8081-exec-6] INFO  c.c.e.a.controller.ExamController - Creating a new exam: Data Structures and Algorithms
+2026-03-24 22:12:07 [http-nio-8081-exec-6] INFO  c.c.e.a.service.ExamServiceImpl - Creating a new exam: Data Structures and Algorithms
+2026-03-24 22:12:07 [http-nio-8081-exec-6] INFO  c.c.e.a.service.ExamServiceImpl - Exam created successfully: Data Structures and Algorithms
+2026-03-24 22:12:48 [http-nio-8081-exec-5] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:12:48 [http-nio-8081-exec-5] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/register
+2026-03-24 22:12:48 [http-nio-8081-exec-5] INFO  c.c.e.a.controller.ExamController - Creating a new exam: Advanced Java Microservices
+2026-03-24 22:12:48 [http-nio-8081-exec-5] INFO  c.c.e.a.service.ExamServiceImpl - Creating a new exam: Advanced Java Microservices
+2026-03-24 22:12:48 [http-nio-8081-exec-5] INFO  c.c.e.a.service.ExamServiceImpl - Exam created successfully: Advanced Java Microservices
+2026-03-24 22:13:33 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:13:33 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/register
+2026-03-24 22:13:33 [http-nio-8081-exec-2] INFO  c.c.e.a.controller.ExamController - Creating a new exam: Physics: Mechanics and Heat
+2026-03-24 22:13:33 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - Creating a new exam: Physics: Mechanics and Heat
+2026-03-24 22:13:33 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - Exam created successfully: Physics: Mechanics and Heat
+2026-03-24 22:14:05 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsImlhdCI6MTc3NDM1Mzg5OCwiZXhwIjoxNzc0NDQwMjk4fQ.okA46uDDq4JEFoTl0mJKyvOjAeYIPIV_nhhZU0AZNv8]
+2026-03-24 22:14:05 [http-nio-8081-exec-7] WARN  c.c.e.a.service.AppUserServiceImpl - Login failure: User with email student@gmail.com not found in database
+2026-03-24 22:14:05 [http-nio-8081-exec-7] ERROR c.c.e.security.filter.JwtFilter - JWT Error: Invalid login Details
+2026-03-24 22:15:13 [http-nio-8081-exec-10] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:15:13 [http-nio-8081-exec-10] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/allExams
+2026-03-24 22:15:13 [http-nio-8081-exec-10] INFO  c.c.e.a.controller.ExamController - Controller: Request received to fetch all exam projections
+2026-03-24 22:15:13 [http-nio-8081-exec-10] INFO  c.c.e.a.service.ExamServiceImpl - User has requested to display all exams via projection
+2026-03-24 22:15:13 [http-nio-8081-exec-10] INFO  c.c.e.a.service.ExamServiceImpl - Exam list accessed successfully. Total exams found: 3. First exam: Data Structures and Algorithms
+2026-03-24 22:26:12 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:26:12 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/update/2
+2026-03-24 22:26:12 [http-nio-8081-exec-4] INFO  c.c.e.a.controller.ExamController - Received request to update exam with ID: 2
+2026-03-24 22:26:12 [http-nio-8081-exec-4] INFO  c.c.e.a.service.ExamServiceImpl - Updating exam details for ID: 2
+2026-03-24 22:26:12 [http-nio-8081-exec-4] INFO  c.c.e.a.service.ExamServiceImpl - Exam ID: 2 updated successfully
+2026-03-24 22:27:25 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:27:25 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/patch/2
+2026-03-24 22:27:25 [http-nio-8081-exec-2] INFO  c.c.e.a.controller.ExamController - Patch update for examId: 2 has been initiated successfully
+2026-03-24 22:27:25 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - Patch update initiated for Exam ID: 2
+2026-03-24 22:27:25 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - Exam ID: 2 partially updated successfully
+2026-03-24 22:29:49 [http-nio-8081-exec-9] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:29:49 [http-nio-8081-exec-9] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/update/2
+2026-03-24 22:29:49 [http-nio-8081-exec-9] INFO  c.c.e.a.controller.ExamController - Received request to update exam with ID: 2
+2026-03-24 22:29:49 [http-nio-8081-exec-9] INFO  c.c.e.a.service.ExamServiceImpl - Updating exam details for ID: 2
+2026-03-24 22:29:49 [http-nio-8081-exec-9] INFO  c.c.e.a.service.ExamServiceImpl - Exam ID: 2 updated successfully
+2026-03-24 22:30:50 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:30:50 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/register
+2026-03-24 22:30:50 [http-nio-8081-exec-3] INFO  c.c.e.a.controller.ExamController - Creating a new exam: Git & GitHub Workshop Quiz
+2026-03-24 22:30:50 [http-nio-8081-exec-3] INFO  c.c.e.a.service.ExamServiceImpl - Creating a new exam: Git & GitHub Workshop Quiz
+2026-03-24 22:30:50 [http-nio-8081-exec-3] INFO  c.c.e.a.service.ExamServiceImpl - Exam created successfully: Git & GitHub Workshop Quiz
+2026-03-24 22:31:33 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:31:33 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /exam/delete/4
+2026-03-24 22:31:33 [http-nio-8081-exec-4] INFO  c.c.e.a.controller.ExamController - Delete operation for examId: 4 has been initiated successfully
+2026-03-24 22:31:33 [http-nio-8081-exec-4] INFO  c.c.e.a.service.ExamServiceImpl - Deletion request initiated for Exam ID: 4
+2026-03-24 22:31:33 [http-nio-8081-exec-4] INFO  c.c.e.a.service.ExamServiceImpl - Exam ID: 4 deleted successfully
+2026-03-24 22:32:52 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:32:52 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /faculty/upcoming/1955424
+2026-03-24 22:33:52 [http-nio-8081-exec-9] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:33:52 [http-nio-8081-exec-9] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /faculty/dashboard/1955424
+2026-03-24 22:33:52 [http-nio-8081-exec-9] INFO  c.c.e.a.controller.FacultyController - Faculty dashboard requested for facultyId: 1955424
+2026-03-24 22:33:52 [http-nio-8081-exec-9] INFO  c.c.e.a.service.FacultyServiceImpl - Generating dashboard data for faculty: 1955424
+2026-03-24 22:34:16 [http-nio-8081-exec-10] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:34:16 [http-nio-8081-exec-10] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /faculty/upComingCount/1955424
+2026-03-24 22:36:23 [http-nio-8081-exec-4] INFO  c.c.e.a.controller.FacultyController - meenakshi.s@edulink.edu.in has initiated the registration as a Faculty
+2026-03-24 22:36:23 [http-nio-8081-exec-4] INFO  c.c.e.a.service.AppUserServiceImpl - AppUser registration intercepted 
+2026-03-24 22:36:23 [http-nio-8081-exec-4] INFO  c.c.e.a.service.AppUserServiceImpl - meenakshi.s@edulink.edu.in information saved into database successFully
+2026-03-24 22:36:23 [http-nio-8081-exec-4] INFO  c.c.e.a.service.FacultyServiceImpl - faculty entity has saved into database for meenakshi.s@edulink.edu.in
+2026-03-24 22:37:02 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:37:02 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /faculty/update/1681926
+2026-03-24 22:37:02 [http-nio-8081-exec-6] INFO  c.c.e.a.controller.FacultyController - Received request to update faculty with ID: 1681926
+2026-03-24 22:37:02 [http-nio-8081-exec-6] INFO  c.c.e.a.service.FacultyServiceImpl - Updating faculty profile for ID: 1681926
+2026-03-24 22:37:02 [http-nio-8081-exec-6] INFO  c.c.e.a.service.FacultyServiceImpl - Faculty profile updated successfully for ID: 1681926
+2026-03-24 22:37:38 [http-nio-8081-exec-5] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrYXJ0aGlrQGVkdWxpbmsuY29tIiwiaWF0IjoxNzc0MzcwNDAxLCJleHAiOjE3NzQ0NTY4MDF9.sygzMLg9bWtcjEsF3Gp2X5BTv2aDqn3TN2kcg4syv6w]
+2026-03-24 22:37:38 [http-nio-8081-exec-5] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: karthik@edulink.com for URI: /faculty/delete/1681926
+2026-03-24 22:44:34 [http-nio-8081-exec-8] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: nishanth@gmail.com
+2026-03-24 22:44:34 [http-nio-8081-exec-8] INFO  c.c.e.a.controller.AppUserController - Authentication successful for user: nishanth@gmail.com
+2026-03-24 22:44:34 [http-nio-8081-exec-8] INFO  c.c.eduLink.security.utils.JwtUtils - Generating JWT token for user: nishanth@gmail.com
+2026-03-24 22:44:34 [http-nio-8081-exec-8] INFO  c.c.eduLink.security.utils.JwtUtils - GENERATED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:45:03 [http-nio-8081-exec-9] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:45:03 [http-nio-8081-exec-9] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /student/studentDetailsById/4994015
+2026-03-24 22:45:03 [http-nio-8081-exec-9] INFO  c.c.e.a.controller.StudentController - REST request received to fetch details for Student ID: 4994015
+2026-03-24 22:45:03 [http-nio-8081-exec-9] INFO  c.c.e.a.service.StudentServiceImpl - Initiating request to find details for student ID: 4994015
+2026-03-24 22:45:03 [http-nio-8081-exec-9] INFO  c.c.e.a.service.StudentServiceImpl - Successfully retrieved details for student ID: 4994015
+2026-03-24 22:48:57 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:48:57 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /attendance/register/4994015
+2026-03-24 22:49:06 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:49:06 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /attendance/register/4994015
+2026-03-24 22:52:44 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:52:44 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /feedback/register
+2026-03-24 22:52:44 [http-nio-8081-exec-2] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<java.lang.String> com.cts.eduLink.application.controller.FeedbackController.registerFeedback(com.cts.eduLink.application.dto.FeedbackDto): [Field error in object 'feedbackDto' on field 'reviewerType': rejected value [student]; codes [Pattern.feedbackDto.reviewerType,Pattern.reviewerType,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [feedbackDto.reviewerType,reviewerType]; arguments []; default message [reviewerType],[Ljakarta.validation.constraints.Pattern$Flag;@1f5706f0,^(STUDENT|FACULTY)$]; default message [Reviewer type must be either 'STUDENT' or 'FACULTY']] ]
+2026-03-24 22:53:12 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:53:12 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /feedback/register
+2026-03-24 22:53:12 [http-nio-8081-exec-7] INFO  c.c.e.a.c.FeedbackController - Received POST request to register feedback for User ID: 3951878
+2026-03-24 22:53:12 [http-nio-8081-exec-7] INFO  c.c.e.a.service.FeedbackServiceImpl - Attempting to register feedback for User ID: 3951878 with Reviewer Type: STUDENT
+2026-03-24 22:53:12 [http-nio-8081-exec-7] INFO  c.c.e.a.service.FeedbackServiceImpl - Feedback successfully saved for User ID: 3951878
+2026-03-24 22:54:37 [http-nio-8081-exec-10] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:54:37 [http-nio-8081-exec-10] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /feedback/register
+2026-03-24 22:54:37 [http-nio-8081-exec-10] INFO  c.c.e.a.c.FeedbackController - Received POST request to register feedback for User ID: 2267677
+2026-03-24 22:54:37 [http-nio-8081-exec-10] INFO  c.c.e.a.service.FeedbackServiceImpl - Attempting to register feedback for User ID: 2267677 with Reviewer Type: FACULTY
+2026-03-24 22:54:37 [http-nio-8081-exec-10] INFO  c.c.e.a.service.FeedbackServiceImpl - Feedback successfully saved for User ID: 2267677
+2026-03-24 22:56:01 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuaXNoYW50aEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNzI0NzQsImV4cCI6MTc3NDQ1ODg3NH0.B3OqLPmwxo7BLDe16C7AiT9Si15YKR4Uzur8WBbgW5w]
+2026-03-24 22:56:02 [http-nio-8081-exec-4] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: nishanth@gmail.com for URI: /feedback/getFeedbackList
+2026-03-24 22:56:02 [http-nio-8081-exec-4] INFO  c.c.e.a.service.FeedbackServiceImpl - Fetching all feedback records from the repository
+2026-03-24 22:56:02 [http-nio-8081-exec-4] INFO  c.c.e.a.service.FeedbackServiceImpl - Successfully retrieved 2 feedback records
+2026-03-24 22:57:04 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-24 22:57:04 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-24 22:57:04 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 22:57:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-24 22:57:04 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
