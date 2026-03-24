@@ -12,6 +12,7 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long attendanceId;
     @ManyToOne
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;

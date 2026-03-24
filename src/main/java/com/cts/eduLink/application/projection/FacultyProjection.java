@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
+@Getter
 public class FacultyProjection {
     private final String userName;
     private final String userEmail;

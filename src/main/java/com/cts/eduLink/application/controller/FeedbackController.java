@@ -4,6 +4,7 @@ import com.cts.eduLink.application.dto.FeedbackDto;
 import com.cts.eduLink.application.projection.FeedbackProjection;
 import com.cts.eduLink.application.service.IFeedbackService;
 import jakarta.annotation.security.PermitAll;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class FeedbackController {
 
     @PreAuthorize("hasAnyRole('STUDENT','FACULTY')")
     @PostMapping("/register")
-    public ResponseEntity<String> registerFeedback(@RequestBody FeedbackDto feedbackDto) {
+    public ResponseEntity<String> registerFeedback(@Valid @RequestBody FeedbackDto feedbackDto) {
         log.info("Received POST request to register feedback for User ID: {}", feedbackDto.getUserId());
         return ResponseEntity.status(200).body(feedbackService.registerFeedback(feedbackDto));
     }

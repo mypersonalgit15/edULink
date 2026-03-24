@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class AttendanceRegistrationDto {
-    @NotNull(message = "Student ID is required")
+    @NotNull(message = "Student ID is required to mark attendance")
     private Long studentId;
 
     @NotNull(message = "Course ID is required")

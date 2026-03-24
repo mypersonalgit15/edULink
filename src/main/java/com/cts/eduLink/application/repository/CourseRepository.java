@@ -1,9 +1,10 @@
 package com.cts.eduLink.application.repository;
 
 import com.cts.eduLink.application.entity.Course;
+import com.cts.eduLink.application.entity.Exam;
+import com.cts.eduLink.application.projection.CourseProjection;
 import com.cts.eduLink.application.projection.CourseDetailByIdProjection;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
-import com.cts.eduLink.application.projection.CourseProjection;
 import com.cts.eduLink.application.projection.CourseSummaryProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,6 +33,10 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
             " from Course c inner join c.facultySet f inner join f.appUser a where c.courseId = :courseId")
     Optional<CourseDetailByIdProjection> findCourseDetailsById(@Param("courseId") Long courseId);
 
+    @Query("select new com.cts.eduLink.application.projection.CourseSummaryProjection(c.id, c.courseId, c.courseTitle)"+" from Course c"+
+            " inner join c.studentSet s where s.studentId = :studentId")
+    List<CourseSummaryProjection> findCourseSummaryListByStudentId(@Param("studentId") Long studentId);
+
     @Query("select c from Course c where c.courseId = :courseId")
     Optional<Course> findCourseById(@Param("courseId") Long courseId);
 
@@ -39,7 +44,4 @@ public interface CourseRepository extends JpaRepository<Course,Long> {
             "c.courseGradeLevel,c.courseRating) from Course c inner join c.studentSet s where s.studentId = :studentId")
     List<CourseDetailProjection> findCourseListByStudentId(@Param("studentId") Long studentId);
 
-    @Query("select new com.cts.eduLink.application.projection.CourseSummaryProjection(c.id, c.courseId, c.courseTitle)"+" from Course c"+
-            " inner join c.studentSet s where s.studentId = :studentId")
-    List<CourseSummaryProjection> findCourseSummaryListByStudentId(@Param("studentId") Long studentId);
 }

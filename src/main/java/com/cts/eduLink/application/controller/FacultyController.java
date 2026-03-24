@@ -32,7 +32,7 @@ public class FacultyController {
 
     @PreAuthorize("hasRole('FACULTY')")
     @PutMapping("/update/{facultyId}")
-    public ResponseEntity<String> updateFaculty(@PathVariable Long facultyId, @RequestBody FacultyRegistrationDto facultyRegistrationDto) {
+    public ResponseEntity<String> updateFaculty(@Valid @PathVariable Long facultyId, @RequestBody FacultyRegistrationDto facultyRegistrationDto) {
         log.info("Received request to update faculty with ID: {}", facultyId);
         String response = facultyService.updateFaculty(facultyId, facultyRegistrationDto);
         return ResponseEntity.ok(response);
@@ -41,7 +41,7 @@ public class FacultyController {
     @PreAuthorize("hasRole('FACULTY')")
     @PatchMapping("/patch/{facultyId}")
     public ResponseEntity<String> patchFaculty(
-            @PathVariable Long facultyId,
+            @Valid @PathVariable Long facultyId,
             @RequestBody Map<String, Object> updates) {
 
         log.info("Received patch request for facultyId: {}", facultyId);
@@ -51,20 +51,20 @@ public class FacultyController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{facultyId}")
-    public ResponseEntity<String> deleteFaculty(@PathVariable Long facultyId) {
+    public ResponseEntity<String> deleteFaculty(@Valid @PathVariable Long facultyId) {
         log.info("Received request to delete faculty with ID: {}", facultyId);
         String response = facultyService.deleteFaculty(facultyId);
         return ResponseEntity.ok(response);
         }
     @PreAuthorize("hasRole('STUDENT')")
     @PatchMapping("/updateRating/{facultyId}/{newFacultyRating}")
-    public ResponseEntity<String> updateFacultyRating(@PathVariable Long facultyId, @PathVariable double newFacultyRating){
+    public ResponseEntity<String> updateFacultyRating(@Valid @PathVariable Long facultyId, @PathVariable double newFacultyRating){
         return ResponseEntity.status(200).body(facultyService.updateFacultyRating(facultyId,newFacultyRating));
     }
 
     @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/dashboard/{facultyId}")
-    public ResponseEntity<FacultyDashboardDto> getFacultyDashboard(@PathVariable Long facultyId){
+    public ResponseEntity<FacultyDashboardDto> getFacultyDashboard(@Valid @PathVariable Long facultyId){
         log.info("Faculty dashboard requested for facultyId: {}", facultyId);
         FacultyDashboardDto dashboardDto = facultyService.getFacultyDashboard(facultyId);
         return ResponseEntity.status(200).body(dashboardDto);
@@ -72,7 +72,7 @@ public class FacultyController {
 
     @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/profile/{facultyId}")
-    public ResponseEntity<FacultyProjection> getFacultyProfile(@PathVariable Long facultyId){
+    public ResponseEntity<FacultyProjection> getFacultyProfile(@Valid @PathVariable Long facultyId){
         return facultyService.getFacultyProfile(facultyId)
                 .map(app -> ResponseEntity.ok(app))
                 .orElse(ResponseEntity.notFound().build());
@@ -80,14 +80,14 @@ public class FacultyController {
 
     @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/upcoming/{facultyId}")
-    public ResponseEntity<List<Exam>> getupComingExams(@PathVariable Long facultyId) {
+    public ResponseEntity<List<Exam>> getupComingExams(@Valid @PathVariable Long facultyId) {
         // This now matches the return type of your service/repository
         return ResponseEntity.ok(facultyService.getupComingExams(facultyId));
     }
 
     @PreAuthorize("hasRole('FACULTY')")
     @GetMapping("/upComingCount/{facultyId}")
-    public Map<String,Integer> getupComingExamsCount(@PathVariable Long facultyId){
+    public Map<String,Integer> getupComingExamsCount(@Valid @PathVariable Long facultyId){
         int count = facultyService.getupComingExamsCount(facultyId);
         return Map.of("upComing Exams", count);
     }
