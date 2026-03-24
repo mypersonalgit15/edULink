@@ -1,41 +1,49 @@
 package com.cts.eduLink.application.service;
 
 import com.cts.eduLink.application.classexception.FacultyException;
-import com.cts.eduLink.application.dto.FacultyDashboardDto;
 import com.cts.eduLink.application.dto.FacultyRegistrationDto;
-import com.cts.eduLink.application.entity.*;
-import com.cts.eduLink.application.projection.FacultyDetailProjection;
+import com.cts.eduLink.application.dto.FacultyDashboardDto;
+import com.cts.eduLink.application.entity.AppUser;
+import com.cts.eduLink.application.entity.Faculty;
+import com.cts.eduLink.application.entity.Role;
 import com.cts.eduLink.application.projection.FacultyProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
+import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
+import com.cts.eduLink.application.util.RatingCalculator;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.HttpStatus;
+import java.util.Map;
 import com.cts.eduLink.application.util.DtoMapper;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+import java.util.List;
+import java.util.ArrayList;
+
+import static com.cts.eduLink.application.constants.ErrorConstant.Faculty_Error;
+
+import com.cts.eduLink.application.entity.Exam;
+import com.cts.eduLink.application.entity.Course;
+
 @Service
 @AllArgsConstructor
 @Slf4j
-public class FacultyServiceImpl implements IFacultyService{
+public class FacultyServiceImpl implements IFacultyService {
+
     private final FacultyRepository facultyRepository;
     private final AppUserServiceImpl appUserService;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
     private final CourseRepository courseRepository;
 
-    @Transactional
     @Override
     public String registerFaculty(FacultyRegistrationDto facultyRegistrationDto) {
 
         log.debug("AppUser and Faculty separation initiated");
-        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto,passwordEncoder);
+        AppUser appUser = DtoMapper.appUserDtoSeparator(facultyRegistrationDto);
         Faculty faculty = DtoMapper.facultyDtoSeparator(facultyRegistrationDto);
         Optional<Role> role = roleRepository.findRoleByName("FACULTY");
 
@@ -44,13 +52,101 @@ public class FacultyServiceImpl implements IFacultyService{
         appUserService.registerAppUser(appUser);
         faculty.setAppUser(appUser);
         facultyRepository.save(faculty);
+        log.info("faculty entity has saved into database for "+appUser.getUserEmail());
         log.info("faculty entity has saved into database for {}",appUser.getUserEmail());
         return "You have registered SuccessFully, your login id is: "+faculty.getFacultyId();
     }
 
+    // Add to edULink-dev last update 17032026/src/main/java/com/cts/eduLink/application/service/FacultyServiceImpl.java
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String updateFaculty(Long facultyId, FacultyRegistrationDto dto) {
+        log.info("Updating faculty profile for ID: {}", facultyId);
+
+        // Find existing faculty or throw exception
+        Faculty existingFaculty = facultyRepository.findFacultyById(facultyId)
+                .orElseThrow(() -> new FacultyException("Faculty not found with ID: " + facultyId, org.springframework.http.HttpStatus.NOT_FOUND));
+        // Use utility to map DTO fields to existing entity
+        DtoMapper.updateFacultyFromDto(existingFaculty, dto);
+        // Save updated entity (JPA identifies this as an update because the ID is present)
+        facultyRepository.save(existingFaculty);
+
+        log.info("Faculty profile updated successfully for ID: {}", facultyId);
+        return "Faculty profile updated successfully!";
+    }
+    @Override
+    public List<FacultyDetailProjection> filterFacultyByRating(int facultyRating) throws FacultyException {
+        log.info("Faculty rating filtration request has sent to database");
+        List<FacultyDetailProjection> facultyDetailProjections = facultyRepository.filterFacultyByRating(facultyRating);
+        if (facultyDetailProjections.isEmpty()) {
+            log.error("No faculty available with {} ratting", facultyRating);
+            throw new FacultyException(Faculty_Error + facultyRating, HttpStatus.NOT_FOUND);
+        }
+        log.info("Faculty with rating {} fetch successfully and first faculty name is {}", facultyRating, facultyDetailProjections.getFirst().getFacultyName());
+        return facultyDetailProjections;
+    }
+
+    @Override
+    public String updateFacultyRating(Long facultyId, double newFacultyRating) throws FacultyException {
+        log.info("Updating rating for Faculty ID: {} with new score: {}", facultyId, newFacultyRating);
+        Optional<Faculty> faculty = facultyRepository.findFacultyById(facultyId);
+        if(faculty.isEmpty()){
+            log.error("Faculty with ID {} not found", facultyId);
+            throw new FacultyException("Faculty is not registered",HttpStatus.NOT_FOUND);
+        }
+        Long totalFacultyRating = faculty.get().getTotalFacultyRatingCount();
+        double newRating = RatingCalculator.calculateRating(faculty.get().getFacultyRating(),newFacultyRating,totalFacultyRating);
+        faculty.get().setFacultyRating(newRating);
+        faculty.get().setTotalFacultyRatingCount(totalFacultyRating+1);
+        log.info("Update successful for Faculty ID: {}. Rating changed to {} (Total reviews: {})",facultyId, newRating, totalFacultyRating + 1);
+        return "Thanks for you feedBack!";
+    }
+
+    @Transactional
+    public String patchFaculty(Long facultyId, Map<String, Object> updates) {
+        log.info("Patch update initiated for Faculty ID: {}", facultyId);
+
+        Faculty faculty = facultyRepository.findFacultyById(facultyId)
+                .orElseThrow(() -> new FacultyException("Faculty not found", HttpStatus.NOT_FOUND));
+
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "phoneNumber":
+                    faculty.getAppUser().setPhoneNumber(Long.valueOf(value.toString()));
+                    break;
+                case "facultyYearOfExperience":
+                    faculty.setFacultyYearOfExperience((Integer) value);
+                    break;
+                case "studentAddress":
+                    faculty.setFacultyAddress((String) value);
+                    break;
+                // Add other fields as needed
+            }
+        });
+
+        facultyRepository.save(faculty);
+        return "Faculty record partially updated successfully!";
+    }
+
+    @Override
+    @org.springframework.transaction.annotation.Transactional
+    public String deleteFaculty(Long facultyId) {
+        log.info("Deletion request initiated for Faculty ID: {}", facultyId);
+
+        // Check if faculty exists using your existing repository method
+        Faculty faculty = facultyRepository.findFacultyById(facultyId)
+                .orElseThrow(() -> new FacultyException("Faculty not found with ID: " + facultyId, org.springframework.http.HttpStatus.NOT_FOUND));
+
+        // Delete the entity
+        facultyRepository.delete(faculty);
+
+        log.info("Faculty ID: {} and associated user deleted successfully", facultyId);
+        return "Faculty record deleted successfully!";
+    }
+
     @Override
     public FacultyDashboardDto getFacultyDashboard(Long facultyId) {
-
         log.info("Generating dashboard data for faculty: {}", facultyId);
 
         // 1. Get the course count from CourseRepository
@@ -83,37 +179,12 @@ public class FacultyServiceImpl implements IFacultyService{
         return courses;
     }
 
-    @Override
-    public String updateFaculty(Long facultyId, FacultyRegistrationDto facultyRegistrationDto) {
-        return "";
-    }
-
-    @Override
-    public String patchFaculty(Long facultyId, Map<String, Object> updates) {
-        return "";
-    }
-
-    @Override
-    public String deleteFaculty(Long facultyId) {
-        return "";
-    }
-
     public List<Exam> getupComingExams(Long facultyId ){
         return facultyRepository.findUpcomingExamsByFacultyId(facultyId);
     }
 
     public int getupComingExamsCount(Long facultyId){
         return facultyRepository.getUpcomingExamsCount(facultyId);
-    }
-
-    @Override
-    public List<FacultyDetailProjection> filterFacultyByRating(int facultyRating) {
-        return List.of();
-    }
-
-    @Override
-    public String updateFacultyRating(Long facultyId, double newFacultyRating) {
-        return "";
     }
 
 
@@ -143,4 +214,3 @@ public class FacultyServiceImpl implements IFacultyService{
     }
 
 }
-

@@ -71,13 +71,13 @@ public class FacultyController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/upcoming/{facultyId}")
+    @GetMapping("/upcomingExam/{facultyId}")
     public ResponseEntity<List<Exam>> getupComingExams(@PathVariable Long facultyId) {
         // This now matches the return type of your service/repository
         return ResponseEntity.ok(facultyService.getupComingExams(facultyId));
     }
 
-    @GetMapping("/upComingCount/{facultyId}")
+    @GetMapping("/upComingExamCount/{facultyId}")
     public Map<String,Integer> getupComingExamsCount(@PathVariable Long facultyId){
         int count = facultyService.getupComingExamsCount(facultyId);
         return Map.of("upComing Exams", count);
