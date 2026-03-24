@@ -27,13 +27,13 @@ public class LearningMaterialController {
         return ResponseEntity.status(200).body(learningMaterialService.registerLearningMaterial(learningMaterialRegistrationDto));
     }
 
-    @PreAuthorize("hasRole('STUDENT','FACULTY')")
+    @PreAuthorize("hasAnyRole('STUDENT','FACULTY')")
     @GetMapping("/findCourseMaterial/{courseId}")
     public ResponseEntity<LearningCourseMaterialProjection> findLearningCourseMaterialByCourseId(@PathVariable Long courseId){
         return ResponseEntity.status(200).body(learningMaterialService.findMaterialsByCourseId(courseId));
     }
 
-    @PreAuthorize("hasRole('STUDENT','FACULTY')")
+    @PreAuthorize("hasAnyRole('STUDENT','FACULTY')")
     @GetMapping("/displayLearningMaterialContent/{id}")
     public ResponseEntity<Resource> displayLearningMaterialContent(@PathVariable Long id){
         return ResponseEntity.status(200).body(learningMaterialService.getFileFromProjection(id));

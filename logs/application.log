@@ -1,32 +1,36 @@
-2026-03-24 15:46:48 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 24192 (C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026\target\classes started by root in C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026)
-2026-03-24 15:46:48 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-24 15:46:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-03-24 15:46:49 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 117 ms. Found 12 JPA repository interfaces.
-2026-03-24 15:46:50 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
-2026-03-24 15:46:50 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
-2026-03-24 15:46:50 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-24 15:46:50 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
-2026-03-24 15:46:50 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2326 ms
-2026-03-24 15:46:51 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-03-24 15:46:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-24 15:46:52 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71135794
-2026-03-24 15:46:52 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-24 15:46:52 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-03-24 15:46:53 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24 15:46:53 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-03-24 15:46:54 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
-2026-03-24 15:46:55 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-24 15:46:56 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
-2026-03-24 15:46:56 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
-2026-03-24 15:46:56 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 8.959 seconds (process running for 9.543)
-2026-03-24 15:46:56 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
-2026-03-24 15:46:56 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
-2026-03-24 15:51:40 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-24 15:51:40 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2026-03-24 15:51:40 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
-2026-03-24 15:51:41 [http-nio-8081-exec-1] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<java.lang.String> com.cts.eduLink.application.controller.FacultyController.registerFaculty(com.cts.eduLink.application.dto.FacultyRegistrationDto) with 2 errors: [Field error in object 'facultyRegistrationDto' on field 'studentAddress': rejected value [Old Campus Quarter A1]; codes [Min.facultyRegistrationDto.studentAddress,Min.studentAddress,Min.java.lang.String,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [facultyRegistrationDto.studentAddress,studentAddress]; arguments []; default message [studentAddress],0]; default message [Experience cannot be negative]] [Field error in object 'facultyRegistrationDto' on field 'studentAddress': rejected value [Old Campus Quarter A1]; codes [Max.facultyRegistrationDto.studentAddress,Max.studentAddress,Max.java.lang.String,Max]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [facultyRegistrationDto.studentAddress,studentAddress]; arguments []; default message [studentAddress],60]; default message [Experience seems unrealistic]] ]
-2026-03-24 16:14:48 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
-2026-03-24 16:14:48 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
-2026-03-24 16:14:48 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-03-24 16:14:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2026-03-24 16:14:48 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-24 17:39:07 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 28824 (C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026\target\classes started by root in C:\Users\2478266\Downloads\edULink-FacultyDashboard\edULink-FacultyDashboard\edULink-dev last update 17032026)
+2026-03-24 17:39:07 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-24 17:39:09 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-24 17:39:09 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 119 ms. Found 12 JPA repository interfaces.
+2026-03-24 17:39:10 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-03-24 17:39:10 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2026-03-24 17:39:10 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-24 17:39:10 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-24 17:39:10 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 3023 ms
+2026-03-24 17:39:11 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-24 17:39:11 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-24 17:39:12 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@30e15628
+2026-03-24 17:39:12 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-24 17:39:12 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-24 17:39:13 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 17:39:14 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-24 17:39:15 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
+2026-03-24 17:39:16 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-24 17:39:17 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2026-03-24 17:39:17 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2026-03-24 17:39:17 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 10.384 seconds (process running for 11.204)
+2026-03-24 17:39:17 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-03-24 17:39:17 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHVkZW50QGdtYWlsLmNvbSIsImlhdCI6MTc3NDM1Mzg5OCwiZXhwIjoxNzc0NDQwMjk4fQ.okA46uDDq4JEFoTl0mJKyvOjAeYIPIV_nhhZU0AZNv8]
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: student@gmail.com for URI: /exam/allExams
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.a.controller.ExamController - Controller: Request received to fetch all exam projections
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - User has requested to display all exams via projection
+2026-03-24 17:39:29 [http-nio-8081-exec-2] INFO  c.c.e.a.service.ExamServiceImpl - Exam list accessed successfully. Total exams found: 1. First exam: Unit Test 1: Java Programming
+2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-24 17:46:29 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-24 17:46:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

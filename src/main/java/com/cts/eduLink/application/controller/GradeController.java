@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class GradeController {
     private final IGradeService gradeService;
 
-    @PreAuthorize("hasRole('STUDENT','FACULTY')")
+    @PreAuthorize("hasAnyRole('STUDENT','FACULTY')")
     @GetMapping("/status/{gradeId}")
     public ResponseEntity<String> getGradeStatusById(@PathVariable Long gradeId){
         log.info("API call: Fetching status for grade ID: {}", gradeId);

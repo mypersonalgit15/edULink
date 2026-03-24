@@ -55,7 +55,7 @@ public class ExamController {
         return ResponseEntity.status(200).body(examService.deleteExam(examId));
     }
 
-    @PreAuthorize("hasRole('STUDENT')")
+    @PreAuthorize("hasAnyRole('STUDENT','FACULTY')")
     @GetMapping("/allExams")
     public ResponseEntity<List<ExamProjection>> getAllExams() throws ExamException {
         log.info("Controller: Request received to fetch all exam projections");

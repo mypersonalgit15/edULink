@@ -24,7 +24,7 @@ public class FeedbackController {
 
     private final IFeedbackService feedbackService;
 
-    @PreAuthorize("hasRole('STUDENT','FACULTY')")
+    @PreAuthorize("hasAnyRole('STUDENT','FACULTY')")
     @PostMapping("/register")
     public ResponseEntity<String> registerFeedback(@RequestBody FeedbackDto feedbackDto) {
         log.info("Received POST request to register feedback for User ID: {}", feedbackDto.getUserId());
