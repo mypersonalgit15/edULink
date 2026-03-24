@@ -4,16 +4,22 @@ import com.cts.eduLink.application.classexception.AppUserException;
 import com.cts.eduLink.application.entity.AppUser;
 import com.cts.eduLink.application.repository.AppUserRepository;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 @Slf4j
-public class AppUserServiceImpl implements IAppUserService{
+public class AppUserServiceImpl implements IAppUserService, UserDetailsService {
     private final AppUserRepository appUserRepository;
 
     @Override
@@ -34,5 +40,20 @@ public class AppUserServiceImpl implements IAppUserService{
         appUserRepository.save(appUser);
         log.info("{} information saved into database successFully",appUser.getUserEmail());
 //        return appUser.getUserName()+" added SuccessFully"; // for testing
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(@NonNull String userEmail) throws AppUserException {
+        log.debug("Attempting to load user by email: {}", userEmail);
+        Optional<AppUser> appUser = appUserRepository.findByUserEmail(userEmail);
+        if(appUser.isEmpty()){
+            log.warn("Login failure: User with email {} not found in database", userEmail);
+            throw new AppUserException("Invalid login Details",HttpStatus.NOT_FOUND);
+        }
+        return new User(
+                appUser.get().getUserEmail(),
+                appUser.get().getUserPassword(),
+                List.of(new SimpleGrantedAuthority("ROLE_"+appUser.get().getRole().getRoleName()))
+        );
     }
 }

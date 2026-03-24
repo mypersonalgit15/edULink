@@ -1,43 +1,49 @@
-2026-03-23 15:19:59 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 26612 (C:\Users\2478197\IdeaProjects\edULink\target\classes started by 2478197 in C:\Users\2478197\IdeaProjects\edULink)
-2026-03-23 15:19:59 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-23 15:19:59 [main] WARN  o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [com.cts.eduLink.EduLinkApplication]: Could not find class [org.springdoc.core.conditions.MultipleOpenApiSupportCondition]
-2026-03-23 15:19:59 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
-
-Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
-2026-03-23 15:19:59 [main] ERROR o.s.boot.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanDefinitionStoreException: Failed to process import candidates for configuration class [com.cts.eduLink.EduLinkApplication]: Could not find class [org.springdoc.core.conditions.MultipleOpenApiSupportCondition]
-	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:644)
-	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.lambda$processGroupImports$0(ConfigurationClassParser.java:864)
-	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
-	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.processGroupImports(ConfigurationClassParser.java:860)
-	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorHandler.process(ConfigurationClassParser.java:831)
-	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:200)
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:446)
-	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:310)
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349)
-	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118)
-	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603)
-	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
-	at com.cts.eduLink.EduLinkApplication.main(EduLinkApplication.java:11)
-Caused by: java.lang.IllegalArgumentException: Could not find class [org.springdoc.core.conditions.MultipleOpenApiSupportCondition]
-	at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:353)
-	at org.springframework.context.annotation.ConditionEvaluator.getCondition(ConditionEvaluator.java:138)
-	at org.springframework.context.annotation.ConditionEvaluator.collectConditions(ConditionEvaluator.java:122)
-	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:94)
-	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
-	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:634)
-	... 18 common frames omitted
-Caused by: java.lang.ClassNotFoundException: org.springdoc.core.conditions.MultipleOpenApiSupportCondition
-	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580)
-	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
-	at java.base/java.lang.Class.forName0(Native Method)
-	at java.base/java.lang.Class.forName(Class.java:543)
-	at org.springframework.util.ClassUtils.forName(ClassUtils.java:302)
-	at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:343)
-	... 23 common frames omitted
+2026-03-24 15:14:10 [main] INFO  com.cts.eduLink.EduLinkApplication - Starting EduLinkApplication using Java 24.0.1 with PID 21472 (C:\Users\2478275\Documents\fullStack\backend\springBoot\eduLinkM\target\classes started by root in C:\Users\2478275\Documents\fullStack\backend\springBoot\eduLinkM)
+2026-03-24 15:14:10 [main] INFO  com.cts.eduLink.EduLinkApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-24 15:14:11 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-03-24 15:14:12 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 144 ms. Found 12 JPA repository interfaces.
+2026-03-24 15:14:13 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat initialized with port 8081 (http)
+2026-03-24 15:14:13 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8081"]
+2026-03-24 15:14:13 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-24 15:14:13 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/11.0.18]
+2026-03-24 15:14:13 [main] INFO  o.s.b.w.c.s.WebApplicationContextInitializer - Root WebApplicationContext: initialization completed in 2764 ms
+2026-03-24 15:14:14 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-03-24 15:14:14 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-24 15:14:15 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7c8a91e2
+2026-03-24 15:14:15 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-24 15:14:15 [main] WARN  org.hibernate.orm.deprecation - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-03-24 15:14:17 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 15:14:18 [main] INFO  o.s.d.j.r.q.QueryEnhancerFactories - Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-03-24 15:14:19 [main] INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name appUserServiceImpl
+2026-03-24 15:14:20 [main] WARN  o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-24 15:14:22 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8081"]
+2026-03-24 15:14:22 [main] INFO  o.s.boot.tomcat.TomcatWebServer - Tomcat started on port 8081 (http) with context path '/'
+2026-03-24 15:14:22 [main] INFO  com.cts.eduLink.EduLinkApplication - Started EduLinkApplication in 12.595 seconds (process running for 13.154)
+2026-03-24 15:14:22 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-03-24 15:14:22 [main] WARN  o.s.c.events.SpringDocAppInitializer - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2026-03-24 15:14:36 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.AppUserController - Login attempt initiated for user: prash@gmail.com
+2026-03-24 15:14:37 [http-nio-8081-exec-1] INFO  c.c.e.a.controller.AppUserController - Authentication successful for user: prash@gmail.com
+2026-03-24 15:14:37 [http-nio-8081-exec-1] INFO  c.c.eduLink.security.utils.JwtUtils - Generating JWT token for user: prash@gmail.com
+2026-03-24 15:14:37 [http-nio-8081-exec-1] INFO  c.c.eduLink.security.utils.JwtUtils - GENERATED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
+2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
+2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: prash@gmail.com for URI: /course/allCourseListByStudentId/1446312
+2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.a.controller.CourseController - Received GET request: Fetching courses for studentId: 1446312
+2026-03-24 15:15:20 [http-nio-8081-exec-3] INFO  c.c.e.a.service.CourseServiceImpl - Fetching course list for student ID: 1446312
+2026-03-24 15:15:20 [http-nio-8081-exec-3] ERROR c.c.e.a.service.CourseServiceImpl - Student lookup failed: ID 1446312 not registered
+2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
+2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: prash@gmail.com for URI: /student/studentDetailsById/1446371
+2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.a.controller.StudentController - REST request received to fetch details for Student ID: 1446371
+2026-03-24 15:16:39 [http-nio-8081-exec-6] INFO  c.c.e.a.service.StudentServiceImpl - Initiating request to find details for student ID: 1446371
+2026-03-24 15:16:39 [http-nio-8081-exec-6] ERROR c.c.e.a.service.StudentServiceImpl - Lookup failed: Student ID 1446371 does not exist.
+2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - RECEIVED TOKEN: [eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcmFzaEBnbWFpbC5jb20iLCJpYXQiOjE3NzQzNDU0NzcsImV4cCI6MTc3NDQzMTg3N30.Q31VFrHUc5K-X-zwVYYAN8ALb4NZ9hewy2bNY8F-3RY]
+2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.security.filter.JwtFilter - Successfully authenticated user: prash@gmail.com for URI: /student/enrolledList/2186285
+2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Request received to fetch course enrollment count for Student ID: 2186285
+2026-03-24 15:16:56 [http-nio-8081-exec-7] INFO  c.c.e.a.service.StudentServiceImpl - Successfully retrieved enrollment count for Student ID: 2186285. Count: 0
+2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  o.s.boot.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2026-03-24 15:17:11 [tomcat-shutdown] INFO  o.s.boot.tomcat.GracefulShutdown - Graceful shutdown complete
+2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-24 15:17:11 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
