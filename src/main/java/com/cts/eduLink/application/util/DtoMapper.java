@@ -58,7 +58,7 @@ public class DtoMapper {
         course.setCourseSubject(dto.getCourseSubject());
         course.setCourseCredit(dto.getCourseCredit());
         course.setCourseGradeLevel(dto.getCourseGradeLevel());
-        course.setCourseStatus(dto.getCourseStatus());
+        course.setCourseStatus("INACTIVE");
     }
 
     public static Faculty facultyDtoSeparator(FacultyRegistrationDto facultyRegistrationDto){

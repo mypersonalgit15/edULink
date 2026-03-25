@@ -91,6 +91,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
+    @Transactional
     public String updateFacultyRating(Long facultyId, double newFacultyRating) {
         log.info("Updating rating for Faculty ID: {} with new score: {}", facultyId, newFacultyRating);
         Optional<Faculty> faculty = facultyRepository.findFacultyById(facultyId);

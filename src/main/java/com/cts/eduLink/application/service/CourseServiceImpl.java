@@ -116,17 +116,15 @@ public class CourseServiceImpl implements ICourseService {
         log.info("Deletion request initiated for Course ID: {}", courseId);
 
         // 1. Find the existing course or throw exception
-        com.cts.eduLink.application.entity.Course course = courseRepository.findByCourseId(courseId)
-                .orElseThrow(() -> new com.cts.eduLink.application.classexception.CourseException(
-                        "Course not found with ID: " + courseId,
-                        org.springframework.http.HttpStatus.NOT_FOUND
-                ));
+        Course course = courseRepository.findByCourseId(courseId)
+                .orElseThrow(() -> new CourseException("Course not found with ID: " + courseId, HttpStatus.NOT_FOUND));
 
         // 2. Delete the course
-        courseRepository.delete(course);
+
+        course.setCourseStatus("INACTIVE");
 
         log.info("Course ID: {} deleted successfully", courseId);
-        return "Course deleted successfully!";
+        return "Course deleted successfully with Id : "+courseId;
     }
 
     @Override
