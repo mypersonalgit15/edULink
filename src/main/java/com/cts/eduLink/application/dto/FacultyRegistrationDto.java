@@ -1,5 +1,6 @@
 package com.cts.eduLink.application.dto;
 
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.validation.constraints.*;
@@ -16,7 +17,9 @@ public class FacultyRegistrationDto {
     private String userEmail;
 
     @NotNull(message = "Phone number is required")
-    @Digits(integer = 10, fraction = 0, message = "Phone number must be 10 digits")
+    @Min(value = 1000000000L, message = "Phone number must be 10 digits")
+    @Max(value = 9999999999L, message = "Phone number must be 10 digits")
+    @Column(unique = true, nullable = false)
     private Long phoneNumber;
 
     @NotBlank(message = "Gender is required")
