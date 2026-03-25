@@ -109,7 +109,7 @@ public class FacultyServiceImpl implements IFacultyService {
                 case "facultyYearOfExperience":
                     faculty.setFacultyYearOfExperience((Integer) value);
                     break;
-                case "studentAddress":
+                case "facultyAddress":
                     faculty.setFacultyAddress((String) value);
                     break;
                 // Add other fields as needed
