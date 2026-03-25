@@ -32,7 +32,7 @@ public class CourseController {
         return  ResponseEntity.status(200).body(iCourseService.registerCourse(courseRegistrationDto));
     }
 
-    @PermitAll
+
     @GetMapping("/findCourseDetailsById/{courseId}")
     public ResponseEntity<CourseDetailByIdProjection> findCourseById(@Valid @PathVariable Long courseId) {
         log.info("User requested for details of courseId: {} ", courseId);
