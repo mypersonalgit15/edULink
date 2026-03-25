@@ -62,7 +62,7 @@ public class CourseController {
         return ResponseEntity.ok(response);
     }
 
-    @PermitAll
+
     @GetMapping("/findAllAvailableCourse")
     public ResponseEntity<List<CourseProjection>> findALlAvailableCourse(){
         log.info("User has called the endpoint successFully to fetch all available courses");
