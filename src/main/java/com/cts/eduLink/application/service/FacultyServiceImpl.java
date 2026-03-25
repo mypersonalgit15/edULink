@@ -11,6 +11,7 @@ import com.cts.eduLink.application.repository.CourseRepository;
 import com.cts.eduLink.application.projection.FacultyDetailProjection;
 import com.cts.eduLink.application.repository.FacultyRepository;
 import com.cts.eduLink.application.repository.RoleRepository;
+import com.cts.eduLink.application.util.RatingCalculator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.HttpStatus;
@@ -90,8 +91,20 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public String updateFacultyRating(Long facultyId, double newFacultyRating)  {
-        return "";
+    @Transactional
+    public String updateFacultyRating(Long facultyId, double newFacultyRating) {
+        log.info("Updating rating for Faculty ID: {} with new score: {}", facultyId, newFacultyRating);
+        Optional<Faculty> faculty = facultyRepository.findFacultyById(facultyId);
+        if(faculty.isEmpty()){
+            log.error("Faculty with ID {} not found", facultyId);
+            throw new FacultyException("Faculty is not registered",HttpStatus.NOT_FOUND);
+        }
+        Long totalFacultyRating = faculty.get().getTotalFacultyRatingCount();
+        double newRating = RatingCalculator.calculateRating(faculty.get().getFacultyRating(),newFacultyRating,totalFacultyRating);
+        faculty.get().setFacultyRating(newRating);
+        faculty.get().setTotalFacultyRatingCount(totalFacultyRating+1);
+        log.info("Update successful for Faculty ID: {}. Rating changed to {} (Total reviews: {})",facultyId, newRating, totalFacultyRating + 1);
+        return "Thanks for you feedBack!";
     }
 
     @Transactional
@@ -109,7 +122,7 @@ public class FacultyServiceImpl implements IFacultyService {
                 case "facultyYearOfExperience":
                     faculty.setFacultyYearOfExperience((Integer) value);
                     break;
-                case "studentAddress":
+                case "facultyAddress":
                     faculty.setFacultyAddress((String) value);
                     break;
                 // Add other fields as needed

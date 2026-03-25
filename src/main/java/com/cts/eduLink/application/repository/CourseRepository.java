@@ -17,7 +17,7 @@ import java.util.Optional;
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
     @Query(" select new com.cts.eduLink.application.projection.CourseProjection(c.courseTitle," +
-            "c.courseSubject,c.courseGradeLevel,c.courseCredit,c.courseStatus,c.courseRating) from Course c")
+            "c.courseSubject,c.courseGradeLevel,c.courseCredit,c.courseStatus,c.courseRating) from Course c where c.courseStatus='ACTIVE'")
     List<CourseProjection> findAllAvailableCourse();
 
      Optional<Course> findByCourseId(Long courseId);

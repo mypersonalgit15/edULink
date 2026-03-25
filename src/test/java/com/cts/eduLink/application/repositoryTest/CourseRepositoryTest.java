@@ -2,6 +2,7 @@ package com.cts.eduLink.application.repositoryTest;
 
 import com.cts.eduLink.application.entity.Course;
 import com.cts.eduLink.application.projection.CourseDetailProjection;
+import com.cts.eduLink.application.projection.CourseProjection;
 import com.cts.eduLink.application.repository.CourseRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class CourseRepositoryTest {
 
     @Test
     public void getCourseList_200(){
-        List<CourseDetailProjection> courseDetailProjections = courseRepository.findAllAvailableCourse();
+        List<CourseProjection> courseDetailProjections = courseRepository.findAllAvailableCourse();
         assertEquals("Java", courseDetailProjections.getFirst().getCourseTitle());
     }
 }
