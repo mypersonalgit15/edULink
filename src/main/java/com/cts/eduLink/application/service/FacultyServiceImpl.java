@@ -90,7 +90,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public String updateFacultyRating(Long facultyId, double newFacultyRating) {
+    public String updateFacultyRating(Long facultyId, double newFacultyRating)  {
         return "";
     }
 
