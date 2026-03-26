@@ -77,7 +77,7 @@ public class AttendanceServiceImpl implements IAttendanceService{
             Long totalAttendedDays = attendanceRepository.countAttendanceByIdAndStudentId(course.getId(),studentId);
             if(totalAttendedDays >0L){
                 LocalDateTime firstAttendanceDate = attendanceRepository.findFirstEnrollmentDate(course.getCourseId(),studentId);
-                LocalDateTime lastAttendanceDate = attendanceRepository.findLastEnrollmentDate(course.getCourseId(),studentId);
+                LocalDateTime lastAttendanceDate = LocalDateTime.now();
                 Long daysBetween = DateUtils.getCalendarDaysBetween(firstAttendanceDate,lastAttendanceDate);
                 double attendancePercentage = AttendanceCalculator.calculateAttendance(totalAttendedDays,daysBetween);
                 log.info("Course: {} | Attended: {} days | first Attended date: {} | last attended date: {} | Window: {} days | Rate: {}%",course.getCourseId(), totalAttendedDays, firstAttendanceDate,lastAttendanceDate, daysBetween, String.format("%.2f", attendancePercentage));
