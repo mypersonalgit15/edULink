@@ -1,5 +1,6 @@
 package com.cts.eduLink.application.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ public class CourseRegistrationDto {
     private String courseTitle;
 
     @NotBlank(message = "Subject is required")
+
     private String courseSubject;
 
     @NotBlank(message = "Grade level is required")
@@ -26,6 +28,7 @@ public class CourseRegistrationDto {
 
     @NotNull(message = "Faculty ID must be provided")
     @Positive(message = "Invalid Faculty ID")
+    @Column(unique = true ,nullable=false)
     private Long facultyId;
 }
 

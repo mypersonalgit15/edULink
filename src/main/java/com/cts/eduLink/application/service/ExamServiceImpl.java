@@ -34,7 +34,7 @@ public class ExamServiceImpl implements IExamService {
         exam.setCourse(course);
         examRepository.save(exam);
         log.info("Exam created successfully: {}", examCreationRequestDto.getExamName());
-        return "Exam created successfully with ID: " + exam.getId();
+        return "Exam created successfully with ID: " + exam.getExamId();
     }
     @Override
     @Transactional

@@ -32,7 +32,6 @@ public class FeedbackController {
         return ResponseEntity.status(200).body(feedbackService.registerFeedback(feedbackDto));
     }
 
-
     @GetMapping("/getFeedbackList")
     public ResponseEntity<List<FeedbackProjection>> findFeedBackList(){
         return ResponseEntity.status(200).body(feedbackService.findFeedBackList());

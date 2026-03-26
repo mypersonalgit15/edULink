@@ -42,7 +42,7 @@ public class CourseServiceImpl implements ICourseService {
             log.error("{} is not authorized to register course", courseRegistrationDto.getFacultyId());
             throw new FacultyException(courseRegistrationDto.getFacultyId() + " is not registered", HttpStatus.BAD_REQUEST);
         }
-        Course course = DtoMapper.facultyDtoSeparator(courseRegistrationDto);
+        Course course = DtoMapper.courseDtoSeparator(courseRegistrationDto);
         log.error("Unable to separate faculty from courseRegistrationDto");
         course.setCourseStatus("ACTIVE");
         course.getFacultySet().add(facultyOption.get());

@@ -42,7 +42,7 @@ public class FeedbackServiceImpl implements IFeedbackService {
             log.debug("Fetching AppUser from faculty repository for ID: {}", feedbackDto.getUserId());
             appUser = facultyRepository.findAppUserByFacultyId(feedbackDto.getUserId());
         }
-        if (appUser.isEmpty() || appUser.isEmpty()){
+        if (appUser.isEmpty() ){
             log.error("Feedback registration failed: No AppUser found for ID: {} and Type: {}",
                     feedbackDto.getUserId(), feedbackDto.getReviewerType());
             throw new AppUserException("Invalid feedback type", HttpStatus.BAD_REQUEST);

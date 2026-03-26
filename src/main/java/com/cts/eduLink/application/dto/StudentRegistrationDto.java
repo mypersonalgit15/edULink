@@ -40,7 +40,7 @@ public class StudentRegistrationDto {
     private String studentAddress;
     @NotBlank(message = "Password is required")
     @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
-//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",
-//            message = "Password must contain at least one uppercase, one lowercase, one digit, and one special character")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$",
+            message = "Password must contain at least one uppercase, one lowercase, one digit, and one special character")
     private String password;
 }
