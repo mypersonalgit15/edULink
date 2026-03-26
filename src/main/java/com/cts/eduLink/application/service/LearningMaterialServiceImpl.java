@@ -71,7 +71,7 @@ public class LearningMaterialServiceImpl implements ILearningMaterialService {
         }
         return  learningCourseMaterialProjection.get();
     }
-
+@Override
     public Resource getFileFromProjection(Long id) {
         try {
             LearningMaterial material = learningMaterialRepository.findById(id).orElseThrow(() -> new RuntimeException("Material not found"));

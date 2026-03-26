@@ -14,8 +14,6 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
     @Query("SELECT min(a.localDateTime) from Attendance a where a.course.courseId = :courseId and a.student.studentId = :studentId")
     LocalDateTime findFirstEnrollmentDate(Long courseId, Long studentId);
 
-    @Query("SELECT max(a.localDateTime) from Attendance a where a.course.courseId = :courseId and a.student.studentId = :studentId")
-    LocalDateTime findLastEnrollmentDate(Long courseId, Long studentId);
 
 
 }

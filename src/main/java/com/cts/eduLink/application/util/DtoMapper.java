@@ -40,7 +40,7 @@ public class DtoMapper {
         attendance.setLocalDateTime(LocalDateTime.now());
         return attendance;
     }
-    public static Course facultyDtoSeparator(CourseRegistrationDto courseRegistrationDto){
+    public static Course courseDtoSeparator(CourseRegistrationDto courseRegistrationDto){
         Course course = new Course();
         course.setCourseTitle(courseRegistrationDto.getCourseTitle());
         course.setCourseSubject(courseRegistrationDto.getCourseSubject());
@@ -96,12 +96,15 @@ public class DtoMapper {
         appUser.setUserPassword(encodePassword);
         return appUser;
     }
-    public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto) {
+    public static Exam ExamDtoSeparator(ExamCreationRequestDto examCreationRequestDto) {
         Exam exam = new Exam();
         exam.setExamName(examCreationRequestDto.getExamName());
         exam.setExamLocalDateTime(LocalDateTime.now());
         exam.setExamStatus(examCreationRequestDto.getStatus());
         exam.setCandidates(examCreationRequestDto.getCandidates());
+        Long examId=UIDGeneratorUtils.uidGenerator();
+        exam.setExamId(examId);
+
 
         return exam;
     }

@@ -34,8 +34,6 @@ public class JwtUtils {
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
 
-        // ADD THIS LOG:
-        log.info("GENERATED TOKEN: [{}]", token);
         return token;
     }
 
