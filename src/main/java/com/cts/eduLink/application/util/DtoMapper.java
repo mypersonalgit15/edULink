@@ -96,7 +96,7 @@ public class DtoMapper {
         appUser.setUserPassword(encodePassword);
         return appUser;
     }
-    public static Exam ExamDtoSeperator(ExamCreationRequestDto examCreationRequestDto) {
+    public static Exam ExamDtoSeparator(ExamCreationRequestDto examCreationRequestDto) {
         Exam exam = new Exam();
         exam.setExamName(examCreationRequestDto.getExamName());
         exam.setExamLocalDateTime(LocalDateTime.now());

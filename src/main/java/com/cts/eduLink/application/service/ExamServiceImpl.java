@@ -27,7 +27,7 @@ public class ExamServiceImpl implements IExamService {
     ExamRepository examRepository;
     public String createExam(ExamCreationRequestDto examCreationRequestDto) {
         log.info("Creating a new exam: {}", examCreationRequestDto.getExamName());
-        Exam exam = DtoMapper.ExamDtoSeperator(examCreationRequestDto);
+        Exam exam = DtoMapper.ExamDtoSeparator(examCreationRequestDto);
         // Pass both the message and the HttpStatus to match your ExamException constructor
         Course course = courseRepository.findByCourseId(examCreationRequestDto.getCourseId()).orElseThrow(() -> new ExamException("Course not found with ID: " + examCreationRequestDto.getCourseId(), HttpStatus.NOT_FOUND));
 
