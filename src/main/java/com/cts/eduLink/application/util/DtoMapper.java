@@ -74,12 +74,9 @@ public class DtoMapper {
     }
 
     public static void updateFacultyFromDto(Faculty faculty, FacultyRegistrationDto dto) {
-        // Update Faculty-specific fields
         faculty.setFacultyGender(dto.getFacultyGender());
         faculty.setFacultyYearOfExperience(dto.getFacultyYearOfExperience());
         faculty.setFacultyAddress(dto.getFacultyAddress());
-
-        // Update associated AppUser fields
         if (faculty.getAppUser() != null) {
             faculty.getAppUser().setUserName(dto.getUserName());
             faculty.getAppUser().setUserEmail(dto.getUserEmail());
@@ -129,7 +126,6 @@ public class DtoMapper {
         if (file == null || file.isEmpty()) {
             throw new IOException("File is empty or missing");
         }
-        // examLocalDateTime is usually set at creation, but you can update it here if needed
 
         File uploadDir = new File("uploads");
         if (!uploadDir.exists()) uploadDir.mkdirs();
